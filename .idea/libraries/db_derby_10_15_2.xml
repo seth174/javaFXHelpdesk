@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="db-derby-10.15.2">
+    <CLASSES>
+      <root url="file://$USER_HOME$/db-derby-10.15.2.0-bin" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-11.0.2/lib/javafx-swt.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-11.0.2/lib/javafx.graphics.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-11.0.2/lib/javafx.media.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-11.0.2/lib/javafx.base.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-11.0.2/lib/javafx.controls.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/javafx-sdk-11.0.2/lib/javafx.fxml.jar!/" />
+      <root url="file://$USER_HOME$/Downloads/javafx-sdk-11.0.2" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$USER_HOME$/Downloads/javafx-sdk-11.0.2" recursive="false" />
+  </library>
+</component>

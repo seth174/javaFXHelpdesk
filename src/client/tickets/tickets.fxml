@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="37.0" fitWidth="89.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../Desktop/HelpSpot%20Logo.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets left="25.0" top="5.0" />
+                    </HBox.margin>
+                </ImageView>
+                <ButtonBar prefHeight="75.0" prefWidth="344.0" style="-fx-background-color: none;">
+                    <buttons>
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-radius: 15; -fx-background-color: #050A30;" text="Tickets" textAlignment="CENTER" textFill="WHITE">
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Contacts" textFill="WHITE">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Profile" textFill="WHITE">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Button>
+                    </buttons>
+                    <HBox.margin>
+                        <Insets left="100.0" />
+                    </HBox.margin>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </ButtonBar>
+            </children>
+            <opaqueInsets>
+                <Insets left="100.0" />
+            </opaqueInsets>
+        </HBox>
+    </top>
+    <bottom>
+        <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF FC766AFF;" BorderPane.alignment="CENTER">
+            <children>
+                <Text fill="#5b84b1" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit Ticket To HelpSpot For Support" textAlignment="CENTER" wrappingWidth="593.85595703125" />
+            </children>
+        </HBox>
+    </bottom>
+    <center>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <HBox>
+                    <children>
+                        <TitledPane animated="false" text="My Old Tickets" HBox.hgrow="ALWAYS">
+                            <HBox.margin>
+                                <Insets left="15.0" right="15.0" top="30.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                            <content>
+                                <ScrollPane>
+                                    <content>
+                                        <VBox />
+                                    </content>
+                                </ScrollPane>
+                            </content>
+                        </TitledPane>
+                        <Button mnemonicParsing="false" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Current Tickets" textFill="WHITE">
+                            <HBox.margin>
+                                <Insets right="30.0" top="30.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox>
+                    <children>
+                        <TitledPane animated="false" text="Organization Old Tickets" HBox.hgrow="ALWAYS">
+                            <HBox.margin>
+                                <Insets bottom="15.0" left="15.0" right="15.0" top="30.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                            <content>
+                                <ScrollPane>
+                                    <content>
+                                        <VBox />
+                                    </content>
+                                </ScrollPane>
+                            </content>
+                        </TitledPane>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
