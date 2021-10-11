@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ScrollPane?>
@@ -8,12 +9,16 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<?import java.lang.String?>
+<BorderPane fx:controller="client.tickets.Tickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
             <children>
@@ -27,7 +32,7 @@
                 </ImageView>
                 <ButtonBar prefHeight="75.0" prefWidth="344.0" style="-fx-background-color: none;">
                     <buttons>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-radius: 15; -fx-background-color: #050A30;" text="Tickets" textAlignment="CENTER" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#loadTickets" prefHeight="50.0" prefWidth="100.0" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Tickets" textAlignment="CENTER" textFill="WHITE">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
@@ -35,12 +40,12 @@
                                 <Font size="16.0" />
                             </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Contacts" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#loadContacts" prefHeight="50.0" prefWidth="100.0" styleClass="Button" stylesheets="/css/helpspot.css" text="Contacts" textFill="WHITE">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Profile" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#loadProfile" prefHeight="50.0" prefWidth="100.0" styleClass="Button" stylesheets="/css/helpspot.css" text="Profile" textFill="WHITE">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -71,7 +76,7 @@
             <children>
                 <HBox>
                     <children>
-                        <TitledPane animated="false" text="My Old Tickets" HBox.hgrow="ALWAYS">
+                        <TitledPane animated="false" stylesheets="/css/helpspot.css" text="Current Tickets" HBox.hgrow="ALWAYS">
                             <HBox.margin>
                                 <Insets left="15.0" right="15.0" top="30.0" />
                             </HBox.margin>
@@ -79,40 +84,46 @@
                                 <Font size="24.0" />
                             </font>
                             <content>
-                                <ScrollPane>
+                                <ScrollPane fitToHeight="true" fitToWidth="true">
                                     <content>
-                                        <VBox />
+                                        <VBox>
+                                            <children>
+                                                <GridPane onMouseClicked="#loadTicketPage">
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    </rowConstraints>
+                                                    <children>
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Organization" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Title" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Priority" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="ID" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Status" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                                                    </children>
+                                                    <cursor>
+                                                        <Cursor fx:constant="HAND" />
+                                                    </cursor>
+                                                </GridPane>
+                                            </children></VBox>
                                     </content>
                                 </ScrollPane>
                             </content>
                         </TitledPane>
-                        <Button mnemonicParsing="false" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Current Tickets" textFill="WHITE">
+                        <Button mnemonicParsing="false" onAction="#loadOldTickets" stylesheets="/css/helpspot.css" text="Old Tickets" textFill="WHITE">
                             <HBox.margin>
                                 <Insets right="30.0" top="30.0" />
                             </HBox.margin>
-                            <font>
-                                <Font size="20.0" />
-                            </font>
+                            <styleClass>
+                                <String fx:value="Button" />
+                                <String fx:value="MediumButton" />
+                            </styleClass>
                         </Button>
-                    </children>
-                </HBox>
-                <HBox>
-                    <children>
-                        <TitledPane animated="false" text="Organization Old Tickets" HBox.hgrow="ALWAYS">
-                            <HBox.margin>
-                                <Insets bottom="15.0" left="15.0" right="15.0" top="30.0" />
-                            </HBox.margin>
-                            <font>
-                                <Font size="24.0" />
-                            </font>
-                            <content>
-                                <ScrollPane>
-                                    <content>
-                                        <VBox />
-                                    </content>
-                                </ScrollPane>
-                            </content>
-                        </TitledPane>
                     </children>
                 </HBox>
             </children>

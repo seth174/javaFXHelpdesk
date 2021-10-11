@@ -1,0 +1,50 @@
+.Button {
+    -fx-background-color: #5B84B1FF;
+	-fx-background-radius: 15;
+	-fx-cursor: hand;
+	-fx-text-fill: white;
+	-fx-pref-height: 50;
+	-fx-font-size: 16;
+}
+
+.Button:hover {
+    -fx-background-color: #050A30;
+}
+
+.ButtonPressed{
+	-fx-background-color: #050A30;
+	-fx-background-radius: 15;
+	-fx-cursor: hand;
+	-fx-text-fill: white;
+	-fx-pref-height: 50;
+}
+
+.BigButton{
+	-fx-background-color: #5B84B1FF;
+	-fx-background-radius: 15;
+	-fx-cursor: hand;
+	-fx-text-fill: white;
+	-fx-font-size: 48;
+
+}
+
+.BigButton:hover{
+	-fx-background-color: #050A30;
+}
+
+.ButtonPressed:hover {
+    -fx-background-color: #000000;
+}
+.text{
+	-fx-font-size: 18;
+}
+.BigText{
+	-fx-font-size: 50;
+}
+.MediumButton{
+	-fx-font-size: 24;
+}
+
+.WhiteText{
+   -fx-fill: white;
+}

@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="client.contacts.ContactsController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
             <children>
@@ -30,7 +30,7 @@
                 </ImageView>
                 <ButtonBar prefHeight="75.0" prefWidth="344.0" style="-fx-background-color: none;">
                     <buttons>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-radius: 15; -fx-background-color: #5B84B1FF;" text="Tickets" textAlignment="CENTER" textFill="WHITE">
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Tickets" textAlignment="CENTER" textFill="WHITE" onAction="#loadTickets">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
@@ -38,12 +38,12 @@
                                 <Font size="16.0" />
                             </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #050A30; -fx-background-radius: 15;" text="Contacts" textFill="WHITE">
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="/css/helpspot.css" styleClass="ButtonPressed" text="Contacts" textFill="WHITE" onAction="#loadContacts">
                             <font>
                                 <Font size="16.0" />
                             </font>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Profile" textFill="WHITE">
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Profile" textFill="WHITE" onAction="#loadProfile">
                             <font>
                                 <Font size="16.0" />
                             </font>
@@ -63,7 +63,7 @@
         </HBox>
     </top>
     <bottom>
-        <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF FC766AFF;" BorderPane.alignment="CENTER">
+        <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
             <children>
                 <Text fill="#5b84b1" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit Ticket To HelpSpot For Support" textAlignment="CENTER" wrappingWidth="593.85595703125" />
             </children>
@@ -85,7 +85,7 @@
                         <Font size="24.0" />
                     </font>
                 </Text>
-                <MenuButton mnemonicParsing="false" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Organization" textFill="WHITE" GridPane.columnIndex="1">
+                <MenuButton mnemonicParsing="false" stylesheets="/css/helpspot.css" styleClass="Button" text="Organization" textFill="WHITE" GridPane.columnIndex="1">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Action 1" />
                         <MenuItem mnemonicParsing="false" text="Action 2" />

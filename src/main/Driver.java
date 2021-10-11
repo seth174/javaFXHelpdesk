@@ -1,5 +1,6 @@
 package main;
 
+//import dao.DatabaseManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -16,11 +17,11 @@ import java.io.IOException;
 
 public class Driver extends Application {
     private static Stage stage;
-    public static final String backgroundButton = "-fx-background-color: #5B84B1FF; -fx-background-radius: 15;";
-    public static final String backgroundButtonPressed = "-fx-background-color: #050A30; -fx-background-radius: 15;";
     public static void main(String[] args)
     {
-        launch(args);
+        System.out.println();
+        //DatabaseManager dbm = new DatabaseManager();
+        //launch(args);
     }
 
     @Override
@@ -59,8 +60,7 @@ public class Driver extends Application {
 
         Scene startMenu = new Scene(grid);
 
-        frame.setHeight(200);
-        frame.setWidth(200);
+        frame.setFullScreen(true);
         frame.setTitle("Hello");
 
         frame.setScene(startMenu);
@@ -78,10 +78,9 @@ public class Driver extends Application {
         return Driver.stage;
     }
 
-    public static void loadButton(Button button)
+    public static void createFakeData()
     {
-        button.setStyle(Driver.backgroundButton);
-        button.setOnMouseEntered(e -> button.setStyle(Driver.backgroundButtonPressed));
-        button.setOnMouseExited(e -> button.setStyle(Driver.backgroundButton));
+
     }
+
 }

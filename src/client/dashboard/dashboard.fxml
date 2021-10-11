@@ -27,7 +27,7 @@
                 </ImageView>
                 <ButtonBar prefHeight="73.0" prefWidth="316.0" style="-fx-background-color: none;">
                     <buttons>
-                        <Button fx:id="buttonTickets" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-radius: 15; -fx-background-color: #5B84B1FF;" text="Tickets" textAlignment="CENTER" textFill="WHITE" onAction="#loadTickets">
+                        <Button fx:id="buttonTickets" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Tickets" textAlignment="CENTER" textFill="WHITE" onAction="#loadTickets">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
@@ -35,11 +35,11 @@
                                 <Font size="16.0" />
                             </font>
                         </Button>
-                        <Button fx:id="buttonContacts" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Contacts" textFill="WHITE" onAction="#loadContacts">
+                        <Button fx:id="buttonContacts" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Contacts" textFill="WHITE" onAction="#loadContacts" stylesheets="/css/helpspot.css" styleClass="Button">
                             <font>
                                 <Font size="16.0" />
                             </font></Button>
-                        <Button fx:id="buttonProfile" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Profile" textFill="WHITE" onAction="#loadProfile">
+                        <Button fx:id="buttonProfile" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Profile" textFill="WHITE" onAction="#loadProfile" stylesheets="/css/helpspot.css" styleClass="Button">
                             <font>
                                 <Font size="16.0" />
                             </font></Button>
@@ -75,22 +75,22 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Old Tickets" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Old Tickets" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Submit Ticket" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Submit Ticket" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="HelpSpot Support" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="HelpSpot Support" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="Current Tickets" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Current Tickets" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <font>
                         <Font size="20.0" />
                     </font>

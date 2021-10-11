@@ -1,5 +1,6 @@
 package login;
 
+import buttonCalls.HelpDeskTeamManagerButtons;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,8 +33,6 @@ public class LoginController implements Initializable {
         stage.setOnShown(e -> {
             username.requestFocus();
         });
-        Driver.loadButton(help);
-        Driver.loadButton(login);
         username.setOnKeyPressed( event -> {
             if( event.getCode() == KeyCode.ENTER ) {
                 login();
@@ -49,6 +48,7 @@ public class LoginController implements Initializable {
     public void login()
     {
         try{
+            //Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/tickets/ticketMainPage.fxml"));
             Parent root1 = FXMLLoader.load(getClass().getResource("/client/dashboard/dashboard.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);

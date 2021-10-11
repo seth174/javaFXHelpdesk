@@ -1,14 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="client.tickets.OldTickets"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import java.lang.String?>
+<BorderPane fx:controller="client.tickets.OldTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="37.0" fitWidth="89.0" pickOnBounds="true">
+                    <image>
+                        <Image url="/logo/HelpSpot Logo.png" />
+                    </image>
+                    <HBox.margin>
+                        <Insets left="25.0" top="5.0" />
+                    </HBox.margin>
+                </ImageView>
+                <ButtonBar prefHeight="75.0" prefWidth="344.0" style="-fx-background-color: none;">
+                    <buttons>
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="/css/helpspot.css" styleClass="ButtonPressed" text="Tickets" textAlignment="CENTER" textFill="WHITE" onAction="#loadTickets">
+                            <opaqueInsets>
+                                <Insets />
+                            </opaqueInsets>
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Contacts" textFill="WHITE" onAction="#loadContacts">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Profile" textFill="WHITE" onAction="#loadProfile">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Button>
+                    </buttons>
+                    <HBox.margin>
+                        <Insets left="100.0" />
+                    </HBox.margin>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </ButtonBar>
+            </children>
+            <opaqueInsets>
+                <Insets left="100.0" />
+            </opaqueInsets>
+        </HBox>
+    </top>
+    <bottom>
+        <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF FC766AFF;" BorderPane.alignment="CENTER">
+            <children>
+                <Text fill="#5b84b1" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit Ticket To HelpSpot For Support" textAlignment="CENTER" wrappingWidth="593.85595703125" />
+            </children>
+        </HBox>
+    </bottom>
+    <center>
+        <VBox BorderPane.alignment="CENTER">
+            <children>
+                <HBox>
+                    <children>
+                        <TitledPane animated="false" text="My Old Tickets" HBox.hgrow="ALWAYS">
+                            <HBox.margin>
+                                <Insets left="15.0" right="15.0" top="30.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                            <content>
+                                <ScrollPane>
+                                    <content>
+                                        <VBox />
+                                    </content>
+                                </ScrollPane>
+                            </content>
+                        </TitledPane>
+                        <Button mnemonicParsing="false" stylesheets="/css/helpspot.css" text="Current Tickets" textFill="WHITE" onAction="#loadCurrentTickets">
+                            <HBox.margin>
+                                <Insets right="30.0" top="30.0" />
+                            </HBox.margin>
+                            <styleClass>
+                                <String fx:value="Button" />
+                                <String fx:value="MediumButton" />
+                            </styleClass>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox>
+                    <children>
+                        <TitledPane animated="false" text="Organization Old Tickets" HBox.hgrow="ALWAYS">
+                            <HBox.margin>
+                                <Insets bottom="15.0" left="15.0" right="15.0" top="30.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                            <content>
+                                <ScrollPane>
+                                    <content>
+                                        <VBox />
+                                    </content>
+                                </ScrollPane>
+                            </content>
+                        </TitledPane>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

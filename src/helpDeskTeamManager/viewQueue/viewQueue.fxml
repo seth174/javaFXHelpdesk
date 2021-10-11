@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="/css/helpspot.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.tickets.assignedUsers.AssignedUsersController">
+   <content>
+      <BorderPane>
+          <top>
+              <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
+                  <children>
+                      <ImageView fitHeight="37.0" fitWidth="89.0" pickOnBounds="true">
+                          <HBox.margin>
+                              <Insets left="25.0" top="5.0" />
+                          </HBox.margin>
+                      </ImageView>
+                      <ButtonBar>
+                          <buttons>
+                              <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Tickets" />
+                              <Button mnemonicParsing="false" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Contacts" />
+                              <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Profile" />
+                              <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Add Organizations" />
+                              <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Manage Team Queue" />
+                              <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Statistics" />
+                          </buttons>
+                          <HBox.margin>
+                              <Insets left="100.0" />
+                          </HBox.margin>
+                          <opaqueInsets>
+                              <Insets />
+                          </opaqueInsets>
+                      </ButtonBar>
+                  </children>
+                  <opaqueInsets>
+                      <Insets left="100.0" />
+                  </opaqueInsets>
+              </HBox>
+          </top>
+         <center>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+                  <ColumnConstraints hgrow="SOMETIMES" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="BigText" text="Which users queues would you like to see?">
+                     <GridPane.margin>
+                        <Insets left="15.0" right="15.0" top="30.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="15.0" right="15.0" top="30.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <Button mnemonicParsing="false" styleClass="BigButton" text="Submit" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <GridPane.margin>
+                        <Insets left="15.0" right="15.0" top="30.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="BigText" text="User:" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <GridPane.margin>
+                        <Insets left="15.0" right="15.0" top="30.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="BigText" text="Queue:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <GridPane.margin>
+                        <Insets left="15.0" right="15.0" top="30.0" />
+                     </GridPane.margin>
+                  </Text>
+                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" styleClass="BigButton" text="Add Queue" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                     <GridPane.margin>
+                        <Insets left="15.0" right="15.0" top="15.0" />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+            </GridPane>
+         </center>
+          <bottom>
+              <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF FC766AFF;" BorderPane.alignment="CENTER">
+                  <children>
+                      <Text fill="#5b84b1" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit Ticket To HelpSpot For Support" textAlignment="CENTER" wrappingWidth="593.85595703125" />
+                  </children>
+              </HBox>
+          </bottom>
+      </BorderPane>
+   </content>
+</ScrollPane>
