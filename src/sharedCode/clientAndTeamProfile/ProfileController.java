@@ -1,4 +1,4 @@
-package helpDeskTeamManager.profile;
+package sharedCode.clientAndTeamProfile;
 
 import buttonCalls.HelpDeskTeamManagerButtons;
 import dao.DatabaseManager;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Profile extends HelpDeskTeamManagerButtons implements Initializable {
+public class ProfileController extends HelpDeskTeamManagerButtons implements Initializable {
     @FXML
     private Text firstName;
     @FXML

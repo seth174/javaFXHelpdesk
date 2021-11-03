@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.profile.ProfileController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" >
     <top>
         <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
             <children>
@@ -23,10 +23,10 @@
                 </ImageView>
                 <ButtonBar>
                     <buttons>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Tickets" />
+                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Tickets"/>
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Contacts" />
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Profile" />
-                        <Button mnemonicParsing="false" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Add Organizations" />
+                        <Button mnemonicParsing="false" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Add Organizations/Contacts" />
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Manage Team Queue" />
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Statistics" />
                     </buttons>

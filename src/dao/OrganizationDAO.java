@@ -58,8 +58,36 @@ public class OrganizationDAO {
         }
     }
 
+    public Organization find(String name)
+    {
+
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select o.organizationID");
+            sb.append("  from Organization o");
+            sb.append("  where o.name = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setString(1, name);
+            ResultSet rs = pstmt.executeQuery();
+
+            if(!rs.next())
+                return null;
+
+            int organizationID = rs.getInt("organizationID");
+
+            return find(organizationID);
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding organization", e);
+        }
+    }
+
     public Organization insert(String name, Organization parentOrganization) {
         try {
+
+            if(find(name) != null)
+                return find(name);
 
             StringBuilder sb = new StringBuilder();
             sb.append("insert into organization(name, organizationID, parentOrganizationID)");
@@ -84,7 +112,6 @@ public class OrganizationDAO {
             {
                 parentOrganization.invalidateChildren();
             }
-
             return organization;
         } catch (SQLException e) {
             dbm.cleanup();

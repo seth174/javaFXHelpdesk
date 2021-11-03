@@ -1,6 +1,7 @@
 package main;
 
 //import dao.DatabaseManager;
+import dao.DatabaseManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -17,16 +18,29 @@ import java.io.IOException;
 
 public class Driver extends Application {
     private static Stage stage;
+    private static DatabaseManager dbm;
+    private static int employeeID;
+
     public static void main(String[] args)
     {
-        System.out.println();
-        //DatabaseManager dbm = new DatabaseManager();
-        //launch(args);
+        DatabaseManager dbm1 = new DatabaseManager();
+        dbm1.insertFakeOrganization();
+        dbm1.fakePeople();
+        dbm = dbm1;
+        dbm.commit();
+
+        launch(args);
     }
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         setStage(primaryStage);
+        stage.setOnCloseRequest(e -> {
+            dbm.close();
+            stage.close();
+        });
         try{
             Parent root1 = FXMLLoader.load(getClass().getResource("/login/Login.fxml"));
             primaryStage.setTitle("Login");
@@ -77,6 +91,12 @@ public class Driver extends Application {
     {
         return Driver.stage;
     }
+
+    public static DatabaseManager getDbm(){ return dbm; }
+
+    public static int getEmployeeID(){ return employeeID;}
+
+    public static void setEmployeeID(int employeeID1){ employeeID = employeeID1; }
 
     public static void createFakeData()
     {

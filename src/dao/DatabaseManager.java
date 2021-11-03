@@ -58,7 +58,6 @@ public class DatabaseManager {
         ticketPriorityDAO = new TicketPriorityDAO(conn, this);
         ticketStatusDAO = new TicketStatusDAO(conn, this);
         timePerPersonDAO = new TimePerPersonDAO(conn, this);
-        System.out.println("Finished");
     }
 
     public void create(Connection conn) throws SQLException
@@ -210,5 +209,137 @@ public class DatabaseManager {
     {
         return ticketDAO.getOrganizationTickets(organizationID);
     }
+
+    public Message insert(Ticket ticket, Message messageReplyTo, Person person, String messageContent)
+    {
+        return messageDAO.insert(ticket, messageReplyTo, person, messageContent);
+    }
+
+    public Organization insert(String name, Organization parentOrganization)
+    {
+        return organizationDAO.insert(name, parentOrganization);
+    }
+
+    public Person insert(String firstName, String lastName, String email, String password, String phoneNumber,
+                         Organization organization, int level)
+    {
+        return personDAO.insert(firstName, lastName, email, password, phoneNumber, organization, level);
+    }
+
+    public Queue insert(String name){
+        return queueDAO.insert(name);
+    }
+
+    public QueuePerPerson insert(Person person, Queue queue)
+    {
+        return queuePerPersonDAO.insert(person, queue);
+    }
+
+    public Ticket insert(String ticketTitle, String ticketDescription, TicketPriority ticketPriority,
+                         TicketStatus ticketStatus, Organization organization, Queue queue, Person personCreated)
+    {
+        return ticketDAO.insert(ticketTitle, ticketDescription, ticketPriority, ticketStatus, organization,
+                queue, personCreated);
+    }
+
+    public TicketPerPerson insert(Ticket ticket, Person person){
+        return ticketPerPersonDAO.insert(ticket, person);
+    }
+
+    public TicketStatus insertTicketStatus(String ticketStatusName)
+    {
+        return ticketStatusDAO.insert(ticketStatusName);
+    }
+
+    public TicketPriority insertTickePriority(int ticketPriorityNumber)
+    {
+        return ticketPriorityDAO.insert(ticketPriorityNumber);
+    }
+
+    public TimePerPerson insert(Ticket ticket, Person person, double time)
+    {
+        return timePerPersonDAO.insert(ticket, person, time);
+    }
+
+    public Organization findByName(String name)
+    {
+        return organizationDAO.find(name);
+    }
+
+    public void updateSubscription(Person person, Ticket ticket)
+    {
+        ticketPerPersonDAO.toggleTicketSubscription(person, ticket);
+    }
+
+    public void updateUserInfo(String firstName, String lastName, String email, String phoneNumber, int employeeID) {
+        personDAO.updateUserInfo(firstName, lastName, email, phoneNumber, employeeID);
+    }
+
+    public Person getPerson(String email, String password)
+    {
+        return personDAO.findPerson(email, password);
+    }
+
+    public Collection<Organization> getOrganizationsChildren(int parentOrganizationID)
+    {
+        return organizationDAO.getOrganizationsChildren(parentOrganizationID);
+    }
+
+    public Person findByEmail(String email)
+    {
+        return personDAO.findByEmail(email);
+    }
+
+    public void insertFakeOrganization()
+    {
+        System.out.println("HERE");
+        Organization helpSpot =  organizationDAO.insert("helpSpot", null);
+        Organization dePauwHelpDesk = organizationDAO.insert("DePauwHelpDesk", helpSpot);
+        organizationDAO.insert("CS Department", dePauwHelpDesk);
+        organizationDAO.insert("Math Department", dePauwHelpDesk);
+        organizationDAO.insert("English Department", dePauwHelpDesk);
+        Organization bigTech = organizationDAO.insert("BigTech", helpSpot);
+        organizationDAO.insert("Google", bigTech);
+        organizationDAO.insert("Microsoft", bigTech);
+        organizationDAO.insert("FaceBook", bigTech);
+        organizationDAO.insert("Uber", bigTech);
+        commit();
+    }
+
+    public void fakePeople()
+    {
+        insert("Seth", "Fagen", "Sethfagen_2022@depauw.edu", "1234", "2385777",
+         findByName("helpSpot"),  3);
+        insert("Steven", "Boegarts", "stevenBoegarts@depauw.edu", "1235", "254",
+                findByName("CS Department"),  1);
+        insert("Scott", "Thede", "sThede@depauw.edu", "1236", "2543",
+                findByName("CS Department"),  1);
+        insert("Khadija", "Stewart", "Khadija@depauw.edu", "1237", "654",
+                findByName("CS Department"),  1);
+        insert("HelpDesk", "DePauw", "helpdesk@depauw.edu", "1238", "734",
+                findByName("DePauwHelpDesk"),  2);
+        insert("1", "1", "1", "1", "1", findByName("helpSpot"), 3);
+        commit();
+    }
+
+    public void insertPriorities()
+    {
+        insertTickePriority(0);
+        insertTickePriority(1);
+        insertTickePriority(2);
+        insertTickePriority(3);
+        insertTickePriority(4);
+        insertTickePriority(5);
+        commit();
+    }
+
+    public void insertStatus(){
+        insertTicketStatus("Awaiting Feedback");
+        insertTicketStatus("Response Provided");
+        insertTicketStatus("Closed");
+        insertTicketStatus("On hold");
+        commit();
+    }
+
 
 }

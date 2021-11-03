@@ -26,7 +26,7 @@ public class Organization {
 
     public int getOrganizationID() {return organizationID;}
 
-    public Organization getParentOrganizationID() {return parentOrganization;}
+    public Organization getParentOrganization() {return parentOrganization;}
 
     public Collection<Person> getOrganizationPeople()
     {

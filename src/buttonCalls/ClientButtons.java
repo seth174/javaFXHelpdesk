@@ -14,7 +14,7 @@ public abstract class ClientButtons {
     public void loadProfile()  {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/profile/Profile.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/sharedCode/clientAndTeamProfile/Profile.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

@@ -14,7 +14,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.profile.ProfileController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sharedCode.clientAndTeamProfile.ProfileController">
     <top>
         <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
             <children>
@@ -68,72 +68,49 @@
         </HBox>
     </bottom>
     <center>
-        <GridPane BorderPane.alignment="CENTER">
+        <GridPane BorderPane.alignment="CENTER" stylesheets="/css/helpspot.css">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="231.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="353.0" minWidth="10.0" prefWidth="220.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="149.0" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" GridPane.halignment="CENTER">
-                    <font>
-                        <Font size="30.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                    <font>
-                        <Font size="30.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-                    <font>
-                        <Font size="30.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Organization:" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-                    <font>
-                        <Font size="30.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1">
-                    <font>
-                        <Font size="30.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <font>
-                        <Font size="30.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <font>
-                        <Font size="30.0" />
-                    </font>
-                </Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                    <font>
-                        <Font size="30.0" />
-                    </font>
-                </Text>
-                <Button fx:id="editName" mnemonicParsing="false" stylesheets="/css/helpspot.css" text="Edit" textFill="WHITE" GridPane.columnIndex="2">
-               <styleClass>
-                  <String fx:value="Button" />
-                  <String fx:value="MediumButton" />
-               </styleClass>
-                </Button>
-                <Button fx:id="editEmail" mnemonicParsing="false" stylesheets="/css/helpspot.css" text="Edit" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="BigText" text="First Name:" GridPane.halignment="CENTER" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name: " styleClass="BigText" GridPane.rowIndex="1" GridPane.halignment="CENTER"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="BigText" text="Email:" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="BigText" text="Phone Number:" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="BigText" text="Organization:" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                <Text fx:id="firstName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="BigText" text="Text" GridPane.columnIndex="1" />
+                <Text fx:id="email" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="BigText" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Text fx:id="phoneNumber" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="BigText" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Text fx:id="organization" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="BigText" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Button fx:id="editName" mnemonicParsing="false" stylesheets="/css/helpspot.css" text="Edit Name" textFill="WHITE" GridPane.columnIndex="2" onAction="#editFirstName">
                     <styleClass>
                         <String fx:value="Button" />
                         <String fx:value="MediumButton" />
                     </styleClass>
                 </Button>
-                <Button fx:id="editPhone" mnemonicParsing="false" stylesheets="/css/helpspot.css" text="Edit" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <Button fx:id="editEmail" mnemonicParsing="false" stylesheets="/css/helpspot.css" text="Edit Email" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" onAction="#editEmail">
+                    <styleClass>
+                        <String fx:value="Button" />
+                        <String fx:value="MediumButton" />
+                    </styleClass>
+                </Button>
+                <Button fx:id="editPhone" mnemonicParsing="false" stylesheets="/css/helpspot.css" text="Edit Phone Number" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3" onAction="#editPhoneNumber">
+                    <styleClass>
+                        <String fx:value="Button" />
+                        <String fx:value="MediumButton" />
+                    </styleClass>
+                </Button>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="BigText" fx:id="lastName"/>
+                <Button fx:id="editLastName" mnemonicParsing="false" text="Edit Last Name" GridPane.columnIndex="2" GridPane.rowIndex="1" onAction="#editLastName">
                     <styleClass>
                         <String fx:value="Button" />
                         <String fx:value="MediumButton" />

@@ -30,7 +30,7 @@ public class PersonDAO {
         sb.append("  lastName varchar(255) not null,");
         sb.append("  email varchar(255) not null,");
         sb.append("  password varchar(255) not null,");
-        sb.append("  phoneNumber integer not null,");
+        sb.append("  phoneNumber varchar(255) not null,");
         sb.append("  organizationID integer not null,");
         sb.append("  employeeID integer not null,");
         sb.append("  level integer not null,");
@@ -93,7 +93,7 @@ public class PersonDAO {
             String lastName = rs.getString("lastName");
             String email = rs.getString("email");
             String password = rs.getString("password");
-            int phoneNumber = rs.getInt("phoneNumber");
+            String phoneNumber = rs.getString("phoneNumber");
             int organizationID = rs.getInt("organizationID");
             int level = rs.getInt("level");
             rs.close();
@@ -136,7 +136,7 @@ public class PersonDAO {
         }
     }
 
-    public Person insert(String firstName, String lastName, String email, String password, int phoneNumber,
+    public Person insert(String firstName, String lastName, String email, String password, String phoneNumber,
                          Organization organization, int level) {
         try {
             // make sure that the email is currently unused
@@ -154,7 +154,7 @@ public class PersonDAO {
             pstmt.setString(2, lastName);
             pstmt.setString(3, email);
             pstmt.setString(4, password);
-            pstmt.setInt(5, phoneNumber);
+            pstmt.setString(5, phoneNumber);
             pstmt.setInt(6, organization.getOrganizationID());
             int employeeID = getNewEmployeeID();
             pstmt.setInt(7, employeeID);
@@ -171,6 +171,87 @@ public class PersonDAO {
         } catch (SQLException e) {
             dbm.cleanup();
             throw new RuntimeException("error inserting new person", e);
+        }
+    }
+
+    public Person findPerson(String email, String password)
+    {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select p.employeeID");
+            sb.append("  from Person p");
+            sb.append("  where p.email = ? and p.password = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+            ResultSet rs = pstmt.executeQuery();
+
+            // return null if person doesn't exist
+            if (!rs.next())
+                return null;
+
+            int employeeID = rs.getInt("employeeID");
+            rs.close();
+
+            return find(employeeID);
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding person by email and password", e);
+        }
+    }
+
+    public void updateUserInfo(String firstName, String lastName, String email, String phoneNumber, int employeeID) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("update person");
+            if(firstName != null)
+            {
+                sb.append("  set firstName = ?");
+            }
+            else if(lastName != null)
+            {
+                sb.append("  set lastName = ?");
+            }
+            else if(email != null)
+            {
+                sb.append("  set email = ?");
+            }
+            else if(phoneNumber != null)
+            {
+                sb.append("  set phoneNumber = ?");
+            }
+            sb.append("  where employeeID = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            if (firstName != null) {
+                pstmt.setString(1, firstName);
+            }
+            else if(lastName != null)
+            {
+                pstmt.setString(1, lastName);
+            }
+            else if(email != null)
+            {
+                pstmt.setString(1, email);
+            }
+            else if(phoneNumber != null)
+            {
+                pstmt.setString(1, phoneNumber);
+            }
+            else
+            {
+                return;
+            }
+            pstmt.setInt(2, employeeID);
+            pstmt.executeUpdate();
+
+            Person person = find(employeeID);
+            person.getOrganization().invalidatePeople();
+            cache.remove(person.getEmployeeID());
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error updating user info", e);
         }
     }
 
@@ -215,3 +296,6 @@ public class PersonDAO {
     }
 
 }
+
+
+//finish update method for user info then finish the profile dao

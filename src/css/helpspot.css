@@ -38,6 +38,9 @@
 .text{
 	-fx-font-size: 18;
 }
+.MediumText{
+	-fx-font-size: 24;
+}
 .BigText{
 	-fx-font-size: 50;
 }
@@ -47,4 +50,38 @@
 
 .WhiteText{
    -fx-fill: white;
+}
+
+
+.MenuButton .label {
+    -fx-text-fill: white;
+}
+
+.MenuButton{
+    -fx-background-color: #5B84B1FF;
+    -fx-background-radius: 15;
+    -fx-cursor: hand;
+}
+
+.MenuButton:focused {
+     -fx-background-color: darkgray;
+}
+
+.ComboBox{
+    -fx-background-color: #5B84B1FF;
+    -fx-background-radius: 15;
+    -fx-cursor: hand;
+    -fx-prompt-text-fill: white;
+}
+
+.MenuButton:focused .label {
+    -fx-text-fill: black;
+}
+
+.BigMenuButton{
+    -fx-font-size: 48;
+}
+
+.TextPadding{
+    -fx-padding: 100px;
 }

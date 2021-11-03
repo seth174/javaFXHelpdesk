@@ -1,10 +1,13 @@
 package login;
 
 import buttonCalls.HelpDeskTeamManagerButtons;
+import dao.DatabaseManager;
+import error.Error;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Modality;
 import main.Driver;
 
 import javafx.fxml.FXML;
@@ -12,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import models.Person;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +31,7 @@ public class LoginController implements Initializable {
     @FXML
     private Button help;
     private static Stage stage = Driver.getStage();
+    private static DatabaseManager dbm = Driver.getDbm();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,9 +52,28 @@ public class LoginController implements Initializable {
 
     public void login()
     {
+        String email = username.getText();
+        String loginPassword = password.getText();
+
+        Person person = dbm.getPerson(email, loginPassword);
+
+        dbm.commit();
+
+        if(person == null)
+        {
+            Error.error("Username or Password is incorrect");
+            return;
+        }
+
+        Driver.setEmployeeID(person.getEmployeeID());
         try{
-            //Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/tickets/ticketMainPage.fxml"));
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/dashboard/dashboard.fxml"));
+            Parent root1 = null;
+            if(person.getLevel() == 1)
+                root1 = FXMLLoader.load(getClass().getResource("/client/dashboard/dashboard.fxml"));
+            else if(person.getLevel() == 2)
+                root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/ticketMainPage.fxml"));
+            else if(person.getLevel() == 3)
+                root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/tickets/ticketMainPage.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

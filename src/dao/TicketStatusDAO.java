@@ -1,6 +1,5 @@
 package dao;
 
-import models.Organization;
 import models.Ticket;
 import models.TicketStatus;
 
@@ -67,5 +66,48 @@ public class TicketStatusDAO {
     public Collection<Ticket> getTicketsByStatus(int ticketStatusID)
     {
         return dbm.getTicketsByStatus(ticketStatusID);
+    }
+
+    public TicketStatus insert(String ticketStatusName) {
+        try {
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("insert into TicketStatus(TicketStatusID, ticketStatus)");
+            sb.append("  values (?, ?)");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            int ticketStatusID = getNewID();
+            pstmt.setInt(1, ticketStatusID);
+            pstmt.setString(2, ticketStatusName);
+            pstmt.executeUpdate();
+
+            TicketStatus ticketStatus = new TicketStatus(this, ticketStatusID, ticketStatusName);
+            cache.put(ticketStatusID, ticketStatus);
+
+            return ticketStatus;
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error inserting new ticket status", e);
+        }
+    }
+
+    private int getNewID()
+    {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select max(t.TicketStatusID) as id");
+            sb.append("  from TicketStatus t");
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            ResultSet rs = pstmt.executeQuery();
+
+            //No ticket exist
+            if (!rs.next())
+                return 1;
+            int max = rs.getInt("id");
+            return max + 1;
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding max ticket id", e);
+        }
     }
 }

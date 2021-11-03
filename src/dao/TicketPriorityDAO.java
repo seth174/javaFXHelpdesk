@@ -1,6 +1,5 @@
 package dao;
 
-import models.Organization;
 import models.Ticket;
 import models.TicketPriority;
 
@@ -67,5 +66,48 @@ public class TicketPriorityDAO {
     public Collection<Ticket> getTicketsByPriority(int ticketPriorityID)
     {
         return dbm.getTicketsByPriority(ticketPriorityID);
+    }
+
+    public TicketPriority insert(int ticketPriorityNumber) {
+        try {
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("insert into ticketPriority(ticketPriorityID, ticketPriority)");
+            sb.append("  values (?, ?)");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            int ticketPriorityID = getNewID();
+            pstmt.setInt(1, ticketPriorityID);
+            pstmt.setInt(2, ticketPriorityNumber);
+            pstmt.executeUpdate();
+
+            TicketPriority ticketPriority = new TicketPriority(this, ticketPriorityID, ticketPriorityNumber);
+            cache.put(ticketPriorityID, ticketPriority);
+
+            return ticketPriority;
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error inserting new ticketPriority", e);
+        }
+    }
+
+    private int getNewID()
+    {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select max(t.ticketPriorityID) as id");
+            sb.append("  from ticketPriority t");
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            ResultSet rs = pstmt.executeQuery();
+
+            //No ticket exist
+            if (!rs.next())
+                return 1;
+            int max = rs.getInt("id");
+            return max + 1;
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding max ticket id", e);
+        }
     }
 }

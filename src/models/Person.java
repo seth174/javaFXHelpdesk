@@ -11,7 +11,7 @@ public class Person {
     private String lastName;
     private String email;
     private String password;
-    private int phoneNumber;
+    private String phoneNumber;
     private Organization organization;
     private int employeeID;
     private int level;
@@ -21,7 +21,7 @@ public class Person {
     private Collection<TimePerPerson> timePerPerson;
     private Collection<Message> messages;
 
-    public Person(PersonDAO dao, String firstName, String lastName, String email, String password, int phoneNumber, Organization organization,
+    public Person(PersonDAO dao, String firstName, String lastName, String email, String password, String phoneNumber, Organization organization,
                   int employeeID, int level)
     {
         this.dao = dao;
@@ -43,7 +43,7 @@ public class Person {
 
     public String getPassword() {return password;}
 
-    public int getPhoneNumber() {return phoneNumber;}
+    public String getPhoneNumber() {return phoneNumber;}
 
     public Organization getOrganization() {return organization;}
 

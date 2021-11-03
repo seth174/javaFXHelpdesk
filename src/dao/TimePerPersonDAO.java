@@ -128,4 +128,53 @@ public class TimePerPersonDAO {
         }
     }
 
+    public TimePerPerson insert(Ticket ticket, Person person, double time) {
+        try {
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("insert into timePerPerson(timePerPersonid, ticketID, employeeID, time)");
+            sb.append("  values (?, ?, ?)");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            int timePerPersonID= getNewID();
+            pstmt.setInt(1, timePerPersonID);
+            pstmt.setInt(2, ticket.getTicketID());
+            pstmt.setInt(3, person.getEmployeeID());
+            pstmt.setDouble(4, time);
+            pstmt.executeUpdate();
+
+            TimePerPerson timePerPerson = new TimePerPerson(this, timePerPersonID, person, ticket, time);
+            cache.put(timePerPersonID, timePerPerson);
+
+            // Tell the Dept that it will have to recalculate its majors list
+            person.invalidateTimePerPerson();
+            ticket.invalidateTimePerPerson();
+
+            return timePerPerson;
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error inserting new time per person", e);
+        }
+    }
+
+    private int getNewID()
+    {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select max(t.timePerPersonid) as id");
+            sb.append("  from timePerPerson t");
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            ResultSet rs = pstmt.executeQuery();
+
+            //No ticket exist
+            if (!rs.next())
+                return 1;
+            int max = rs.getInt("id");
+            return max + 1;
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding max ticket id", e);
+        }
+    }
+
 }

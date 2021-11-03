@@ -102,4 +102,33 @@ public class HelpDeskTeamManagerButtons  {
         }
     }
 
+    public void loadAddOrganization(){
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/addOrganization/addOrganization.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadAddUsers()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/addUsers/addUsers.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
 }
