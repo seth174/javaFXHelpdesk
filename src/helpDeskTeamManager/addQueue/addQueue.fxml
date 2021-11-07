@@ -3,30 +3,61 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox depthTest="DISABLE" style="-fx-background-color: FC766AFF;" styleClass="PinkColor" stylesheets="/css/helpspot.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <GridPane alignment="CENTER" VBox.vgrow="ALWAYS">
+<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpDeskTeamManager.addQueue.QueueController" stylesheets="/css/helpspot.css">
+    <top>
+        <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="37.0" fitWidth="89.0" pickOnBounds="true">
+
+                    <HBox.margin>
+                        <Insets left="25.0" top="5.0" />
+                    </HBox.margin>
+                </ImageView>
+                <ButtonBar>
+                    <buttons>
+                        <Button mnemonicParsing="false" onAction="#loadTickets" styleClass="Button" text="Tickets" />
+                        <Button mnemonicParsing="false" onAction="#loadContacts" styleClass="Button" text="Contacts" />
+                        <Button mnemonicParsing="false" onAction="#loadProfile" styleClass="Button" text="Profile" />
+                        <Button mnemonicParsing="false" onAction="#loadAdd" styleClass="Button" text="Add Organizations" />
+                        <Button mnemonicParsing="false" onAction="#loadManageQueue" styleClass="ButtonPressed" text="Manage Team Queue" />
+                        <Button mnemonicParsing="false" styleClass="Button" text="Statistics" />
+                    </buttons>
+                    <HBox.margin>
+                        <Insets left="100.0" />
+                    </HBox.margin>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                </ButtonBar>
+            </children>
+            <opaqueInsets>
+                <Insets left="100.0" />
+            </opaqueInsets>
+        </HBox>
+    </top>
+   <center>
+        <GridPane alignment="CENTER" styleClass="Pink">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
             </columnConstraints>
             <rowConstraints>
-            <RowConstraints vgrow="ALWAYS" />
                 <RowConstraints vgrow="ALWAYS" />
             <RowConstraints vgrow="ALWAYS" />
             <RowConstraints vgrow="ALWAYS" />
             <RowConstraints vgrow="ALWAYS" />
             </rowConstraints>
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name of new Queue" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name of new Queue" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                     <styleClass>
                         <String fx:value="BigText" />
                         <String fx:value="WhiteText" />
@@ -35,12 +66,12 @@
                         <Insets top="25.0" />
                     </GridPane.margin>
                 </Text>
-            <TextField GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <TextField fx:id="name" prefHeight="100.0" prefWidth="200.0" styleClass="MediumText" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                <GridPane.margin>
                   <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                </GridPane.margin>
             </TextField>
-            <GridPane GridPane.rowIndex="3">
+            <GridPane GridPane.rowIndex="2">
               <columnConstraints>
                 <ColumnConstraints hgrow="ALWAYS" />
                 <ColumnConstraints hgrow="ALWAYS" />
@@ -49,25 +80,21 @@
                 <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" text="Close" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" text="Add" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" styleClass="BigButton" text="Close" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#close"/>
+                  <Button mnemonicParsing="false" styleClass="BigButton" text="Add" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
                </children>
                <GridPane.margin>
                   <Insets bottom="25.0" top="25.0" />
                </GridPane.margin>
             </GridPane>
-            <ImageView fitHeight="57.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-               <image>
-                  <Image url="@../../logo/HelpSpot%20Logo.png" />
-               </image>
-               <GridPane.margin>
-                  <Insets bottom="25.0" top="25.0" />
-               </GridPane.margin>
-            </ImageView>
             </children>
-            <VBox.margin>
-                <Insets top="25.0" />
-            </VBox.margin>
         </GridPane>
-    </children>
-</VBox>
+   </center>
+    <bottom>
+        <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF FC766AFF;" BorderPane.alignment="CENTER">
+            <children>
+                <Text fill="#5b84b1" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit Ticket To HelpSpot For Support" textAlignment="CENTER" wrappingWidth="593.85595703125" />
+            </children>
+        </HBox>
+    </bottom>
+</BorderPane>

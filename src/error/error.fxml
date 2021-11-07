@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<?import javafx.geometry.Insets?>
+<GridPane stylesheets="/css/helpspot.css" fx:controller="error.Error" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: FC766AFF;" styleClass="BigText" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+  <columnConstraints>
+    <ColumnConstraints hgrow="ALWAYS" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints  vgrow="ALWAYS" />
+    <RowConstraints  vgrow="ALWAYS" />
+  </rowConstraints>
+   <children>
+       <Text fx:id="text" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #5B84B1FF;" styleClass="BigText" text="Text" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+           <GridPane.margin>
+               <Insets left="50.0" right="50.0" top="50.0" bottom="50.0" />
+           </GridPane.margin>
+      </Text>
+      <Button  GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" mnemonicParsing="false" styleClass="BigButton" text="Close" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" onAction="#close">
+       <GridPane.margin>
+           <Insets left="50.0" right="50.0" top="50.0" bottom="50.0" />
+       </GridPane.margin>
+       </Button>
+   </children>
+</GridPane>

@@ -28,6 +28,10 @@
 
 }
 
+.Pink{
+ -fx-background-color: #FC766AFF
+}
+
 .BigButton:hover{
 	-fx-background-color: #050A30;
 }

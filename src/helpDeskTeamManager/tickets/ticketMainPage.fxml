@@ -26,7 +26,7 @@
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Contacts" onAction="#loadContacts"/>
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Profile" onAction="#loadProfile"/>
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Add Organizations" onAction="#loadAdd"/>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Manage Team Queue" />
+                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Manage Team Queue" onAction="#loadManageQueue"/>
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Statistics" />
                     </buttons>
                     <HBox.margin>

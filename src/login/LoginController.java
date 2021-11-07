@@ -6,6 +6,7 @@ import error.Error;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import main.Driver;
@@ -25,7 +26,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField username;
     @FXML
-    private TextField password;
+    private PasswordField password;
     @FXML
     private Button login;
     @FXML

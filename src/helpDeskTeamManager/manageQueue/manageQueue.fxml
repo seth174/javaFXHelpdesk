@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpDeskTeamManager.manageQueue.ManageQueueController">
     <top>
         <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
             <children>
@@ -25,10 +25,10 @@
                 <ButtonBar>
                     <buttons>
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Tickets" />
-                        <Button mnemonicParsing="false" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Contacts" />
+                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Contacts" />
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Profile" />
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Add Organizations" />
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Manage Team Queue" />
+                        <Button mnemonicParsing="false" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Manage Team Queue" />
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Statistics" />
                     </buttons>
                     <HBox.margin>
@@ -82,9 +82,9 @@
                       <Insets bottom="40.0" left="25.0" right="25.0" top="40.0" />
                   </VBox.margin>
                <children>
-                  <Button mnemonicParsing="false" text="View/Add User Queue" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="BigButton"/>
-                  <Button mnemonicParsing="false" text="Add New Queue" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="BigButton"/>
-                  <Button mnemonicParsing="false" text="Delete Queue" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="BigButton"/>
+                  <Button mnemonicParsing="false" text="View/Add User Queue" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="BigButton" onAction="#loadViewQueue"/>
+                  <Button mnemonicParsing="false" text="Add New Queue" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="BigButton" onAction="#loadAddQueue"/>
+                  <Button mnemonicParsing="false" text="Delete Queue" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="BigButton" onAction="#loadDeleteQueue"/>
                </children>
               </GridPane>
           </children>

@@ -131,4 +131,63 @@ public class HelpDeskTeamManagerButtons  {
         }
     }
 
+    public void loadManageQueue()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/manageQueue/manageQueue.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadViewQueue()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/viewQueue/viewQueue.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadAddQueue()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/addQueue/addQueue.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadDeleteQueue()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/deleteQueue/deleteQueue.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
 }
