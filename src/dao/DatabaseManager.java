@@ -39,6 +39,7 @@ public class DatabaseManager {
         } catch (SQLException e) {
             // database doesn't exist, so try creating it
             try {
+                System.out.println("here");
                 prop.put("create", "true");
                 conn = driver.connect(url, prop);
                 conn.setAutoCommit(false);
@@ -226,8 +227,8 @@ public class DatabaseManager {
         return personDAO.insert(firstName, lastName, email, password, phoneNumber, organization, level);
     }
 
-    public Queue insert(String name){
-        return queueDAO.insert(name);
+    public Queue insertQueue(String name, Organization organization){
+        return queueDAO.insert(name, organization);
     }
 
     public QueuePerPerson insert(Person person, Queue queue)
@@ -290,9 +291,22 @@ public class DatabaseManager {
         return personDAO.findByEmail(email);
     }
 
+    public Queue findQueueByName(String name){
+        return queueDAO.findByName(name);
+    }
+
+    public Collection<Queue> getOrganizationQueues(int organizationID)
+    {
+        return queueDAO.getOrganizationQueues(organizationID);
+    }
+
+    public Queue updateDeleted(int queueID)
+    {
+        return queueDAO.updateDeleted(queueID);
+    }
+
     public void insertFakeOrganization()
     {
-        System.out.println("HERE");
         Organization helpSpot =  organizationDAO.insert("helpSpot", null);
         Organization dePauwHelpDesk = organizationDAO.insert("DePauwHelpDesk", helpSpot);
         organizationDAO.insert("CS Department", dePauwHelpDesk);
@@ -318,7 +332,9 @@ public class DatabaseManager {
                 findByName("CS Department"),  1);
         insert("HelpDesk", "DePauw", "helpdesk@depauw.edu", "1238", "734",
                 findByName("DePauwHelpDesk"),  2);
-        insert("1", "1", "1", "1", "1", findByName("helpSpot"), 3);
+        insert("1", "1", "1", "1", "1", findByName("DePauwHelpDesk"), 1);
+        insert("2", "2", "2", "2", "2", findByName("DePauwHelpDesk"), 2);
+        insert("3", "3", "3", "3", "3", findByName("CS Department"), 3);
         commit();
     }
 

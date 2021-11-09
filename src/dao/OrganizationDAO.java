@@ -2,6 +2,7 @@ package dao;
 
 import models.Organization;
 import models.Person;
+import models.Queue;
 import models.Ticket;
 
 import java.sql.*;
@@ -188,5 +189,10 @@ public class OrganizationDAO {
     public Collection<Ticket> getOrganizationTickets(int organizationID)
     {
         return dbm.getOrganizationTickets(organizationID);
+    }
+
+    public Collection<Queue> getOrganizationQueues(int organizationID)
+    {
+        return dbm.getOrganizationQueues(organizationID);
     }
 }

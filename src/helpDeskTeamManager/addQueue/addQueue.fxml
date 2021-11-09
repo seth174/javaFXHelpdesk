@@ -81,7 +81,7 @@
               </rowConstraints>
                <children>
                   <Button mnemonicParsing="false" styleClass="BigButton" text="Close" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#close"/>
-                  <Button mnemonicParsing="false" styleClass="BigButton" text="Add" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" styleClass="BigButton" text="Add" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#insertQueue"/>
                </children>
                <GridPane.margin>
                   <Insets bottom="25.0" top="25.0" />

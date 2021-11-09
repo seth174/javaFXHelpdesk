@@ -91,14 +91,14 @@ public class AutoCompleteTextField extends TextField {
             //List of "suggestions"
             List<CustomMenuItem> menuItems = new LinkedList<>();
             //List size - 10 or founded suggestions count
-            int maxEntries = 10;
+            int maxEntries = 100;
             int count = Math.min(searchResult.size(), maxEntries);
             //Build list as set of labels
             for (int i = 0; i < count; i++) {
                 final String result = searchResult.get(i);
                 //label with graphic (text flow) to highlight founded subtext in suggestions
                 Label entryLabel = new Label();
-                entryLabel.setGraphic(buildTextFlow(result, searchReauest));
+                entryLabel.setGraphic(buildTextFlow(result, searchReauest, super.getFont()));
                 entryLabel.setPrefHeight(10);  //don't sure why it's changed with "graphic"
                 CustomMenuItem item = new CustomMenuItem(entryLabel, true);
                 menuItems.add(item);
@@ -134,13 +134,13 @@ public class AutoCompleteTextField extends TextField {
      * @param filter - string to select in text
      * @return - TextFlow
      */
-    public static TextFlow buildTextFlow(String text, String filter) {
+    public static TextFlow buildTextFlow(String text, String filter, Font font) {
         int filterIndex = text.toLowerCase().indexOf(filter.toLowerCase());
         Text textBefore = new Text(text.substring(0, filterIndex));
         Text textAfter = new Text(text.substring(filterIndex + filter.length()));
         Text textFilter = new Text(text.substring(filterIndex,  filterIndex + filter.length())); //instead of "filter" to keep all "case sensitive"
         textFilter.setFill(Color.ORANGE);
-        textFilter.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+        textFilter.setFont(font);
         return new TextFlow(textBefore, textFilter, textAfter);
     }
 

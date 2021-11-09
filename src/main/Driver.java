@@ -24,6 +24,7 @@ public class Driver extends Application {
     public static void main(String[] args)
     {
         DatabaseManager dbm1 = new DatabaseManager();
+        dbm1.commit();
         dbm1.insertFakeOrganization();
         dbm1.fakePeople();
         dbm = dbm1;

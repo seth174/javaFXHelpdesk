@@ -78,14 +78,14 @@
                         <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
                     </rowConstraints>
                     <children>
-                        <Button mnemonicParsing="false" text="Cancel" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="BigButton"/>
-                        <Button mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="BigButton"/>
+                        <Button mnemonicParsing="false" text="Cancel" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="BigButton" onAction="#close"/>
+                        <Button mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="BigButton" onAction="#delete"/>
                     </children>
                     <GridPane.margin>
                         <Insets bottom="25.0" top="25.0" />
                     </GridPane.margin>
                 </GridPane>
-            <AutoCompleteTextField prefWidth="150.0" GridPane.rowIndex="1" styleClass="MediumText" prefHeight="100">
+            <AutoCompleteTextField prefWidth="150.0" GridPane.rowIndex="1" styleClass="MediumText" prefHeight="100" fx:id="textField">
                <GridPane.margin>
                   <Insets bottom="15.0" top="15.0" left="15.0" right="15.0"/>
                </GridPane.margin>

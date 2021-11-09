@@ -13,6 +13,7 @@ public class Organization {
     private Collection<Person> organizationPeople;
     private Collection<Organization> organizationsChildren;
     private Collection<Ticket> organizationTickets;
+    private Collection<Queue> organizationQueues;
 
     public Organization(OrganizationDAO dao, String name, int organizationID, Organization parentOrganization)
     {
@@ -55,6 +56,15 @@ public class Organization {
         return organizationsChildren;
     }
 
+    public Collection<Queue> getOrganizationQueues()
+    {
+        if(organizationQueues == null)
+        {
+            organizationQueues = dao.getOrganizationQueues(organizationID);
+        }
+        return organizationQueues;
+    }
+
     public void invalidatePeople() {
         organizationPeople = null;
     }
@@ -66,6 +76,8 @@ public class Organization {
     public void invalidateTickets(){
         organizationTickets = null;
     }
+
+    public void invalidateQueues() { organizationQueues = null; }
 
 
 }
