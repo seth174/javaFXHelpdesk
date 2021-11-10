@@ -74,52 +74,6 @@ public abstract class HelpDeskTeamButtons {
         }
     }
 
-    public void loadCurrentTickets()
-    {
-        try
-        {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/ticketMainPage.fxml"));
-            stage.setScene(new Scene(root1));
-            stage.setTitle("My Current Tickets");
-            stage.setFullScreen(true);
-            stage.show();
-        }
-        catch (IOException e)
-        {
-            System.out.println(e);
-        }
-    }
 
-    public void loadOrganizationTickets()
-    {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        try
-        {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/selectOrganization.fxml"));
-            window.setScene(new Scene(root1));
-            window.setTitle("Select Organization");
-            window.showAndWait();
-        }
-        catch (IOException e)
-        {
-            System.out.println(e);
-        }
-    }
 
-    public void loadMyOldTickets()
-    {
-        try
-        {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/myOldTickets.fxml"));
-            stage.setScene(new Scene(root1));
-            stage.setTitle("My Old Tickets");
-            stage.setFullScreen(true);
-            stage.show();
-        }
-        catch (IOException e)
-        {
-            System.out.println(e);
-        }
-    }
 }

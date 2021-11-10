@@ -47,14 +47,16 @@ public class DeleteQueue extends HelpDeskTeamManagerButtons implements Initializ
             Error.error("Please enter a Queue");
             return false;
         }
-        else if(dbm.findQueueByName(textField.getText()).getDeleted())
-        {
-            Error.error("This Queue has been deleted");
-            return false;
-        }
         else if(dbm.findQueueByName(textField.getText()) == null)
         {
+            dbm.commit();
             Error.error("Queue does not exist");
+            return false;
+        }
+        else if(dbm.findQueueByName(textField.getText()).getDeleted())
+        {
+            dbm.commit();
+            Error.error("This Queue has been deleted");
             return false;
         }
         else if(dbm.findQueueByName(textField.getText()).getTicketsInQueue() != null)

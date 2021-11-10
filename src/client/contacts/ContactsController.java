@@ -39,6 +39,8 @@ public class ContactsController extends ClientButtons implements Initializable {
         organizations.add(dbm.findPersonByID(Driver.getEmployeeID()).getOrganization());
         if(dbm.findPersonByID(Driver.getEmployeeID()).getOrganization().getParentOrganization() != null)
             organizations.add(dbm.findPersonByID(Driver.getEmployeeID()).getOrganization().getParentOrganization());
+        //Collection<Organization> children = dbm.getOrganizationsChildren(dbm.findPersonByID(Driver.getEmployeeID()).getEmployeeID());
+        //organizations.addAll(children);
         dbm.commit();
 
         for(Organization o: organizations)

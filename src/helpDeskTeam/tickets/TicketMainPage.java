@@ -1,5 +1,6 @@
 package helpDeskTeam.tickets;
 
+import buttonCalls.ButtonCalls;
 import buttonCalls.ClientButtons;
 import buttonCalls.HelpDeskTeamButtons;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TicketMainPage extends HelpDeskTeamButtons implements Initializable {
+public class TicketMainPage extends ButtonCalls implements Initializable {
     private static Stage stage = Driver.getStage();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

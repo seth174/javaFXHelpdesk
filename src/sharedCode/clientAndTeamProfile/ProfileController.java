@@ -1,5 +1,6 @@
 package sharedCode.clientAndTeamProfile;
 
+import buttonCalls.ButtonCalls;
 import buttonCalls.HelpDeskTeamManagerButtons;
 import dao.DatabaseManager;
 import javafx.fxml.FXML;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProfileController extends HelpDeskTeamManagerButtons implements Initializable {
+public class ProfileController extends ButtonCalls implements Initializable {
     @FXML
     private Text firstName;
     @FXML

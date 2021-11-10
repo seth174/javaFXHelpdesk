@@ -67,6 +67,7 @@ public class LoginController implements Initializable {
         }
 
         Driver.setEmployeeID(person.getEmployeeID());
+        System.out.println(person.getOrganization().getOrganizationID());
         try{
             Parent root1 = null;
             if(person.getLevel() == 1)
