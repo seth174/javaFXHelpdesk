@@ -1,15 +1,13 @@
 package helpDeskTeamManager.deleteQueue;
 
 import autoCompleteTextField.AutoCompleteTextField;
-import buttonCalls.HelpDeskTeamManagerButtons;
+import buttonCalls.ButtonCalls;
 import dao.DatabaseManager;
 import error.Error;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import main.Driver;
-import models.Organization;
 import models.Person;
 import models.Queue;
 
@@ -18,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
-public class DeleteQueue extends HelpDeskTeamManagerButtons implements Initializable {
+public class DeleteQueue extends ButtonCalls implements Initializable {
 
     private DatabaseManager dbm = Driver.getDbm();
     private Person person = dbm.findPersonByID(Driver.getEmployeeID());
@@ -29,7 +27,7 @@ public class DeleteQueue extends HelpDeskTeamManagerButtons implements Initializ
     {
         if(check())
         {
-            int queueID = dbm.findQueueByName(textField.getText()).getQueueID();
+            int queueID = dbm.findQueueByName(textField.getText(), person.getOrganization()).getQueueID();
             dbm.updateDeleted(queueID);
             dbm.commit();
             Error.error("Successfully deleted Queue");
@@ -47,19 +45,19 @@ public class DeleteQueue extends HelpDeskTeamManagerButtons implements Initializ
             Error.error("Please enter a Queue");
             return false;
         }
-        else if(dbm.findQueueByName(textField.getText()) == null)
+        else if(dbm.findQueueByName(textField.getText(), person.getOrganization()) == null)
         {
             dbm.commit();
             Error.error("Queue does not exist");
             return false;
         }
-        else if(dbm.findQueueByName(textField.getText()).getDeleted())
+        else if(dbm.findQueueByName(textField.getText(), person.getOrganization()).getDeleted())
         {
             dbm.commit();
             Error.error("This Queue has been deleted");
             return false;
         }
-        else if(dbm.findQueueByName(textField.getText()).getTicketsInQueue() != null)
+        else if(dbm.findQueueByName(textField.getText(), person.getOrganization()).getTicketsInQueue() != null)
         {
             //Add method to move tickets if queue has tickets
         }

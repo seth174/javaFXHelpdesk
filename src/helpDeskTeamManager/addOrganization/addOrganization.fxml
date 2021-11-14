@@ -23,11 +23,11 @@
                 </ImageView>
                 <ButtonBar>
                     <buttons>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Tickets"/>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Contacts" />
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Profile" />
-                        <Button mnemonicParsing="false" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Add Organizations/Contacts" />
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Manage Team Queue" />
+                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Tickets" onAction="#loadTickets"/>
+                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Contacts" onAction="#loadContacts"/>
+                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Profile" onAction="#loadProfile"/>
+                        <Button mnemonicParsing="false" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Add" onAction="#loadAdd"/>
+                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Manage Team Queue" onAction="#loadManageQueue"/>
                         <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Statistics" />
                     </buttons>
                     <HBox.margin>

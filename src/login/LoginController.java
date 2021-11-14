@@ -1,6 +1,5 @@
 package login;
 
-import buttonCalls.HelpDeskTeamManagerButtons;
 import dao.DatabaseManager;
 import error.Error;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Modality;
 import main.Driver;
 
 import javafx.fxml.FXML;
@@ -72,11 +70,10 @@ public class LoginController implements Initializable {
             Parent root1 = null;
             if(person.getLevel() == 1)
                 root1 = FXMLLoader.load(getClass().getResource("/client/dashboard/dashboard.fxml"));
-            else if(person.getLevel() == 2)
+            else
                 root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/ticketMainPage.fxml"));
-            else if(person.getLevel() == 3)
-                root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/tickets/ticketMainPage.fxml"));
             stage.setScene(new Scene(root1));
+            stage.setTitle("Ticket Home Page");
             stage.setFullScreen(true);
             stage.show();
         } catch (IOException ioException) {

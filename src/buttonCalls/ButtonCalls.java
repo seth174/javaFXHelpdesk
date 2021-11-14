@@ -13,33 +13,16 @@ public abstract class ButtonCalls {
     private int level = Driver.getDbm().findPersonByID(Driver.getEmployeeID()).getLevel();
     private static Stage stage = Driver.getStage();
     public void loadProfile()  {
-        if(level == 1 || level == 2)
+        try
         {
-            try
-            {
-                Parent root1 = FXMLLoader.load(getClass().getResource("/sharedCode/clientAndTeamProfile/Profile.fxml"));
-                stage.setScene(new Scene(root1));
-                stage.setFullScreen(true);
-                stage.show();
-            }
-            catch (IOException e)
-            {
-                System.out.println(e);
-            }
+            Parent root1 = FXMLLoader.load(getClass().getResource("/sharedCode/clientAndTeamProfile/Profile.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
         }
-        else if(level == 3)
+        catch (IOException e)
         {
-            try
-            {
-                Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/profile/Profile.fxml"));
-                stage.setScene(new Scene(root1));
-                stage.setFullScreen(true);
-                stage.show();
-            }
-            catch (IOException e)
-            {
-                System.out.println(e);
-            }
+            System.out.println(e);
         }
 
     }
@@ -48,7 +31,7 @@ public abstract class ButtonCalls {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/contacts/contacts.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/sharedCode/contacts/contacts.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();
@@ -73,7 +56,6 @@ public abstract class ButtonCalls {
         }
         else{
             try {
-                System.out.println("HERERE");
                 Parent root1 = FXMLLoader.load(getClass().getResource("/helpdeskTeam/tickets/ticketMainPage.fxml"));
                 stage.setScene(new Scene(root1));
                 stage.setFullScreen(true);
@@ -184,14 +166,13 @@ public abstract class ButtonCalls {
 
     public void loadOrganizationTickets()
     {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
         try
         {
             Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/selectOrganization.fxml"));
-            window.setScene(new Scene(root1));
-            window.setTitle("Select Organization");
-            window.showAndWait();
+            stage.setScene(new Scene(root1));
+            stage.setTitle("Organization Old Tickets");
+            stage.setFullScreen(true);
+            stage.show();
         }
         catch (IOException e)
         {
@@ -206,6 +187,125 @@ public abstract class ButtonCalls {
             Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/myOldTickets.fxml"));
             stage.setScene(new Scene(root1));
             stage.setTitle("My Old Tickets");
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadAdd()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/add/add.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadManageQueue()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/manageQueue/manageQueue.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadAddOrganization(){
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/addOrganization/addOrganization.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadCreateUsers()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/addUsers/addUsers.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadViewQueue()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/viewQueue/viewQueue.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadAddQueue()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/addQueue/addQueue.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadDeleteQueue()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/deleteQueue/deleteQueue.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadAddUsersToQueue()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/addUsersToQueue/addUsersToQueue.fxml"));
+            stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();
         }

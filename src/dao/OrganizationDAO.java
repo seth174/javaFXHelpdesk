@@ -6,10 +6,7 @@ import models.Queue;
 import models.Ticket;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 public class OrganizationDAO {
@@ -87,7 +84,7 @@ public class OrganizationDAO {
     public Organization insert(String name, Organization parentOrganization) {
         try {
 
-            if(find(name) != null)
+            if(find(name.toLowerCase(Locale.ROOT)) != null)
                 return find(name);
 
             StringBuilder sb = new StringBuilder();

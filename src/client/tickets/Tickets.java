@@ -1,6 +1,6 @@
 package client.tickets;
 
-import buttonCalls.ClientButtons;
+import zzzzArchive.ClientButtons;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -39,7 +39,7 @@ public class Tickets extends ClientButtons implements Initializable {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/contacts/contacts.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/sharedCode/contacts/contacts.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

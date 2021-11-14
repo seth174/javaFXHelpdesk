@@ -111,8 +111,8 @@ public class QueuePerPersonDAO {
             if (!rs.next())
                 return null;
 
-            int queueID = rs.getInt("employeeID");
-            int employeeID = rs.getInt("queueID");
+            int queueID = rs.getInt("queueID");
+            int employeeID = rs.getInt("employeeID");
             rs.close();
 
             Queue queue = dbm.findQueueByID(queueID);
@@ -173,6 +173,32 @@ public class QueuePerPersonDAO {
         } catch (SQLException e) {
             dbm.cleanup();
             throw new RuntimeException("error finding max queue per person id", e);
+        }
+    }
+
+    public QueuePerPerson find(Person p, Queue q) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select qp.id");
+            sb.append("  from queuePerPerson qp");
+            sb.append("  where qp.queueID = ? and qp.employeeID = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, q.getQueueID());
+            pstmt.setInt(2, p.getEmployeeID());
+            ResultSet rs = pstmt.executeQuery();
+
+            // return null if department doesn't exist
+            if (!rs.next())
+                return null;
+
+            int id = rs.getInt("id");
+            rs.close();
+
+            return find(id);
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding queuePerPerson with queue and person", e);
         }
     }
 

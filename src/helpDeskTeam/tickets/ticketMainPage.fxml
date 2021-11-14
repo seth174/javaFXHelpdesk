@@ -18,30 +18,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:controller="helpDeskTeam.tickets.TicketMainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="helpDeskTeam.tickets.TicketMainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" stylesheets="/css/helpspot.css">
     <top>
         <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitHeight="37.0" fitWidth="89.0" pickOnBounds="true">
                     <image>
-                        <Image url="@../Desktop/HelpSpot%20Logo.png" />
+                        <Image url="/logo/HelpSpot Logo.png" />
                     </image>
                     <HBox.margin>
                         <Insets left="25.0" top="5.0" />
                     </HBox.margin>
                 </ImageView>
-                <ButtonBar prefHeight="75.0" prefWidth="344.0" style="-fx-background-color: none;">
+                <ButtonBar fx:id="buttonBar">
                     <buttons>
-                        <Button mnemonicParsing="false" prefWidth="100.0" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Tickets" onAction="#loadTickets"/>
-                        <Button mnemonicParsing="false" prefWidth="100.0" styleClass="Button" stylesheets="/css/helpspot.css" text="Contacts" onAction="#loadContacts"/>
-                        <Button mnemonicParsing="false" prefWidth="100.0" styleClass="Button" stylesheets="/css/helpspot.css" text="Profile" onAction="#loadProfile"/>
+                        <Button mnemonicParsing="false" onAction="#loadTickets" styleClass="ButtonPressed" text="Tickets" />
+                        <Button mnemonicParsing="false" onAction="#loadContacts" styleClass="Button" text="Contacts"/>
+                        <Button mnemonicParsing="false" onAction="#loadProfile" styleClass="Button" text="Profile" />
                     </buttons>
                     <HBox.margin>
                         <Insets left="100.0" />
                     </HBox.margin>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
                 </ButtonBar>
             </children>
             <opaqueInsets>

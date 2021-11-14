@@ -1,5 +1,6 @@
 package helpDeskTeamManager.addUsers;
 
+import buttonCalls.ButtonCalls;
 import error.Error;
 import autoCompleteTextField.AutoCompleteTextField;
 import dao.DatabaseManager;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
-public class AddUsersController implements Initializable {
+public class AddUsersController extends ButtonCalls implements Initializable {
     @FXML
     private AutoCompleteTextField autoComplete;
     @FXML

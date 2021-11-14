@@ -1,6 +1,6 @@
 package helpDeskTeamManager.manageQueue;
 
-import buttonCalls.HelpDeskTeamManagerButtons;
+import buttonCalls.ButtonCalls;
 
-public class ManageQueueController extends HelpDeskTeamManagerButtons{
+public class ManageQueueController extends ButtonCalls {
 }

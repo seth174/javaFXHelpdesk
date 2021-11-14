@@ -1,19 +1,20 @@
 package sharedCode.clientAndTeamProfile;
 
 import buttonCalls.ButtonCalls;
-import buttonCalls.HelpDeskTeamManagerButtons;
 import dao.DatabaseManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.Driver;
 import models.Person;
-import sharedCode.profile.EditProfile;
+import sharedCode.editProfile.EditProfile;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +31,8 @@ public class ProfileController extends ButtonCalls implements Initializable {
     private Text phoneNumber;
     @FXML
     private Text organization;
+    @FXML
+    private ButtonBar buttonBar;
 
     private static DatabaseManager dbm = Driver.getDbm();
     private static Stage stage = Driver.getStage();
@@ -39,6 +42,28 @@ public class ProfileController extends ButtonCalls implements Initializable {
         person = dbm.findPersonByID(Driver.getEmployeeID());
         loadData();
         dbm.commit();
+
+        if(dbm.findPersonByID(Driver.getEmployeeID()).getLevel() == 3)
+        {
+            Button add = new Button("Add");
+            add.getStylesheets().add("/css/helpspot.css");
+            add.getStyleClass().add("Button");
+
+            Button manageTeamQueue = new Button("Manage Team Queue");
+            manageTeamQueue.getStylesheets().add("/css/helpspot.css");
+            manageTeamQueue.getStyleClass().add("Button");
+
+            Button stats = new Button("Statistics");
+            stats.getStylesheets().add("/css/helpspot.css");
+            stats.getStyleClass().add("Button");
+
+            buttonBar.getButtons().add(add);
+            buttonBar.getButtons().add(manageTeamQueue);
+            buttonBar.getButtons().add(stats);
+
+            manageTeamQueue.setOnAction(e -> loadManageQueue());
+            add.setOnAction(e -> loadAdd());
+        }
     }
 
     public void loadData()
@@ -74,7 +99,7 @@ public class ProfileController extends ButtonCalls implements Initializable {
     {
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource(
-                        "/sharedCode/profile/editProfile.fxml"
+                        "/sharedCode/editProfile/editProfile.fxml"
                 )
         );
         Stage stage2 = new Stage();
@@ -112,7 +137,7 @@ public class ProfileController extends ButtonCalls implements Initializable {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/profile/profile.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/editProfile/editProfile.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

@@ -4,7 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -28,9 +28,9 @@
                     <buttons>
                         <Button mnemonicParsing="false" onAction="#loadTickets" styleClass="Button" text="Tickets" />
                         <Button mnemonicParsing="false" onAction="#loadContacts" styleClass="Button" text="Contacts" />
-                        <Button mnemonicParsing="false" onAction="#loadProfile" styleClass="ButtonPressed" text="Profile" />
-                        <Button mnemonicParsing="false" onAction="#loadAdd" styleClass="Button" text="Add Organizations" />
-                        <Button mnemonicParsing="false" onAction="#loadManageQueue" styleClass="Button" text="Manage Team Queue" />
+                        <Button mnemonicParsing="false" onAction="#loadProfile" styleClass="Button" text="Profile" />
+                        <Button mnemonicParsing="false" onAction="#loadAdd" styleClass="Button" text="Add" />
+                        <Button mnemonicParsing="false" onAction="#loadManageQueue" styleClass="ButtonPressed" text="Manage Team Queue" />
                         <Button mnemonicParsing="false" styleClass="Button" text="Statistics" />
                     </buttons>
                     <HBox.margin>
@@ -47,67 +47,70 @@
         </HBox>
     </top>
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" styleClass="Pink">
-         <content>
-            <GridPane styleClass="Pink">
-              <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" />
-                <ColumnConstraints hgrow="ALWAYS" />
-                  <ColumnConstraints hgrow="ALWAYS" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Which users queues would you like to see?">
-                      <styleClass>
-                          <String fx:value="BigText" />
-                          <String fx:value="WhiteText" />
-                      </styleClass>
-                     <GridPane.margin>
-                        <Insets left="15.0" right="15.0" top="30.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1">
-                     <GridPane.margin>
-                        <Insets left="15.0" right="15.0" top="30.0" />
-                     </GridPane.margin>
-                  </ComboBox>
-                  <Button mnemonicParsing="false" styleClass="BigButton" text="Submit" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
-                     <GridPane.margin>
-                        <Insets left="15.0" right="15.0" top="30.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="User:" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                      <styleClass>
-                          <String fx:value="BigText" />
-                          <String fx:value="WhiteText" />
-                      </styleClass>
-                     <GridPane.margin>
-                        <Insets left="15.0" right="15.0" top="30.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Queue:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                      <styleClass>
-                          <String fx:value="BigText" />
-                          <String fx:value="WhiteText" />
-                      </styleClass>
-                     <GridPane.margin>
-                        <Insets left="15.0" right="15.0" top="30.0" />
-                     </GridPane.margin>
-                  </Text>
-                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" styleClass="BigButton" text="Add Queue" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
-                     <GridPane.margin>
-                        <Insets left="15.0" right="15.0" top="15.0" />
-                     </GridPane.margin>
-                  </Button>
-               </children>
-            </GridPane>
-         </content>
-      </ScrollPane>
+      <GridPane styleClass="Pink">
+        <columnConstraints>
+          <ColumnConstraints hgrow="NEVER" />
+          <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="NEVER" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints fillHeight="false" vgrow="NEVER" />
+          <RowConstraints fillHeight="false" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Which users queues would you like to see?" GridPane.vgrow="NEVER">
+                <styleClass>
+                    <String fx:value="BigText" />
+                    <String fx:value="WhiteText" />
+                </styleClass>
+               <GridPane.margin>
+                  <Insets left="15.0" right="15.0" top="30.0" />
+               </GridPane.margin>
+            </Text>
+            <MenuButton fx:id="menuButton" prefWidth="150.0" styleClass="MenuButton" GridPane.columnIndex="1" GridPane.vgrow="NEVER">
+               <GridPane.margin>
+                  <Insets left="15.0" right="15.0" top="30.0" />
+               </GridPane.margin>
+            </MenuButton>
+            <Button mnemonicParsing="false" styleClass="BigButton" text="Submit" GridPane.columnIndex="2" GridPane.vgrow="NEVER">
+               <GridPane.margin>
+                  <Insets left="15.0" right="15.0" top="30.0" />
+               </GridPane.margin>
+            </Button>
+            <Text fx:id="userText" strokeType="OUTSIDE" strokeWidth="0.0" text="User:" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                <styleClass>
+                    <String fx:value="BigText" />
+                    <String fx:value="WhiteText" />
+                </styleClass>
+               <GridPane.margin>
+                  <Insets left="15.0" right="15.0" top="30.0" />
+               </GridPane.margin>
+            </Text>
+            <Text fx:id="queueText" strokeType="OUTSIDE" strokeWidth="0.0" text="Queue:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                <styleClass>
+                    <String fx:value="BigText" />
+                    <String fx:value="WhiteText" />
+                </styleClass>
+               <GridPane.margin>
+                  <Insets left="15.0" right="15.0" top="30.0" />
+               </GridPane.margin>
+            </Text>
+            <ScrollPane fitToHeight="true" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-background: #FC766AFF; -fx-border-color: #FC766AFF;">
+               <GridPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </GridPane.margin>
+               <content>
+                  <VBox fx:id="vBox" styleClass="Pink" />
+               </content>
+            </ScrollPane>
+            <Button mnemonicParsing="false" onAction="#loadAddUsersToQueue" styleClass="BigButton" text="Add Queue" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+               <GridPane.margin>
+                  <Insets left="15.0" right="15.0" top="15.0" />
+               </GridPane.margin>
+            </Button>
+         </children>
+      </GridPane>
    </center>
     <bottom>
         <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF FC766AFF;" BorderPane.alignment="CENTER">

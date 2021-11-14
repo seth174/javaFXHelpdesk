@@ -1,4 +1,4 @@
-package buttonCalls;
+package zzzzArchive;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +14,7 @@ public abstract class HelpDeskTeamButtons {
     public void loadProfile()  {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/profile/Profile.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/editProfile/Profile.fxml"));
             stage.setScene(new Scene(root1));
             stage.setTitle("Profile");
             stage.setFullScreen(true);

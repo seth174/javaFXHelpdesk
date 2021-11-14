@@ -59,6 +59,7 @@ public class QueueDAO {
             String name = rs.getString("name");
             int organizationID = rs.getInt("organizationID");
             boolean deleted = rs.getInt("deleted") != 0;
+
             Organization organization = dbm.findOrganization(organizationID);
             rs.close();
 
@@ -72,16 +73,17 @@ public class QueueDAO {
         }
     }
 
-    public Queue findByName(String name) {
+    public Queue findByName(String name, Organization organization) {
 
         try {
             StringBuilder sb = new StringBuilder();
             sb.append("select q.QueueID");
             sb.append("  from Queue q");
-            sb.append("  where lower(name) = ?");
+            sb.append("  where lower(name) = ? and organizationID = ?");
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
             pstmt.setString(1, name.toLowerCase());
+            pstmt.setInt(2, organization.getOrganizationID());
             ResultSet rs = pstmt.executeQuery();
 
             // return null if queue doesn't exist
@@ -101,8 +103,10 @@ public class QueueDAO {
     public Queue insert(String name, Organization organization) {
         try {
             // make sure that the name is currently unused
-            if (findByName(name) != null) {
-                return null;
+            Queue q = findByName(name, organization);
+            if (q != null) {
+                if(q.getOrganizationID() == organization)
+                    return null;
             }
 
             StringBuilder sb = new StringBuilder();

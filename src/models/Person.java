@@ -60,6 +60,7 @@ public class Person {
 
     public Collection<QueuePerPerson> getQueuePerPerson() {
         if (queuePerPerson == null) {
+            System.out.println("here");
             queuePerPerson = dao.getQueuePerPerson(employeeID);
         }
         return queuePerPerson;

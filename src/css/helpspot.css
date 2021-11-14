@@ -29,7 +29,7 @@
 }
 
 .Pink{
- -fx-background-color: #FC766AFF
+ -fx-background-color: #FC766AFF;
 }
 
 .BigButton:hover{
@@ -88,4 +88,57 @@
 
 .TextPadding{
     -fx-padding: 100px;
+}
+
+.combo-box .list-cell
+{
+    -fx-background: #5B84B1FF;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-view
+{
+    -fx-background-color: white, white;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+}
+
+.combo-box-popup .list-view .list-cell
+{
+    -fx-background-color: #5B84B1FF;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
+{
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover
+{
+    -fx-background-color: #050A30;
+
+}
+
+.combo-box-base
+{
+    -fx-background-color: #5B84B1FF, #5B84B1FF, #5B84B1FF, #5B84B1FF;
+    -fx-background-radius: 15;
+    -fx-font-size: 48;
+    -fx-cursor: hand;
+}
+
+.combo-box-base:hover
+{
+    -fx-color: -fx-hover-base;
+}
+
+.combo-box-base:focused {
+    -fx-background-color: #050A30, #050A30, #050A30, #050A30;
+    -fx-background-insets: -1.4, 0, 1, 2;
+}
+
+.combo-box-base:disabled {
+    -fx-opacity: .4;
 }

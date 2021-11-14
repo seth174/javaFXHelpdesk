@@ -291,13 +291,17 @@ public class DatabaseManager {
         return personDAO.findByEmail(email);
     }
 
-    public Queue findQueueByName(String name){
-        return queueDAO.findByName(name);
+    public Queue findQueueByName(String name, Organization organization){
+        return queueDAO.findByName(name, organization);
     }
 
     public Collection<Queue> getOrganizationQueues(int organizationID)
     {
         return queueDAO.getOrganizationQueues(organizationID);
+    }
+
+    public QueuePerPerson findQueuePerPerson(Person person, Queue queue){
+        return queuePerPersonDAO.find(person, queue);
     }
 
     public Queue updateDeleted(int queueID)

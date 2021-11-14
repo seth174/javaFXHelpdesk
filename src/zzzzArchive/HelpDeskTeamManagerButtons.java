@@ -1,4 +1,4 @@
-package buttonCalls;
+package zzzzArchive;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +14,7 @@ public class HelpDeskTeamManagerButtons  {
     public void loadProfile()  {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/profile/Profile.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/editProfile/Profile.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();
@@ -44,7 +44,7 @@ public class HelpDeskTeamManagerButtons  {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/tickets/ticketMainPage.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/zzzzArchive/tickets/ticketMainPage.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();
@@ -91,7 +91,7 @@ public class HelpDeskTeamManagerButtons  {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/tickets/myOldTickets.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/zzzzArchive/tickets/myOldTickets.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

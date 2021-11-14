@@ -1,10 +1,12 @@
-package client.contacts;
+package sharedCode.contacts;
 
 
-import buttonCalls.ClientButtons;
+import buttonCalls.ButtonCalls;
 import dao.DatabaseManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
-public class ContactsController extends ClientButtons implements Initializable {
+public class ContactsController extends ButtonCalls implements Initializable {
     private static Stage stage = Driver.getStage();
     private static DatabaseManager dbm = Driver.getDbm();
     private Collection<Organization> organizations = new ArrayList<>();
@@ -33,14 +35,17 @@ public class ContactsController extends ClientButtons implements Initializable {
     private VBox middleVBox;
     @FXML
     private VBox rightVBox;
+    @FXML
+    private ButtonBar buttonBar;
+    private Person person = dbm.findPersonByID(Driver.getEmployeeID());
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        organizations.add(dbm.findPersonByID(Driver.getEmployeeID()).getOrganization());
+        organizations.add(person.getOrganization());
         if(dbm.findPersonByID(Driver.getEmployeeID()).getOrganization().getParentOrganization() != null)
             organizations.add(dbm.findPersonByID(Driver.getEmployeeID()).getOrganization().getParentOrganization());
-        //Collection<Organization> children = dbm.getOrganizationsChildren(dbm.findPersonByID(Driver.getEmployeeID()).getEmployeeID());
-        //organizations.addAll(children);
+        Collection<Organization> children = person.getOrganization().getOrganizationsChildren();
+        organizations.addAll(children);
         dbm.commit();
 
         for(Organization o: organizations)
@@ -59,6 +64,28 @@ public class ContactsController extends ClientButtons implements Initializable {
                 System.out.println("Key Pressed");
             }
         });
+
+        if(dbm.findPersonByID(Driver.getEmployeeID()).getLevel() == 3)
+        {
+            Button manageTeamQueue = new Button("Manage Team Queue");
+            manageTeamQueue.getStylesheets().add("/css/helpspot.css");
+            manageTeamQueue.getStyleClass().add("Button");
+
+            Button stats = new Button("Statistics");
+            stats.getStylesheets().add("/css/helpspot.css");
+            stats.getStyleClass().add("Button");
+
+            Button add = new Button("Add");
+            add.getStylesheets().add("/css/helpspot.css");
+            add.getStyleClass().add("Button");
+
+            buttonBar.getButtons().add(add);
+            buttonBar.getButtons().add(manageTeamQueue);
+            buttonBar.getButtons().add(stats);
+
+            manageTeamQueue.setOnAction(e -> loadManageQueue());
+            add.setOnAction(e -> loadAdd());
+        }
     }
 
     public void clear()
@@ -117,6 +144,10 @@ public class ContactsController extends ClientButtons implements Initializable {
             Error.error("Contact " + person.getOrganization().getParentOrganization().getName()+
                     "\n" + "to add people to your organization ");
         }
+        else
+        {
+            loadCreateUsers();
+        }
     }
 
     public void addOrganization()
@@ -127,6 +158,10 @@ public class ContactsController extends ClientButtons implements Initializable {
         {
             Error.error("Contact " + person.getOrganization().getParentOrganization().getName()+
                     "\n" + "to add another organization");
+        }
+        else
+        {
+            loadAddOrganization();
         }
     }
 

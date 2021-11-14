@@ -1,4 +1,4 @@
-package buttonCalls;
+package zzzzArchive;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,7 +29,7 @@ public abstract class ClientButtons {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/contacts/contacts.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/sharedCode/contacts/contacts.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

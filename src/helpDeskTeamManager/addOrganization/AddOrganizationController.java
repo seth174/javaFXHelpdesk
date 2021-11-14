@@ -1,5 +1,6 @@
 package helpDeskTeamManager.addOrganization;
 
+import buttonCalls.ButtonCalls;
 import error.Error;
 import dao.DatabaseManager;
 import javafx.application.Platform;
@@ -12,7 +13,7 @@ import main.Driver;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddOrganizationController implements Initializable {
+public class AddOrganizationController extends ButtonCalls implements Initializable {
     @FXML
     private TextField organizationName;
 
@@ -33,6 +34,7 @@ public class AddOrganizationController implements Initializable {
         if(check())
         {
             dbm.insert(organizationName.getText(), dbm.findPersonByID(Driver.getEmployeeID()).getOrganization());
+            Error.error("Organization Created Successfully");
         }
         dbm.commit();
     }

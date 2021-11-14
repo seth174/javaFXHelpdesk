@@ -7,10 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PersonDAO {
     private Connection conn;
@@ -116,7 +113,7 @@ public class PersonDAO {
             StringBuilder sb = new StringBuilder();
             sb.append("select p.employeeID");
             sb.append("  from Person p");
-            sb.append("  where p.email = ?");
+            sb.append("  where LOWER(p.email) = ?");
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
             pstmt.setString(1, email);
@@ -140,7 +137,7 @@ public class PersonDAO {
                          Organization organization, int level) {
         try {
             // make sure that the email is currently unused
-            if (findByEmail(email) != null) {
+            if (findByEmail(email.toLowerCase(Locale.ROOT)) != null) {
                 return null;
             }
 
@@ -298,4 +295,4 @@ public class PersonDAO {
 }
 
 
-//finish update method for user info then finish the profile dao
+//finish update method for user info then finish the editProfile dao

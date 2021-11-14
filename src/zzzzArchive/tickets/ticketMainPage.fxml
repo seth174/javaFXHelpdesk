@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.String?>
-<BorderPane fx:controller="helpDeskTeamManager.tickets.TicketMainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:controller="zzzzArchive.tickets.TicketMainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" stylesheets="/css/helpspot.css">
     <top>
         <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
             <children>
@@ -20,14 +20,14 @@
                         <Insets left="25.0" top="5.0" />
                     </HBox.margin>
                 </ImageView>
-                <ButtonBar>
+                <ButtonBar fx:id="buttonBar">
                     <buttons>
-                        <Button mnemonicParsing="false" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Tickets" onAction="#loadTickets"/>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Contacts" onAction="#loadContacts"/>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Profile" onAction="#loadProfile"/>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Add Organizations" onAction="#loadAdd"/>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Manage Team Queue" onAction="#loadManageQueue"/>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Statistics" />
+                        <Button mnemonicParsing="false" styleClass="ButtonPressed" text="Tickets" onAction="#loadTickets"/>
+                        <Button mnemonicParsing="false" styleClass="Button" text="Contacts" onAction="#loadContacts"/>
+                        <Button mnemonicParsing="false" styleClass="Button" text="Profile" onAction="#loadProfile"/>
+                        <Button mnemonicParsing="false" styleClass="Button" text="Add" onAction="#loadAdd"/>
+                        <Button mnemonicParsing="false" styleClass="Button" text="Manage Team Queue" onAction="#loadManageQueue"/>
+                        <Button mnemonicParsing="false" styleClass="Button" text="Statistics" />
                     </buttons>
                     <HBox.margin>
                         <Insets left="100.0" />

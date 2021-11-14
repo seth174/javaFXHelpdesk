@@ -1,6 +1,6 @@
 package client.dashboard;
 
-import buttonCalls.ClientButtons;
+import zzzzArchive.ClientButtons;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

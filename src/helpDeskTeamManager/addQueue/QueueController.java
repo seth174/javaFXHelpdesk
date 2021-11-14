@@ -1,6 +1,6 @@
 package helpDeskTeamManager.addQueue;
 
-import buttonCalls.HelpDeskTeamManagerButtons;
+import buttonCalls.ButtonCalls;
 import dao.DatabaseManager;
 import error.Error;
 import javafx.application.Platform;
@@ -14,7 +14,7 @@ import models.Person;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class QueueController extends HelpDeskTeamManagerButtons implements Initializable  {
+public class QueueController extends ButtonCalls implements Initializable  {
     @FXML
     private TextField name;
     private DatabaseManager dbm = Driver.getDbm();
@@ -41,6 +41,7 @@ public class QueueController extends HelpDeskTeamManagerButtons implements Initi
         {
             dbm.insertQueue(name.getText(), person.getOrganization());
             Error.error("Successfully Added Queue");
+            person.getOrganization().invalidateQueues();
             dbm.commit();
         }
     }
@@ -52,7 +53,7 @@ public class QueueController extends HelpDeskTeamManagerButtons implements Initi
             Error.error("Please enter a name");
             return false;
         }
-        else if(dbm.findQueueByName(name.getText()) != null)
+        else if(dbm.findQueueByName(name.getText(), person.getOrganization()) != null )
         {
             Error.error("Queue already exist");
             return false;
