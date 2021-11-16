@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import main.Driver;
+import models.Person;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +19,7 @@ public class AddOrganizationController extends ButtonCalls implements Initializa
     private TextField organizationName;
 
     private DatabaseManager dbm = Driver.getDbm();
+    private Person person = dbm.findPersonByID(Driver.getEmployeeID());
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -33,8 +35,12 @@ public class AddOrganizationController extends ButtonCalls implements Initializa
     {
         if(check())
         {
-            dbm.insert(organizationName.getText(), dbm.findPersonByID(Driver.getEmployeeID()).getOrganization());
+            dbm.insert(organizationName.getText(), person.getOrganization());
             Error.error("Organization Created Successfully");
+            dbm.insertQueue(organizationName.getText() + " Queue", dbm.findByName(organizationName.getText()));
+            person.getOrganization().invalidateQueues();
+            person.getOrganization().invalidateChildren();
+
         }
         dbm.commit();
     }

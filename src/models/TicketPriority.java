@@ -7,11 +7,11 @@ import java.util.Collection;
 public class TicketPriority {
     private TicketPriorityDAO dao;
     private int id;
-    private int priority;
+    private String priority;
 
     private Collection<Ticket> tickets;
 
-    public TicketPriority(TicketPriorityDAO dao, int id, int priority)
+    public TicketPriority(TicketPriorityDAO dao, int id, String priority)
     {
         this.dao = dao;
         this.id = id;
@@ -20,7 +20,7 @@ public class TicketPriority {
 
     public int getId() {return id;}
 
-    public int getPriority() {return priority;}
+    public String getPriority() {return priority;}
 
     public Collection<Ticket> getTickets()
     {

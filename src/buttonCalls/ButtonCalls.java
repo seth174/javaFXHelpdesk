@@ -1,5 +1,6 @@
 package buttonCalls;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ import java.io.IOException;
 public abstract class ButtonCalls {
     private int level = Driver.getDbm().findPersonByID(Driver.getEmployeeID()).getLevel();
     private static Stage stage = Driver.getStage();
+    
     public void loadProfile()  {
         try
         {
@@ -305,6 +307,21 @@ public abstract class ButtonCalls {
         try
         {
             Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/addUsersToQueue/addUsersToQueue.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void createNewTicket()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/createTickets.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

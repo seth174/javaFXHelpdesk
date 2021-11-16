@@ -57,10 +57,10 @@ public class DeleteQueue extends ButtonCalls implements Initializable {
             Error.error("This Queue has been deleted");
             return false;
         }
-        else if(dbm.findQueueByName(textField.getText(), person.getOrganization()).getTicketsInQueue() != null)
-        {
-            //Add method to move tickets if queue has tickets
-        }
+//        else if(dbm.findQueueByName(textField.getText(), person.getOrganization()).getTicketsInQueue() != null)
+//        {
+//            //Add method to move tickets if queue has tickets
+//        }
         dbm.commit();
         return true;
     }

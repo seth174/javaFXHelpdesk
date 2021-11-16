@@ -1,5 +1,6 @@
 package client.dashboard;
 
+import buttonCalls.ButtonCalls;
 import zzzzArchive.ClientButtons;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +11,7 @@ import main.Driver;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class DashboardController extends ClientButtons implements Initializable {
+public class DashboardController extends ButtonCalls implements Initializable {
     private static Stage myStage = Driver.getStage();
     @FXML
     private Button buttonProfile;
@@ -22,4 +23,5 @@ public class DashboardController extends ClientButtons implements Initializable 
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
 }

@@ -116,7 +116,7 @@ public class PersonDAO {
             sb.append("  where LOWER(p.email) = ?");
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
-            pstmt.setString(1, email);
+            pstmt.setString(1, email.toLowerCase(Locale.ROOT));
             ResultSet rs = pstmt.executeQuery();
 
             // return null if person doesn't exist

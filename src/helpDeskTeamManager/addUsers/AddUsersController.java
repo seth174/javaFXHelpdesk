@@ -1,6 +1,7 @@
 package helpDeskTeamManager.addUsers;
 
 import buttonCalls.ButtonCalls;
+import dao.OrganizationDAO;
 import error.Error;
 import autoCompleteTextField.AutoCompleteTextField;
 import dao.DatabaseManager;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import main.Driver;
 import models.Organization;
 import models.Person;
+import models.Queue;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -90,14 +92,19 @@ public class AddUsersController extends ButtonCalls implements Initializable {
     {
         if(checkInput())
         {
+            Organization org = dbm.findByName(autoComplete.getText());
             int level = 1;
-            if(password.toString().equals("HelpDeskWorker"))
+            if(comboBox.getValue().equals("HelpDeskWorker"))
                 level = 2;
-            else if(password.toString().equals("SuperUser"))
+            else if(comboBox.getValue().equals("SuperUser"))
                 level = 3;
             dbm.insert(firstName.getText(), lastName.getText(), email.getText(), password.getText(),
-                    phoneNumber.getText(), dbm.findByName(autoComplete.getText()), level);
+                    phoneNumber.getText(), org, level);
             Error.error("User created successfully");
+            Queue queue = dbm.insertQueue(email.getText() + " Tickets", org);
+            dbm.insert(dbm.findByEmail(email.getText()), queue);
+            Queue queue2 = dbm.findQueueByName(org.getName() + " Queue", org);
+            dbm.insert(dbm.findByEmail(email.getText()), queue2);
             clear();
 
         }
@@ -146,7 +153,7 @@ public class AddUsersController extends ButtonCalls implements Initializable {
             Error.error("The organization does not exist");
             return false;
         }
-        else if(comboBox.getValue().strip().equals(""))
+        else if(comboBox.getValue() == null)
         {
             Error.error("Please enter a type of user");
             return false;

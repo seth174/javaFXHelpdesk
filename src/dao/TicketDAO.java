@@ -29,14 +29,10 @@ public class TicketDAO {
         sb.append("  ticketStatus integer not null,");
         sb.append("  dateCreated Date not null,");
         sb.append("  dateClosed Date,");
-        sb.append("  organizationID integer not null,");
-        sb.append("  queueID integer not null,");
         sb.append("  EmployeeIDClosed integer,");
         sb.append("  EmployeeIDCreated integer not null,");
 
         sb.append("  primary key (ticketID),");
-        sb.append("  Foreign key (organizationID) references organization,");
-        sb.append("  Foreign key (queueID) references queue,");
         sb.append("  Foreign key (EmployeeIDClosed) references person,");
         sb.append("  Foreign key (EmployeeIDCreated) references person,");
         sb.append("  Foreign key (ticketStatus) references ticketStatus,");
@@ -56,7 +52,7 @@ public class TicketDAO {
         try {
             StringBuilder sb = new StringBuilder();
             sb.append("select t.ticketTitle, t.ticketDescription, t.ticketPriority, t.ticketStatus, t.dateCreated, " +
-                    "t.dateClosed, t.organizationID, t.queueID, t.EmployeeIDClosed, t.EmployeeIDCreated");
+                    "t.dateClosed, t.EmployeeIDClosed, t.EmployeeIDCreated");
             sb.append("  from ticket T");
             sb.append("  where T.ticketID = ?");
 
@@ -74,22 +70,18 @@ public class TicketDAO {
             int ticketStatusID = rs.getInt("ticketStatus");
             Date dateCreated = rs.getDate("dateCreated");
             Date dateClosed = rs.getDate("dateClosed");
-            int organizationID = rs.getInt("organizationID");
-            int queueID = rs.getInt("queueID");
             int employeeIDClosed = rs.getInt("EmployeeIDClosed");
             int employeeIDCreated = rs.getInt("EmployeeIDCreated");
             rs.close();
 
-            Organization organization = dbm.findOrganization(organizationID);
             Person employeeCreated = dbm.findPersonByID(employeeIDCreated);
             Person employeeClosed = dbm.findPersonByID(employeeIDClosed);
-            Queue queue = dbm.findQueueByID(queueID);
             TicketPriority ticketPriority = dbm.findTicketPriorityByID(ticketPriorityNumber);
             TicketStatus ticketStatus = dbm.findTicketStatusByID(ticketStatusID);
 
 
             Ticket ticket = new Ticket(this, ticketID, ticketTitle, ticketDescription, ticketPriority,
-                    ticketStatus, dateCreated, dateClosed, organization, queue, employeeCreated, employeeClosed);
+                    ticketStatus, dateCreated, dateClosed, employeeCreated, employeeClosed);
             cache.put(ticketID, ticket);
 
             return ticket;
@@ -100,13 +92,13 @@ public class TicketDAO {
     }
 
     public Ticket insert(String ticketTitle, String ticketDescription, TicketPriority ticketPriority,
-                         TicketStatus ticketStatus, Organization organization, Queue queue, Person personCreated) {
+                         TicketStatus ticketStatus, Person personCreated) {
         try {
 
             StringBuilder sb = new StringBuilder();
             sb.append("insert into ticket(ticketID, ticketTitle, ticketDescription, ticketPriority, ticketStatus, " +
-                    "dateCreated, dateClosed, organizationID, queueID, EmployeeIDClosed, EmployeeIDCreated)");
-            sb.append("  values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    "dateCreated, dateClosed, EmployeeIDClosed, EmployeeIDCreated)");
+            sb.append("  values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
             int ticketID = getNewTicketID();
@@ -118,22 +110,17 @@ public class TicketDAO {
             java.sql.Date date= new java.sql.Date(System.currentTimeMillis());
             pstmt.setDate(6, date);
             pstmt.setNull(7, Types.DATE);
-            pstmt.setInt(8, organization.getOrganizationID());
-            pstmt.setInt(9, queue.getQueueID());
-            pstmt.setNull(10, Types.INTEGER);
-            pstmt.setInt(11, personCreated.getEmployeeID());
+            pstmt.setNull(8, Types.INTEGER);
+            pstmt.setInt(9, personCreated.getEmployeeID());
             pstmt.executeUpdate();
 
             Ticket ticket = new Ticket(this, ticketID, ticketTitle, ticketDescription, ticketPriority,
-                    ticketStatus, date, null, organization, queue, personCreated, null);
+                    ticketStatus, date, null, personCreated, null);
             cache.put(ticketID, ticket);
 
             // Tell everyone that it will have to recalculate its list of tickets
-            queue.invalidateTicketsInQueue();
-            organization.invalidateTickets();
             ticketPriority.invalidate();
             ticketStatus.invalidate();
-            queue.invalidateTicketsInQueue();
             personCreated.invalidateTicketsPerPerson();
 
             return ticket;
@@ -284,5 +271,10 @@ public class TicketDAO {
             dbm.cleanup();
             throw new RuntimeException("error finding max ticket id", e);
         }
+    }
+
+    public Collection<TicketsPerQueue> getTicketsPerQueue(int ticketID)
+    {
+        return dbm.getTicketsPerQueueTickets(ticketID);
     }
 }

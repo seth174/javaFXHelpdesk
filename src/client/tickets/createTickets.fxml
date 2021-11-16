@@ -3,11 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,14 +15,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:controller="client.tickets.CreateTickets" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.tickets.CreateTickets">
     <top>
         <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitHeight="37.0" fitWidth="89.0" pickOnBounds="true">
-                    <image>
-                        <Image url="/logo/HelpSpot Logo.png" />
-                    </image>
                     <HBox.margin>
                         <Insets left="25.0" top="5.0" />
                     </HBox.margin>
@@ -123,30 +118,6 @@
                         <Font size="24.0" />
                     </font>
                 </Text>
-                <MenuButton mnemonicParsing="false" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15; ; -fx-cursor: hand" text="Organization" textFill="WHITE" GridPane.columnIndex="1">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                    <GridPane.margin>
-                        <Insets left="15.0" />
-                    </GridPane.margin>
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </MenuButton>
-                <MenuButton mnemonicParsing="false" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15; ; -fx-cursor: hand" text="Priority" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                    <GridPane.margin>
-                        <Insets left="15.0" />
-                    </GridPane.margin>
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </MenuButton>
                 <Button mnemonicParsing="false" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15; ; -fx-cursor: hand" text="Submit" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
                     <GridPane.margin>
                         <Insets top="20.0" />
@@ -155,6 +126,16 @@
                         <Font size="24.0" />
                     </font>
                 </Button>
+            <ComboBox prefWidth="150.0" promptText="Organization" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="15.0" right="15.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <ComboBox prefWidth="150.0" promptText="Priority" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="15.0" right="15.0" />
+               </GridPane.margin>
+            </ComboBox>
             </children>
         </GridPane>
     </center>

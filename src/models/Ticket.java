@@ -14,18 +14,17 @@ public class Ticket {
     private TicketStatus ticketStatus;
     private Date dateCreated;
     private Date dateClosed;
-    private Organization organization;
-    private Queue queue;
     private Person personCreated;
     private Person personClosed;
 
     private Collection<Message> messages;
     private Collection<TicketPerPerson> ticketPerPerson;
     private Collection<TimePerPerson> timePerPerson;
+    private Collection<TicketsPerQueue> ticketsPerQueue;
 
     public Ticket(TicketDAO dao, int ticketID, String ticketTitle, String ticketDescription, TicketPriority ticketPriority,
-                  TicketStatus ticketStatus, Date dateCreated, Date dateClosed, Organization organization,
-                  Queue queue, Person personCreated, Person personClosed)
+                  TicketStatus ticketStatus, Date dateCreated, Date dateClosed,
+                  Person personCreated, Person personClosed)
     {
         this.dao = dao;
         this.ticketID = ticketID;
@@ -35,8 +34,6 @@ public class Ticket {
         this.ticketStatus = ticketStatus;
         this.dateCreated = dateCreated;
         this.dateClosed = dateClosed;
-        this.organization = organization;
-        this.queue = queue;
         this.personCreated = personCreated;
         this.personClosed = personClosed;
     }
@@ -54,10 +51,6 @@ public class Ticket {
     public Date getDateCreated() {return dateCreated;}
 
     public Date getDateClosed() {return dateClosed;}
-
-    public Organization getOrganization() {return organization;}
-
-    public Queue getQueue() {return queue;}
 
     public Person getPersonCreated() {return personCreated;}
 
@@ -87,6 +80,13 @@ public class Ticket {
         return timePerPerson;
     }
 
+    public Collection<TicketsPerQueue> getTicketsPerQueue()
+    {
+        if(ticketsPerQueue == null)
+            return dao.getTicketsPerQueue(ticketID);
+        return ticketsPerQueue;
+    }
+
     public void invalidateMessage()
     {
         messages = null;
@@ -101,5 +101,7 @@ public class Ticket {
     {
         ticketPerPerson = null;
     }
+
+    public void invalidateTicketsPerQueue() {ticketsPerQueue = null; }
 
 }

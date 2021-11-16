@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -27,6 +28,8 @@ public class Driver extends Application {
         dbm1.commit();
         dbm1.insertFakeOrganization();
         dbm1.fakePeople();
+        dbm1.insertStatus();
+        dbm1.insertPriorities();
         dbm = dbm1;
         dbm.commit();
 

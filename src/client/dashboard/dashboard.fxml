@@ -42,10 +42,10 @@
         </HBox>
     </top>
     <bottom>
-        <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF FC766AFF;" BorderPane.alignment="CENTER">
-            <children>
-                <Text fill="#5b84b1" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit Ticket To HelpSpot For Support" textAlignment="CENTER" wrappingWidth="593.85595703125" />
-            </children>
+        <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF FC766AFF;"
+              BorderPane.alignment="CENTER">
+            <Text fill="#5b84b1" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit Ticket To HelpSpot For Support"
+                  textAlignment="CENTER" wrappingWidth="593.85595703125"/>
         </HBox>
     </bottom>
     <center>
@@ -74,7 +74,7 @@
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Current Tickets" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Current Tickets" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" onAction="#createNewTicket">
                     <font>
                         <Font size="20.0" />
                     </font>

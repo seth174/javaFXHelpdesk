@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ComboBox?>
 <BorderPane stylesheets="/css/helpspot.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpDeskTeamManager.viewQueue.ViewController">
     <top>
         <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
@@ -68,7 +69,7 @@
                   <Insets left="15.0" right="15.0" top="30.0" />
                </GridPane.margin>
             </Text>
-            <MenuButton fx:id="menuButton" prefWidth="150.0" styleClass="MenuButton" GridPane.columnIndex="1" GridPane.vgrow="NEVER">
+            <MenuButton fx:id="menuButton" prefWidth="150.0" GridPane.columnIndex="1" GridPane.vgrow="NEVER" styleClass="MenuButton" text="Users">
                <GridPane.margin>
                   <Insets left="15.0" right="15.0" top="30.0" />
                </GridPane.margin>

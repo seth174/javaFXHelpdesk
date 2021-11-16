@@ -67,8 +67,16 @@
     -fx-cursor: hand;
 }
 
-.MenuButton:focused {
-     -fx-background-color: darkgray;
+.MenuButton .menu-item:focused {
+     -fx-background-color: #050A30;
+}
+
+.MenuButton .context-menu {
+    -fx-background-color: #5B84B1FF;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    /*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
 }
 
 .ComboBox{
@@ -79,7 +87,7 @@
 }
 
 .MenuButton:focused .label {
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .BigMenuButton{
@@ -141,4 +149,9 @@
 
 .combo-box-base:disabled {
     -fx-opacity: .4;
+}
+
+.TicketText{
+    -fx-font-size: 24;
+
 }

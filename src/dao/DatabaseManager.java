@@ -24,6 +24,7 @@ public class DatabaseManager {
     private TicketPriorityDAO ticketPriorityDAO;
     private TicketStatusDAO ticketStatusDAO;
     private TimePerPersonDAO timePerPersonDAO;
+    private TicketsPerQueueDAO ticketsPerQueueDAO;
 
     private final String url = "jdbc:derby://localhost:1527/db/HelpSpotDB";
 
@@ -59,6 +60,7 @@ public class DatabaseManager {
         ticketPriorityDAO = new TicketPriorityDAO(conn, this);
         ticketStatusDAO = new TicketStatusDAO(conn, this);
         timePerPersonDAO = new TimePerPersonDAO(conn, this);
+        ticketsPerQueueDAO = new TicketsPerQueueDAO(conn, this);
     }
 
     public void create(Connection conn) throws SQLException
@@ -73,6 +75,7 @@ public class DatabaseManager {
         TicketPerPersonDAO.create(conn);
         TimePerPersonDAO.create(conn);
         MessageDAO.create(conn);
+        TicketsPerQueueDAO.create(conn);
         conn.commit();
     }
 
@@ -211,6 +214,16 @@ public class DatabaseManager {
         return ticketDAO.getOrganizationTickets(organizationID);
     }
 
+    public Collection<TicketsPerQueue> getTicketsPerQueue(int queueID)
+    {
+        return ticketsPerQueueDAO.getTicketsPerQueue(queueID);
+    }
+
+    public Collection<TicketsPerQueue> getTicketsPerQueueTickets(int ticketID)
+    {
+        return ticketsPerQueueDAO.getTicketsPerQueueTickets(ticketID);
+    }
+
     public Message insert(Ticket ticket, Message messageReplyTo, Person person, String messageContent)
     {
         return messageDAO.insert(ticket, messageReplyTo, person, messageContent);
@@ -239,8 +252,7 @@ public class DatabaseManager {
     public Ticket insert(String ticketTitle, String ticketDescription, TicketPriority ticketPriority,
                          TicketStatus ticketStatus, Organization organization, Queue queue, Person personCreated)
     {
-        return ticketDAO.insert(ticketTitle, ticketDescription, ticketPriority, ticketStatus, organization,
-                queue, personCreated);
+        return ticketDAO.insert(ticketTitle, ticketDescription, ticketPriority, ticketStatus, personCreated);
     }
 
     public TicketPerPerson insert(Ticket ticket, Person person){
@@ -252,7 +264,7 @@ public class DatabaseManager {
         return ticketStatusDAO.insert(ticketStatusName);
     }
 
-    public TicketPriority insertTickePriority(int ticketPriorityNumber)
+    public TicketPriority insertTickePriority(String ticketPriorityNumber)
     {
         return ticketPriorityDAO.insert(ticketPriorityNumber);
     }
@@ -260,6 +272,11 @@ public class DatabaseManager {
     public TimePerPerson insert(Ticket ticket, Person person, double time)
     {
         return timePerPersonDAO.insert(ticket, person, time);
+    }
+
+    public TicketsPerQueue insert(Ticket ticket, Queue queue)
+    {
+        return ticketsPerQueueDAO.insert(ticket, queue);
     }
 
     public Organization findByName(String name)
@@ -344,12 +361,12 @@ public class DatabaseManager {
 
     public void insertPriorities()
     {
-        insertTickePriority(0);
-        insertTickePriority(1);
-        insertTickePriority(2);
-        insertTickePriority(3);
-        insertTickePriority(4);
-        insertTickePriority(5);
+        insertTickePriority("0");
+        insertTickePriority("1");
+        insertTickePriority("2");
+        insertTickePriority("3");
+        insertTickePriority("4");
+        insertTickePriority("5");
         commit();
     }
 

@@ -63,10 +63,10 @@ public class OrganizationDAO {
             StringBuilder sb = new StringBuilder();
             sb.append("select o.organizationID");
             sb.append("  from Organization o");
-            sb.append("  where o.name = ?");
+            sb.append("  where lower(o.name) = ?");
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
-            pstmt.setString(1, name);
+            pstmt.setString(1, name.toLowerCase(Locale.ROOT));
             ResultSet rs = pstmt.executeQuery();
 
             if(!rs.next())

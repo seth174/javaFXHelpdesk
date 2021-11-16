@@ -1,9 +1,6 @@
 package dao;
 
-import models.Organization;
-import models.Queue;
-import models.QueuePerPerson;
-import models.Ticket;
+import models.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -216,5 +213,10 @@ public class QueueDAO {
             dbm.cleanup();
             throw new RuntimeException("error updating queue", e);
         }
+    }
+
+    public Collection<TicketsPerQueue> getTicketsPerQueue(int queueID)
+    {
+        return dbm.getTicketsPerQueue(queueID);
     }
 }

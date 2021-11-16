@@ -23,7 +23,7 @@ public class TicketPriorityDAO {
         StringBuilder sb = new StringBuilder();
         sb.append("create table ticketPriority(");
         sb.append("  ticketPriorityID integer not null,");
-        sb.append("  ticketPriority integer not null,");
+        sb.append("  ticketPriority varchar(255) not null,");
         sb.append("  primary key (ticketPriorityID)");
         sb.append(")");
 
@@ -50,10 +50,10 @@ public class TicketPriorityDAO {
             if (!rs.next())
                 return null;
 
-            int ticketPriorityNumber = rs.getInt("ticketPriority");
+            String ticketPriorityString = rs.getString("ticketPriority");
             rs.close();
 
-            TicketPriority ticketPriority = new TicketPriority(this, ticketPriorityID, ticketPriorityNumber);
+            TicketPriority ticketPriority = new TicketPriority(this, ticketPriorityID, ticketPriorityString);
             cache.put(ticketPriorityID, ticketPriority);
 
             return ticketPriority;
@@ -68,7 +68,7 @@ public class TicketPriorityDAO {
         return dbm.getTicketsByPriority(ticketPriorityID);
     }
 
-    public TicketPriority insert(int ticketPriorityNumber) {
+    public TicketPriority insert(String ticketPriorityString) {
         try {
 
             StringBuilder sb = new StringBuilder();
@@ -78,10 +78,10 @@ public class TicketPriorityDAO {
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
             int ticketPriorityID = getNewID();
             pstmt.setInt(1, ticketPriorityID);
-            pstmt.setInt(2, ticketPriorityNumber);
+            pstmt.setString(2, ticketPriorityString);
             pstmt.executeUpdate();
 
-            TicketPriority ticketPriority = new TicketPriority(this, ticketPriorityID, ticketPriorityNumber);
+            TicketPriority ticketPriority = new TicketPriority(this, ticketPriorityID, ticketPriorityString);
             cache.put(ticketPriorityID, ticketPriority);
 
             return ticketPriority;

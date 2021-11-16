@@ -12,7 +12,7 @@ public class Queue {
     private boolean deleted;
 
     private Collection<QueuePerPerson> queuePerPerson;
-    private Collection<Ticket> ticketsInQueue;
+    private Collection<TicketsPerQueue> ticketsPerQueues;
 
     public Queue(QueueDAO dao, int queueID, String name, Organization organization, boolean deleted)
     {
@@ -37,16 +37,16 @@ public class Queue {
         return queuePerPerson;
     }
 
-    public Organization getOrganizationID(){
-        return organization;
+    public Collection<TicketsPerQueue> getTicketsPerQueues()
+    {
+        if(ticketsPerQueues == null){
+            ticketsPerQueues = dao.getTicketsPerQueue(queueID);
+        }
+        return ticketsPerQueues;
     }
 
-    public Collection<Ticket> getTicketsInQueue()
-    {
-        if (ticketsInQueue == null) {
-            ticketsInQueue = dao.getTicketsInQueue(queueID);
-        }
-        return ticketsInQueue;
+    public Organization getOrganizationID(){
+        return organization;
     }
 
     public void invalidateQueuePerPerson()
@@ -54,8 +54,9 @@ public class Queue {
         queuePerPerson = null;
     }
 
-    public void invalidateTicketsInQueue()
+    public void invalidateTicketsPerQueues()
     {
-        ticketsInQueue = null;
+        ticketsPerQueues = null;
     }
+
 }
