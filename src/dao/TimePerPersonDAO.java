@@ -29,6 +29,7 @@ public class TimePerPersonDAO {
         sb.append("  ticketID integer not null,");
         sb.append("  employeeID integer not null,");
         sb.append("  time DOUBLE not null,");
+        sb.append("  entryDate Date not null,");
         sb.append("  primary key (timePerPersonid),");
         sb.append("  Foreign key (employeeID) references Person,");
         sb.append("  Foreign key (ticketID) references Ticket");
@@ -71,7 +72,7 @@ public class TimePerPersonDAO {
 
         try {
             StringBuilder sb = new StringBuilder();
-            sb.append("select tpp.ticketID, tpp.employeeID, tpp.time");
+            sb.append("select tpp.ticketID, tpp.employeeID, tpp.time, tpp.entryDate");
             sb.append("  from timePerPerson tpp");
             sb.append("  where tpp.timePerPersonid = ?");
 
@@ -86,12 +87,14 @@ public class TimePerPersonDAO {
             int ticketID = rs.getInt("ticketID");
             int employeeID = rs.getInt("employeeID");
             double time = rs.getDouble("time");
+            Date date = rs.getDate("entryDate");
+
             rs.close();
 
             Person person = dbm.findPersonByID(employeeID);
             Ticket ticket = dbm.findTicketByID(ticketID);
 
-            TimePerPerson timePerPerson = new TimePerPerson(this, timePerPersonID, person, ticket, time);
+            TimePerPerson timePerPerson = new TimePerPerson(this, timePerPersonID, person, ticket, time, date);
             cache.put(timePerPersonID, timePerPerson);
 
             return timePerPerson;
@@ -128,12 +131,12 @@ public class TimePerPersonDAO {
         }
     }
 
-    public TimePerPerson insert(Ticket ticket, Person person, double time) {
+    public TimePerPerson insert(Ticket ticket, Person person, double time, Date date) {
         try {
 
             StringBuilder sb = new StringBuilder();
-            sb.append("insert into timePerPerson(timePerPersonid, ticketID, employeeID, time)");
-            sb.append("  values (?, ?, ?)");
+            sb.append("insert into timePerPerson(timePerPersonid, ticketID, employeeID, time, entryDate)");
+            sb.append("  values (?, ?, ?, ?, ?)");
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
             int timePerPersonID= getNewID();
@@ -141,9 +144,10 @@ public class TimePerPersonDAO {
             pstmt.setInt(2, ticket.getTicketID());
             pstmt.setInt(3, person.getEmployeeID());
             pstmt.setDouble(4, time);
+            pstmt.setDate(5, date);
             pstmt.executeUpdate();
 
-            TimePerPerson timePerPerson = new TimePerPerson(this, timePerPersonID, person, ticket, time);
+            TimePerPerson timePerPerson = new TimePerPerson(this, timePerPersonID, person, ticket, time, date);
             cache.put(timePerPersonID, timePerPerson);
 
             // Tell the Dept that it will have to recalculate its majors list

@@ -1,9 +1,5 @@
 package dao;
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Collection;
 import java.util.Properties;
 
@@ -37,10 +33,11 @@ public class DatabaseManager {
         try {
             conn = driver.connect(url, prop);
             conn.setAutoCommit(false);
+            System.out.println("connected");
         } catch (SQLException e) {
             // database doesn't exist, so try creating it
             try {
-                System.out.println("here");
+                System.out.println("Creating");
                 prop.put("create", "true");
                 conn = driver.connect(url, prop);
                 conn.setAutoCommit(false);
@@ -124,7 +121,7 @@ public class DatabaseManager {
         }
     }
 
-    public Collection<TicketPerPerson> getTicketPerPerson(int employeeID)
+    public Collection<Ticket> getTicketPerPerson(int employeeID)
     {
         return ticketPerPersonDAO.getTicketPerPerson(employeeID);
     }
@@ -149,11 +146,24 @@ public class DatabaseManager {
         return ticketPriorityDAO.find(ticketPriorityID);
     }
 
+    public TicketPriority findPriorityByName(String name, Organization organization){
+        return ticketPriorityDAO.findByName(name, organization);
+    }
+
+    public TicketStatus findStatusByName(String name, Organization organization)
+    {
+        return ticketStatusDAO.findStatusByName(name, organization);
+    }
+
     public TicketStatus findTicketStatusByID(int ticketStatusID)
     {
         return ticketStatusDAO.find(ticketStatusID);
     }
 
+    public Organization findOtherTicketOrganization(int ticketID, Organization currentOrganization)
+    {
+        return ticketsPerQueueDAO.findOtherTicketOrganization(ticketID, currentOrganization);
+    }
     public Collection<QueuePerPerson> getQueuePerPerson(int employeeID)
     {
         return queuePerPersonDAO.getQueuePerPerson(employeeID);
@@ -194,6 +204,11 @@ public class DatabaseManager {
         return ticketPerPersonDAO.getTicketPerPersonTicket(ticketID);
     }
 
+    public Collection<Ticket> getOnlyTicketsPerQueue(int queueID)
+    {
+        return ticketsPerQueueDAO.getOnlyTicketsPerQueue(queueID);
+    }
+
     public Collection<TimePerPerson> getTimePerPersonTicket(int ticketID)
     {
         return timePerPersonDAO.getTimePerPersonTicket(ticketID);
@@ -214,7 +229,7 @@ public class DatabaseManager {
         return ticketDAO.getOrganizationTickets(organizationID);
     }
 
-    public Collection<TicketsPerQueue> getTicketsPerQueue(int queueID)
+    public Collection<Ticket> getTicketsPerQueue(int queueID)
     {
         return ticketsPerQueueDAO.getTicketsPerQueue(queueID);
     }
@@ -224,9 +239,19 @@ public class DatabaseManager {
         return ticketsPerQueueDAO.getTicketsPerQueueTickets(ticketID);
     }
 
-    public Message insert(Ticket ticket, Message messageReplyTo, Person person, String messageContent)
+    public Collection<TicketPriority> getTicketPriorities(int organizationID)
     {
-        return messageDAO.insert(ticket, messageReplyTo, person, messageContent);
+        return ticketPriorityDAO.getTicketPriorities(organizationID);
+    }
+
+    public Collection<TicketStatus> getTicketStatuses(int organizationID)
+    {
+        return ticketStatusDAO.getTicketStatuses(organizationID);
+    }
+
+    public Message insert(Ticket ticket, Message messageReplyTo, Person person, String messageContent, Timestamp timestamp)
+    {
+        return messageDAO.insert(ticket, messageReplyTo, person, messageContent, timestamp);
     }
 
     public Organization insert(String name, Organization parentOrganization)
@@ -250,7 +275,7 @@ public class DatabaseManager {
     }
 
     public Ticket insert(String ticketTitle, String ticketDescription, TicketPriority ticketPriority,
-                         TicketStatus ticketStatus, Organization organization, Queue queue, Person personCreated)
+                         TicketStatus ticketStatus, Organization organization, Person personCreated)
     {
         return ticketDAO.insert(ticketTitle, ticketDescription, ticketPriority, ticketStatus, personCreated);
     }
@@ -259,19 +284,19 @@ public class DatabaseManager {
         return ticketPerPersonDAO.insert(ticket, person);
     }
 
-    public TicketStatus insertTicketStatus(String ticketStatusName)
+    public TicketStatus insertTicketStatus(String ticketStatusName, Organization organization)
     {
-        return ticketStatusDAO.insert(ticketStatusName);
+        return ticketStatusDAO.insert(ticketStatusName, organization);
     }
 
-    public TicketPriority insertTickePriority(String ticketPriorityNumber)
+    public TicketPriority insertTickePriority(String ticketPriorityNumber, Organization organization)
     {
-        return ticketPriorityDAO.insert(ticketPriorityNumber);
+        return ticketPriorityDAO.insert(ticketPriorityNumber, organization);
     }
 
-    public TimePerPerson insert(Ticket ticket, Person person, double time)
+    public TimePerPerson insert(Ticket ticket, Person person, double time, Date date)
     {
-        return timePerPersonDAO.insert(ticket, person, time);
+        return timePerPersonDAO.insert(ticket, person, time, date);
     }
 
     public TicketsPerQueue insert(Ticket ticket, Queue queue)
@@ -310,6 +335,11 @@ public class DatabaseManager {
 
     public Queue findQueueByName(String name, Organization organization){
         return queueDAO.findByName(name, organization);
+    }
+
+    public Message findMessage(String text, Timestamp time, Ticket ticket)
+    {
+        return messageDAO.findMessage(text, time, ticket);
     }
 
     public Collection<Queue> getOrganizationQueues(int organizationID)
@@ -361,20 +391,20 @@ public class DatabaseManager {
 
     public void insertPriorities()
     {
-        insertTickePriority("0");
-        insertTickePriority("1");
-        insertTickePriority("2");
-        insertTickePriority("3");
-        insertTickePriority("4");
-        insertTickePriority("5");
+//        insertTickePriority("0");
+//        insertTickePriority("1");
+//        insertTickePriority("2");
+//        insertTickePriority("3");
+//        insertTickePriority("4");
+//        insertTickePriority("5");
         commit();
     }
 
     public void insertStatus(){
-        insertTicketStatus("Awaiting Feedback");
-        insertTicketStatus("Response Provided");
-        insertTicketStatus("Closed");
-        insertTicketStatus("On hold");
+//        insertTicketStatus("Awaiting Feedback");
+//        insertTicketStatus("Response Provided");
+//        insertTicketStatus("Closed");
+//        insertTicketStatus("On hold");
         commit();
     }
 

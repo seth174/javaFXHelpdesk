@@ -13,6 +13,8 @@ public class Organization {
     private Collection<Person> organizationPeople;
     private Collection<Organization> organizationsChildren;
     private Collection<Queue> organizationQueues;
+    private Collection<TicketPriority> ticketPriorities;
+    private Collection<TicketStatus> ticketStatuses;
 
     public Organization(OrganizationDAO dao, String name, int organizationID, Organization parentOrganization)
     {
@@ -37,6 +39,15 @@ public class Organization {
         return organizationPeople;
     }
 
+    public Collection<TicketPriority> getTicketPriorities()
+    {
+        if(ticketPriorities == null)
+        {
+            ticketPriorities = dao.getTicketPriorities(organizationID);
+        }
+        return ticketPriorities;
+    }
+
     public Collection<Organization> getOrganizationsChildren()
     {
         if(organizationsChildren == null)
@@ -55,6 +66,15 @@ public class Organization {
         return organizationQueues;
     }
 
+    public Collection<TicketStatus> getTicketStatuses()
+    {
+        if(ticketStatuses == null)
+        {
+            ticketStatuses = dao.getTicketStatuses(organizationID);
+        }
+        return ticketStatuses;
+    }
+
     public void invalidatePeople() {
         organizationPeople = null;
     }
@@ -64,6 +84,10 @@ public class Organization {
     }
 
     public void invalidateQueues() { organizationQueues = null; }
+
+    public void invalidatePriorities() { ticketPriorities = null; }
+
+    public void invalidateStatuses() { ticketStatuses = null;}
 
 
 }

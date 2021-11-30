@@ -215,7 +215,7 @@ public class QueueDAO {
         }
     }
 
-    public Collection<TicketsPerQueue> getTicketsPerQueue(int queueID)
+    public Collection<Ticket> getTicketsPerQueue(int queueID)
     {
         return dbm.getTicketsPerQueue(queueID);
     }

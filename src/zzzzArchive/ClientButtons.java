@@ -92,7 +92,7 @@ public abstract class ClientButtons {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/ticketPage.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/ticketPage.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

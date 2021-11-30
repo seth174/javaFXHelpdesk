@@ -3,9 +3,12 @@ package helpDeskTeam.tickets;
 import buttonCalls.ButtonCalls;
 import dao.DatabaseManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.TitledPane;
@@ -17,6 +20,7 @@ import javafx.stage.Stage;
 import main.Driver;
 import models.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,6 +33,8 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
     private ButtonBar buttonBar;
     @FXML
     private VBox vBox;
+    @FXML
+    private TitledPane titledPane;
     private DatabaseManager dbm = Driver.getDbm();
     private Person person = dbm.findPersonByID(Driver.getEmployeeID());
     private HashMap<Integer, Integer> ticketPosition;
@@ -53,6 +59,20 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
             add.setOnAction(e -> loadAdd());
         }
 
+        titledPane.setOnMouseClicked( e -> {
+                try
+                {
+                    Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/ticketPage.fxml"));
+                    stage.setScene(new Scene(root1));
+                    stage.setFullScreen(true);
+                    stage.show();
+                }
+                catch (IOException exception)
+                {
+                    System.out.println(exception);
+                }
+        });
+
         ticketPosition = new HashMap<>();
 
         loadQueues();
@@ -61,6 +81,7 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
     public void loadQueues()
     {
         Collection<QueuePerPerson> qp  = person.getQueuePerPerson();
+        loadTickets(titledPane, null);
         for(QueuePerPerson queuePerPerson: qp)
         {
             TitledPane titledPane = addQueue(queuePerPerson.getQueue());
@@ -108,14 +129,26 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
         titledPaneGridPane.getChildren().addAll(organization, title, priority, status, id);
 
         titledPane.setContent(titledPaneGridPane);
-        //Need to fix this
-        Collection<TicketsPerQueue> tickets = q.getTicketsPerQueues();
-        int counter = 1;
-        for(TicketsPerQueue tq: tickets)
+        Collection<Ticket> tickets;
+        if(q == null)
         {
-            Ticket t = tq.getTicket();
+            tickets = person.getTicketsPerPerson();
+        }
+        else
+        {
+            tickets = q.getTicketsPerQueues();
+        }
+
+        int counter = 1;
+        for(Ticket t: tickets)
+        {
             //this one needs help
-            Text organization1 = new Text(t.getTicketTitle());
+
+            Organization otherOrg = dbm.findOtherTicketOrganization(t.getTicketID(), person.getOrganization());
+            Text organization1 = new Text();
+
+            organization1.setText(otherOrg == null ? person.getOrganization().getName(): otherOrg.getName());
+
             Text title1 = new Text(t.getTicketTitle());
             Text priority1 = new Text(String.valueOf(t.getTicketPriority().getPriority()));
             Text status1 = new Text(t.getTicketStatus().getTicketStatus());
@@ -145,6 +178,12 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
         }
 
         titledPaneGridPane.setOnMouseClicked(e -> {
+            int guess = ((int)(e.getY() - 10) / 35);
+            if(ticketPosition.containsKey(guess))
+            {
+                TicketPage.setTicketID(ticketPosition.get(guess));
+                loadTicketPage();
+            }
             Bounds boundsInScreen = titledPaneGridPane.localToScreen(titledPaneGridPane.getBoundsInLocal());
             System.out.println("MIN " + boundsInScreen.getMinY());
             System.out.println("MAX " + boundsInScreen.getMaxY());
@@ -152,8 +191,6 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
             System.out.println("LOCATION " + e.getY());
             System.out.println("Guess " + ((int)(e.getY() - 10) / 35));
             System.out.println();
-            int guess = ((int)(e.getY() - 10) / 35);
-            System.out.println("row column " + guess + " has a ticket id of " +ticketPosition.get(guess));
         });
     }
 

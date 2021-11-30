@@ -37,12 +37,12 @@ public class TicketPerPersonDAO {
         stmt.executeUpdate(sb.toString());
     }
 
-    public Collection<TicketPerPerson> getTicketPerPerson(int employeeID) {
+    public Collection<Ticket> getTicketPerPerson(int employeeID) {
         try {
-            Collection<TicketPerPerson> ticketPerPerson = new ArrayList<>();
+            Collection<Ticket> ticketPerPerson = new ArrayList<>();
 
             StringBuilder sb = new StringBuilder();
-            sb.append("select tp.ticketID, tp.ticketPerPersonID");
+            sb.append("select tp.ticketID");
             sb.append("  from ticketPerPerson tp");
             sb.append("  where tp.employeeID = ?");
 
@@ -51,8 +51,8 @@ public class TicketPerPersonDAO {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                int ticketPerPersonID = rs.getInt("ticketPerPersonID");
-                ticketPerPerson.add(find(ticketPerPersonID));
+                int ticketPerPersonID = rs.getInt("ticketID");
+                ticketPerPerson.add(dbm.findTicketByID(ticketPerPersonID));
             }
             rs.close();
 

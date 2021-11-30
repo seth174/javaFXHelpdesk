@@ -72,13 +72,13 @@ public class TicketsPerQueueDAO {
         }
     }
 
-    public Collection<TicketsPerQueue> getTicketsPerQueue(int queueID)
+    public Collection<Ticket> getTicketsPerQueue(int queueID)
     {
         try {
-            Collection<TicketsPerQueue> ticketsPerQueues = new ArrayList<>();
+            Collection<Ticket> ticketsPerQueues = new ArrayList<>();
 
             StringBuilder sb = new StringBuilder();
-            sb.append("select tq.TicketsPerQueueID");
+            sb.append("select tq.ticketID");
             sb.append("  from TicketsPerQueue tq");
             sb.append("  where tq.queueID = ?");
 
@@ -87,8 +87,37 @@ public class TicketsPerQueueDAO {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                int ticketsPerQueueID = rs.getInt("TicketsPerQueueID");
-                ticketsPerQueues.add(find(ticketsPerQueueID));
+
+                int ticketID = rs.getInt("ticketID");
+                ticketsPerQueues.add(dbm.findTicketByID(ticketID));
+            }
+            rs.close();
+
+            return ticketsPerQueues;
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding tickets per queue queue", e);
+        }
+    }
+
+    public Collection<Ticket> getOnlyTicketsPerQueue(int queueID)
+    {
+        try {
+            Collection<Ticket> ticketsPerQueues = new ArrayList<>();
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("select tq.ticketID");
+            sb.append("  from TicketsPerQueue tq");
+            sb.append("  where tq.queueID = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, queueID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+                int ticketID = rs.getInt("ticketID");
+                ticketsPerQueues.add(dbm.findTicketByID(ticketID));
             }
             rs.close();
 
@@ -138,7 +167,7 @@ public class TicketsPerQueueDAO {
             //No ticket exist
             if (!rs.next())
                 return 1;
-            int max = rs.getInt("TicketsPerQueueID");
+            int max = rs.getInt("id");
             return max + 1;
         } catch (SQLException e) {
             dbm.cleanup();
@@ -171,6 +200,36 @@ public class TicketsPerQueueDAO {
         } catch (SQLException e) {
             dbm.cleanup();
             throw new RuntimeException("error inserting ticketsPerQueue", e);
+        }
+    }
+
+    public Organization findOtherTicketOrganization(int ticketID, Organization organization)
+    {
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("SELECT o.NAME");
+            sb.append(" from TicketsPerQueue tpq");
+            sb.append(" LEFT JOIN Queue q ON q.QUEUEID = tpq.queueid");
+            sb.append(" LEFT JOIN ORGANIZATION o ON q.ORGANIZATIONID = o.ORGANIZATIONID");
+            sb.append(" WHERE tpq.ticketID = ? AND o.organizationid != ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, ticketID);
+            pstmt.setInt(2, organization.getOrganizationID());
+            ResultSet rs = pstmt.executeQuery();
+
+            // return null if student doesn't exist
+            if (!rs.next())
+                return null;
+
+            String organizationName = rs.getString("NAME");
+
+            rs.close();
+
+            return dbm.findByName(organizationName);
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding ticketsPerQueue", e);
         }
     }
 }

@@ -1,6 +1,5 @@
 package buttonCalls;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -105,7 +104,7 @@ public abstract class ButtonCalls {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/ticketPage.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/ticketPage.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();
@@ -321,7 +320,37 @@ public abstract class ButtonCalls {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/createTickets.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/createTickets.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadAddTicketStatus()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/addTicketStatus/addTicketStatus.fxml"));
+            stage.setScene(new Scene(root1));
+            stage.setFullScreen(true);
+            stage.show();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void loadAddTicketPriority()
+    {
+        try
+        {
+            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/addTicketPriority/AddTicketPriority.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

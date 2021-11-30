@@ -252,7 +252,7 @@ public class PersonDAO {
         }
     }
 
-    public Collection<TicketPerPerson> getTicketPerPerson(int employeeID)
+    public Collection<Ticket> getTicketPerPerson(int employeeID)
     {
         return dbm.getTicketPerPerson(employeeID);
     }

@@ -7,28 +7,32 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.tickets.TicketPage">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpDeskTeam.tickets.TicketPage" stylesheets="/css/helpspot.css">
     <top>
-        <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
+        <HBox prefHeight="75.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fitHeight="37.0" fitWidth="89.0" pickOnBounds="true">
                     <HBox.margin>
                         <Insets left="25.0" top="5.0" />
                     </HBox.margin>
                 </ImageView>
-                <ButtonBar prefHeight="75.0" prefWidth="344.0" style="-fx-background-color: none; ; -fx-cursor: hand ">
+                <ButtonBar fx:id="buttonBar" prefHeight="75.0" style="-fx-background-color: none; ; -fx-cursor: hand ">
                     <buttons>
-                        <Button mnemonicParsing="false" onAction="#loadTickets" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Tickets" />
-                        <Button mnemonicParsing="false" onAction="#loadContacts" styleClass="Button" stylesheets="/css/helpspot.css" text="Contacts" />
-                        <Button mnemonicParsing="false" onAction="#loadProfile" styleClass="Button" stylesheets="/css/helpspot.css" text="Profile" />
+                        <Button mnemonicParsing="false" onAction="#loadTickets" styleClass="ButtonPressed"  text="Tickets" />
+                        <Button mnemonicParsing="false" onAction="#loadContacts" styleClass="Button" text="Contacts" />
+                        <Button mnemonicParsing="false" onAction="#loadProfile" styleClass="Button" text="Profile" />
                     </buttons>
                     <HBox.margin>
                         <Insets left="100.0" />
@@ -57,12 +61,12 @@
                     <children>
                         <HBox VBox.vgrow="ALWAYS">
                             <children>
-                                <DatePicker promptText="Pick Date">
+                                <DatePicker fx:id="datePicker" promptText="Pick Date" styleClass="date">
                                     <HBox.margin>
                                         <Insets left="15.0" right="15.0" top="15.0" />
                                     </HBox.margin>
                                 </DatePicker>
-                                <TextField prefHeight="26.0" prefWidth="80.0" promptText="Time" style="-fx-border-color: black;" HBox.hgrow="NEVER">
+                                <TextField fx:id="datePickerTime" prefHeight="26.0" prefWidth="80.0" promptText="Time" style="-fx-border-color: black;" HBox.hgrow="NEVER">
                                     <HBox.margin>
                                         <Insets left="15.0" right="15.0" top="15.0" />
                                     </HBox.margin>
@@ -70,7 +74,7 @@
                                         <Font size="18.0" />
                                     </font>
                                 </TextField>
-                                <Button mnemonicParsing="false" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15; ; -fx-cursor: hand" text="Submit" textFill="WHITE">
+                                <Button mnemonicParsing="false" text="Submit" styleClass="BigButton">
                                     <HBox.margin>
                                         <Insets left="15.0" right="15.0" top="15.0" />
                                     </HBox.margin>
@@ -90,17 +94,10 @@
                                                         <Font size="18.0" />
                                                     </font>
                                                 </Text>
-                                                <MenuButton mnemonicParsing="false" style="-fx-background-color: #5B84B1FF; -fx-background-radius: 15;" text="MenuButton" textFill="WHITE">
-                                                    <items>
-                                                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                                                        <MenuItem mnemonicParsing="false" text="Action 2" />
-                                                    </items>
+                                                <MenuButton fx:id="menuButtonPriority" mnemonicParsing="false" text="MenuButton">
                                                     <HBox.margin>
                                                         <Insets left="15.0" right="15.0" top="15.0" />
                                                     </HBox.margin>
-                                                    <font>
-                                                        <Font size="18.0" />
-                                                    </font>
                                                 </MenuButton>
                                             </children>
                                         </HBox>
@@ -121,13 +118,72 @@
                                                 </Button>
                                             </children>
                                         </HBox>
+                              <HBox alignment="TOP_RIGHT" VBox.vgrow="NEVER">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status">
+                                       <HBox.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <MenuButton mnemonicParsing="false" text="MenuButton" fx:id="menuButtonStatus">
+                                       <HBox.margin>
+                                          <Insets left="15.0" right="15.0" top="15.0" />
+                                       </HBox.margin>
+                                    </MenuButton>
+                                 </children>
+                              </HBox>
                                     </children>
                                 </VBox>
                             </children>
                         </HBox>
+                  <GridPane fx:id="infoGridPane" hgap="10.0" vgap="25.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" />
+                        <ColumnConstraints fillWidth="false" hgrow="NEVER" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <VBox.margin>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                     </VBox.margin>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Title: " />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Descritption:" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="titleText" GridPane.columnIndex="1" fx:id="titleText"/>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="descriptionText" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="descriptionText"/>
+                        <TextArea fx:id="textArea" prefHeight="100.0" prefWidth="1000.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="New Message:" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#postMessage" text="Post Message" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <GridPane fx:id="newMessages">
+                    <columnConstraints>
+                      <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </VBox.margin>
+                  </GridPane>
                     </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
                 </VBox>
             </content>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
         </ScrollPane>
     </center>
 </BorderPane>

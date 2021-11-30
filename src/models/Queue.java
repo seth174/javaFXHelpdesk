@@ -12,7 +12,7 @@ public class Queue {
     private boolean deleted;
 
     private Collection<QueuePerPerson> queuePerPerson;
-    private Collection<TicketsPerQueue> ticketsPerQueues;
+    private Collection<Ticket> ticketsPerQueues;
 
     public Queue(QueueDAO dao, int queueID, String name, Organization organization, boolean deleted)
     {
@@ -37,7 +37,7 @@ public class Queue {
         return queuePerPerson;
     }
 
-    public Collection<TicketsPerQueue> getTicketsPerQueues()
+    public Collection<Ticket> getTicketsPerQueues()
     {
         if(ticketsPerQueues == null){
             ticketsPerQueues = dao.getTicketsPerQueue(queueID);

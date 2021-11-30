@@ -137,6 +137,14 @@
     -fx-cursor: hand;
 }
 
+.combo-box-base .date
+{
+    -fx-background-color: #5B84B1FF, #5B84B1FF, #5B84B1FF, #5B84B1FF;
+    -fx-background-radius: 15;
+    -fx-font-size: 20;
+    -fx-cursor: hand;
+}
+
 .combo-box-base:hover
 {
     -fx-color: -fx-hover-base;

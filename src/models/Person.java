@@ -16,7 +16,7 @@ public class Person {
     private int employeeID;
     private int level;
 
-    private Collection<TicketPerPerson> ticketsPerPerson;
+    private Collection<Ticket> ticketsPerPerson;
     private Collection<QueuePerPerson> queuePerPerson;
     private Collection<TimePerPerson> timePerPerson;
     private Collection<Message> messages;
@@ -51,7 +51,7 @@ public class Person {
 
     public int getLevel() {return level;}
 
-    public Collection<TicketPerPerson> getTicketsPerPerson() {
+    public Collection<Ticket> getTicketsPerPerson() {
         if (ticketsPerPerson == null) {
             ticketsPerPerson = dao.getTicketPerPerson(employeeID);
         }

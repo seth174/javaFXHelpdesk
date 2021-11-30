@@ -1,9 +1,7 @@
 package dao;
 
-import models.Organization;
-import models.Person;
+import models.*;
 import models.Queue;
-import models.Ticket;
 
 import java.sql.*;
 import java.util.*;
@@ -63,10 +61,10 @@ public class OrganizationDAO {
             StringBuilder sb = new StringBuilder();
             sb.append("select o.organizationID");
             sb.append("  from Organization o");
-            sb.append("  where lower(o.name) = ?");
+            sb.append("  where o.name = ?");
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
-            pstmt.setString(1, name.toLowerCase(Locale.ROOT));
+            pstmt.setString(1, name);
             ResultSet rs = pstmt.executeQuery();
 
             if(!rs.next())
@@ -191,5 +189,15 @@ public class OrganizationDAO {
     public Collection<Queue> getOrganizationQueues(int organizationID)
     {
         return dbm.getOrganizationQueues(organizationID);
+    }
+
+    public Collection<TicketPriority> getTicketPriorities(int organizationID)
+    {
+        return dbm.getTicketPriorities(organizationID);
+    }
+
+    public Collection<TicketStatus> getTicketStatuses(int organizationID)
+    {
+        return dbm.getTicketStatuses(organizationID);
     }
 }

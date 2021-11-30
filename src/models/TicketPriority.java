@@ -8,14 +8,16 @@ public class TicketPriority {
     private TicketPriorityDAO dao;
     private int id;
     private String priority;
+    private Organization organization;
 
     private Collection<Ticket> tickets;
 
-    public TicketPriority(TicketPriorityDAO dao, int id, String priority)
+    public TicketPriority(TicketPriorityDAO dao, int id, String priority, Organization organization)
     {
         this.dao = dao;
         this.id = id;
         this.priority = priority;
+        this.organization = organization;
     }
 
     public int getId() {return id;}
@@ -29,6 +31,8 @@ public class TicketPriority {
         }
         return tickets;
     }
+
+    public Organization getOrganization(){ return organization; }
 
     public void invalidate()
     {

@@ -98,7 +98,7 @@ public class TicketDAO {
             StringBuilder sb = new StringBuilder();
             sb.append("insert into ticket(ticketID, ticketTitle, ticketDescription, ticketPriority, ticketStatus, " +
                     "dateCreated, dateClosed, EmployeeIDClosed, EmployeeIDCreated)");
-            sb.append("  values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            sb.append("  values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
             int ticketID = getNewTicketID();

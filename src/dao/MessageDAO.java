@@ -121,7 +121,8 @@ public class MessageDAO {
             StringBuilder sb = new StringBuilder();
             sb.append("select m.messageID");
             sb.append("  from message m");
-            sb.append("  where m.ticketID = ?");
+            sb.append("  where m.ticketID = ? and messageReplyToID is null");
+            sb.append("  ORDER BY datePosted DESC");
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
             pstmt.setInt(1, ticketID);
@@ -140,7 +141,7 @@ public class MessageDAO {
         }
     }
 
-    public Message insert(Ticket ticket, Message messageReplyTo, Person person, String messageContent) {
+    public Message insert(Ticket ticket, Message messageReplyTo, Person person, String messageContent, Timestamp timestamp) {
         try {
 
             StringBuilder sb = new StringBuilder();
@@ -158,13 +159,12 @@ public class MessageDAO {
                 pstmt.setInt(3, messageReplyTo.getMessageID());
             }
             pstmt.setInt(4, person.getEmployeeID());
-            Timestamp datePosted = new Timestamp(System.currentTimeMillis());
-            pstmt.setTimestamp(5, datePosted);
+            pstmt.setTimestamp(5, timestamp);
             pstmt.setString(6, messageContent);
 
             pstmt.executeUpdate();
 
-             Message message = new Message(this, messageID, ticket, messageContent, datePosted, messageReplyTo, person);
+             Message message = new Message(this, messageID, ticket, messageContent, timestamp, messageReplyTo, person);
             cache.put(messageID, message);
 
             // Tell the ticket that it will have to recalculate its message list
@@ -194,6 +194,64 @@ public class MessageDAO {
         } catch (SQLException e) {
             dbm.cleanup();
             throw new RuntimeException("error finding max message id", e);
+        }
+    }
+
+    public Collection<Message> getReplyMessages(int messageID)
+    {
+        try {
+            Collection<Message> messages = new ArrayList<>();
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("select m.messageID");
+            sb.append("  from message m");
+            sb.append("  where m.messageReplyToID = ?");
+            sb.append("  ORDER BY datePosted");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, messageID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int replyMessageID = rs.getInt("messageID");
+                Message m = find(replyMessageID);
+                System.out.println(m.getMessageID());
+                messages.add(m);
+            }
+            rs.close();
+
+            return messages;
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error getting messagesPerTicket", e);
+        }
+    }
+
+    public Message findMessage(String text, Timestamp time, Ticket ticket)
+    {
+
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select m.messageID");
+            sb.append("  from message m");
+            sb.append("  where m.message = ? and m.datePosted = ? and m.ticketID = ? ");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setString(1, text);
+            pstmt.setTimestamp(2, time);
+            pstmt.setInt(3, ticket.getTicketID());
+            ResultSet rs = pstmt.executeQuery();
+
+            // return null if message doesn't exist
+            if (!rs.next())
+                return null;
+
+            int messageID = rs.getInt("messageID");
+            rs.close();
+
+            return find(messageID);
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding message by a bunch of stuff", e);
         }
     }
 

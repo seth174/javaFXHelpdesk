@@ -101,8 +101,6 @@ public class AddUsersController extends ButtonCalls implements Initializable {
             dbm.insert(firstName.getText(), lastName.getText(), email.getText(), password.getText(),
                     phoneNumber.getText(), org, level);
             Error.error("User created successfully");
-            Queue queue = dbm.insertQueue(email.getText() + " Tickets", org);
-            dbm.insert(dbm.findByEmail(email.getText()), queue);
             Queue queue2 = dbm.findQueueByName(org.getName() + " Queue", org);
             dbm.insert(dbm.findByEmail(email.getText()), queue2);
             clear();
