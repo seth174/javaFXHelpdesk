@@ -2,6 +2,7 @@ package helpDeskTeam.tickets;
 
 import buttonCalls.ButtonCalls;
 import dao.DatabaseManager;
+import error.Error;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -12,7 +13,9 @@ import models.*;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -78,6 +81,10 @@ public class TicketPage extends ButtonCalls implements Initializable {
         newMessages.setVgap(30);
 
         loadMessages();
+
+        datePicker.setOnAction( e -> {
+            loadTime();
+        });
     }
 
     public void loadTitle()
@@ -272,7 +279,65 @@ public class TicketPage extends ButtonCalls implements Initializable {
         dbm.commit();
     }
 
+    public void submitTime()
+    {
+        if(!checkTime())
+        {
+            return;
+        }
+        Date date = Date.valueOf(datePicker.getValue());
+        double time = Integer.parseInt(datePickerTime.getText());
 
+        if(dbm.findTimePerPerson(date, ticket, person) == null)
+        {
+            dbm.insert(ticket, person, time, date);
+        }
+        else
+        {
+            int timePerPersonID = dbm.findTimePerPerson(date, ticket, person).getTimePerPersonID();
+            dbm.updateTimePerPerson(timePerPersonID, time, person, ticket);
+        }
+        dbm.commit();
+    }
 
+    public boolean checkTime()
+    {
+        if(datePicker.getValue() == null || datePicker.getEditor().getText().equals(""))
+        {
+            Error.error("Please choose a date");
+            return false;
+        }
+        else if(!datePicker.getEditor().getText().matches("((\\d)(\\d)?)/((\\d)(\\d)?)/((\\d)(\\d)(\\d)(\\d))"))
+        {
+            Error.error("Please enter a valid date format");
+            return false;
+        }
+        else if(datePickerTime.getText().equals(""))
+        {
+            Error.error("Please enter a time");
+            return false;
+        }
+        else if(!datePickerTime.getText().matches("[0-9]+"))
+        {
+            Error.error("Please enter a number");
+            return false;
+        }
+        return true;
+    }
+
+    public void loadTime()
+    {
+        Date date = Date.valueOf(datePicker.getValue());
+        if(dbm.findTimePerPerson(date, ticket, person) == null)
+        {
+            datePickerTime.setText("0");
+        }
+        else
+        {
+            double time = dbm.findTimePerPerson(date, ticket, person).getTime();
+            datePickerTime.setText(String.valueOf(time));
+        }
+        dbm.commit();
+    }
 
 }

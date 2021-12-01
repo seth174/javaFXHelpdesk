@@ -20,13 +20,13 @@ import java.io.IOException;
 public class Driver extends Application {
     private static Stage stage;
     private static DatabaseManager dbm;
-    private static int employeeID;
+    private static Integer employeeID;
 
     public static void main(String[] args)
     {
         DatabaseManager dbm1 = new DatabaseManager();
+        dbm1.insertFakeData();
         dbm1.commit();
-//        dbm1.insertFakeOrganization();
 //        dbm1.fakePeople();
 //        dbm1.insertStatus();
 //        dbm1.insertPriorities();
@@ -69,7 +69,7 @@ public class Driver extends Application {
 
     public static int getEmployeeID(){ return employeeID;}
 
-    public static void setEmployeeID(int employeeID1){ employeeID = employeeID1; }
+    public static void setEmployeeID(Integer employeeID1){ employeeID = employeeID1; }
 
     public static void createFakeData()
     {

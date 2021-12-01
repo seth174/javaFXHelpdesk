@@ -342,6 +342,11 @@ public class DatabaseManager {
         return messageDAO.findMessage(text, time, ticket);
     }
 
+    public TimePerPerson findTimePerPerson(Date date, Ticket ticket, Person person)
+    {
+        return timePerPersonDAO.findTimePerPerson(date, ticket, person);
+    }
+
     public Collection<Queue> getOrganizationQueues(int organizationID)
     {
         return queueDAO.getOrganizationQueues(organizationID);
@@ -349,6 +354,10 @@ public class DatabaseManager {
 
     public QueuePerPerson findQueuePerPerson(Person person, Queue queue){
         return queuePerPersonDAO.find(person, queue);
+    }
+
+    public void updateTimePerPerson(int timePerPersonid, double time, Person person, Ticket ticket) {
+        timePerPersonDAO.updateTime(timePerPersonid, time, person, ticket);
     }
 
     public Queue updateDeleted(int queueID)
@@ -406,6 +415,13 @@ public class DatabaseManager {
 //        insertTicketStatus("Closed");
 //        insertTicketStatus("On hold");
         commit();
+    }
+
+    public void insertFakeData()
+    {
+        Organization helpSpot =  organizationDAO.insert("fake", null);
+        insert("fake", "fake", "fake", "fake", "fake",
+                findByName("fake"),  3);
     }
 
 

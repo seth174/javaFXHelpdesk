@@ -25,6 +25,8 @@ public class TimePerPerson {
 
     public Person getPerson() {return person;}
 
+    public int getTimePerPersonID() {return timePerPersonID;}
+
     public Ticket getTicket() {return ticket;}
 
     public double getTime() {return time;}

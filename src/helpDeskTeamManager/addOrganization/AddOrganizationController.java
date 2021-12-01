@@ -38,6 +38,11 @@ public class AddOrganizationController extends ButtonCalls implements Initializa
             dbm.insert(organizationName.getText(), person.getOrganization());
             Error.error("Organization Created Successfully");
             dbm.insertQueue(organizationName.getText() + " Queue", dbm.findByName(organizationName.getText()));
+            dbm.insertQueue("Closed", dbm.findByName(organizationName.getText()));
+            dbm.insertQueue("Assigned", dbm.findByName(organizationName.getText()));
+            dbm.insertTickePriority("Normal", dbm.findByName(organizationName.getText()));
+            dbm.insertTicketStatus("Closed", dbm.findByName(organizationName.getText()));
+            dbm.insertTicketStatus("Not Started", dbm.findByName(organizationName.getText()));
             person.getOrganization().invalidateQueues();
             person.getOrganization().invalidateChildren();
 

@@ -161,6 +161,52 @@ public class TimePerPersonDAO {
         }
     }
 
+    public void updateTime(int timePerPersonid, double time, Person person, Ticket ticket) {
+        try {
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("update timePerPerson");
+            sb.append("  set time = ?");
+            sb.append("  where  timePerPersonid = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setDouble(1, time);
+            pstmt.setInt(2, timePerPersonid);
+            pstmt.executeUpdate();
+
+            person.invalidateTimePerPerson();
+            ticket.invalidateTimePerPerson();
+
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error updating new time per person", e);
+        }
+    }
+
+    public TimePerPerson findTimePerPerson(Date date, Ticket ticket, Person person)
+    {
+        try {
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("select tpp.timePerPersonid");
+            sb.append("  from timePerPerson tpp");
+            sb.append("  where tpp.ticketID = ? and tpp.employeeID= ? and tpp.entryDate = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, ticket.getTicketID());
+            pstmt.setInt(2, person.getEmployeeID());
+            pstmt.setDate(3, date);
+            ResultSet rs = pstmt.executeQuery();
+
+            int timePerPersonID = rs.getInt("timePerPersonid");
+
+            return find(timePerPersonID);
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error getting time per person per Ticket", e);
+        }
+    }
+
     private int getNewID()
     {
         try {
