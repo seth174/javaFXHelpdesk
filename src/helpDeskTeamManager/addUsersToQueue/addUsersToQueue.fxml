@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane stylesheets="/css/helpspot.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpDeskTeamManager.addUsersToQueue.AddUsersToQueue">
     <top>
@@ -20,20 +15,21 @@
         <fx:include fx:id="footer" source="/headerAndFooter/footer/footer.fxml"/>
     </bottom>
     <center>
-      <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="Pink">
-        <columnConstraints>
-          <ColumnConstraints hgrow="ALWAYS" />
-          <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
+        <GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                  minHeight="-Infinity" minWidth="-Infinity" styleClass="Pink">
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
             <ComboBox promptText="User" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" fx:id="userComboBox"/>
-            <ComboBox promptText="Queue" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" fx:id="queueComboBox"/>
-            <Button mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.valignment="CENTER" onAction="#add" styleClass="BigButton"/>
-         </children>
-      </GridPane>
+            <ComboBox promptText="Queue" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                      GridPane.valignment="CENTER" fx:id="queueComboBox"/>
+            <Button mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.halignment="LEFT"
+                    GridPane.valignment="CENTER" onAction="#add" styleClass="BigButton"/>
+        </GridPane>
    </center>
 </BorderPane>

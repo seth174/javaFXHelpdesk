@@ -18,7 +18,6 @@ import java.net.URL;
 import java.util.*;
 
 public class TicketMainPage extends ButtonCalls implements Initializable {
-    private static Stage stage = Driver.getStage();
     @FXML
     private VBox vBox;
     @FXML
@@ -112,10 +111,6 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
             Text status1 = new Text(t.getTicketStatus().getTicketStatus());
             System.out.println("Setting the status");
             Text id1 = new Text(String.valueOf(t.getTicketID()));
-
-            organization1.setOnMouseClicked(e -> {System.out.println("hi");});
-
-
 
             GridPane.setConstraints(organization1, 0, counter);
             GridPane.setConstraints(title1, 1, counter);

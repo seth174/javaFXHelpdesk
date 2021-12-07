@@ -2,8 +2,7 @@
 <?import javafx.scene.layout.HBox?>
 
 
-<HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF FC766AFF;" xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml">
+<HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF FC766AFF;" xmlns="http://javafx.com/javafx">
     <children>
         <Text fill="#5b84b1" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit Ticket To HelpSpot For Support" textAlignment="CENTER" wrappingWidth="593.85595703125" />
     </children>

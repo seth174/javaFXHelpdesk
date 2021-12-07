@@ -64,9 +64,7 @@ public class TicketPage extends ButtonCalls implements Initializable {
 
         loadMessages();
 
-        datePicker.setOnAction( e -> {
-            loadTime();
-        });
+        datePicker.setOnAction( e -> loadTime());
     }
 
     public void loadTitle()
@@ -213,7 +211,7 @@ public class TicketPage extends ButtonCalls implements Initializable {
     public void loadPriorities(Organization organization)
     {
         Organization personOrganization = person.getOrganization();
-        Collection<TicketPriority> priorities = null;
+        Collection<TicketPriority> priorities;
         //this will need work
         if(personOrganization == organization)
         {
@@ -235,7 +233,7 @@ public class TicketPage extends ButtonCalls implements Initializable {
                 menuButtonPriority.getItems().add(priority);
 
                 priority.setOnAction( e -> {
-                    Organization ticketPriorityOrg = null;
+                    Organization ticketPriorityOrg;
                     if(personOrganization == organization)
                     {
                         ticketPriorityOrg = organization;
@@ -270,7 +268,7 @@ public class TicketPage extends ButtonCalls implements Initializable {
     public void loadStatuses(Organization organization)
     {
         Organization personOrganization = person.getOrganization();
-        Collection<TicketStatus> statuses = null;
+        Collection<TicketStatus> statuses;
         //this will need work
         if(personOrganization == organization)
         {
@@ -290,7 +288,7 @@ public class TicketPage extends ButtonCalls implements Initializable {
             {
                 MenuItem status = new MenuItem(ts.getTicketStatus());
                 status.setOnAction( e -> {
-                    Organization ticketStatusOrg = null;
+                    Organization ticketStatusOrg;
                     if(personOrganization == organization)
                     {
                         ticketStatusOrg = organization;

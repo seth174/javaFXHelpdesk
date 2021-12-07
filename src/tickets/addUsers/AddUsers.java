@@ -69,9 +69,9 @@ public class AddUsers {
         Queue queue = dbm.find(ticket, organization).getQueue();
         if(!queue.getName().equalsIgnoreCase("Assigned"))
         {
-            Queue oldQueue =  dbm.findQueueByName(organization.getName() + " Queue", organization);
+            Queue oldQueueTest = dbm.find(ticket, organization).getQueue();
             Queue newQueue = dbm.findQueueByName("Assigned", organization);
-            dbm.updateTicketPerQueue(dbm.find(oldQueue, ticket), newQueue);
+            dbm.updateTicketPerQueue(dbm.find(oldQueueTest, ticket), newQueue);
         }
         dbm.commit();
     }

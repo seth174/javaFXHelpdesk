@@ -9,7 +9,6 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import main.Driver;
 import models.Organization;
 import models.Person;
@@ -23,7 +22,6 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class OrganizationOldTickets extends ButtonCalls implements Initializable {
-    private Organization organization;
     @FXML
     private TitledPane titledPane;
     private DatabaseManager dbm = Driver.getDbm();
@@ -35,7 +33,6 @@ public class OrganizationOldTickets extends ButtonCalls implements Initializable
 
     public void loadTickets(Organization organization)
     {
-        this.organization = organization;
         Queue queue = dbm.findQueueByName("Closed", organization);
         loadTickets(titledPane, organization, queue);
         titledPane.setText(organization.getName() + " Tickets");

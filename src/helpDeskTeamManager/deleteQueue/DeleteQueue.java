@@ -61,6 +61,11 @@ public class DeleteQueue extends ButtonCalls implements Initializable {
 //        {
 //            //Add method to move tickets if queue has tickets
 //        }
+        else if(textField.getText().equalsIgnoreCase("Closed") || textField.getText().equalsIgnoreCase("Assigned") ||
+                textField.getText().equalsIgnoreCase(person.getOrganization().getName() + " Queue")){
+            Error.error("You cannot delete this queue");
+            return false;
+        }
         dbm.commit();
         return true;
     }

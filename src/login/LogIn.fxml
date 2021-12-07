@@ -12,66 +12,61 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.PasswordField?>
-<Pane maxHeight="282.0" maxWidth="367.0" minHeight="231.0" minWidth="253.0" prefHeight="232.0" prefWidth="367.0" style="-fx-background-color: FC766AFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.LoginController">
-    <children>
-        <VBox layoutY="50.0">
-            <children>
-                <HBox VBox.vgrow="ALWAYS">
-                    <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
-                            <HBox.margin>
-                                <Insets left="40.0" top="20.0" />
-                            </HBox.margin>
-                            <font>
-                                <Font size="24.0" />
-                            </font>
-                        </Text>
-                        <TextField fx:id="username" prefHeight="26.0" prefWidth="150.0">
-                            <HBox.margin>
-                                <Insets left="5.0" top="20.0" />
-                            </HBox.margin>
-                            <padding>
-                                <Insets right="5.0" />
-                            </padding>
-                        </TextField>
-                    </children>
-                </HBox>
-                <HBox VBox.vgrow="ALWAYS">
-                    <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
-                            <HBox.margin>
-                                <Insets left="40.0" top="20.0" />
-                            </HBox.margin>
-                            <font>
-                                <Font size="24.0" />
-                            </font>
-                        </Text>
-                        <PasswordField fx:id="password" prefHeight="26.0" prefWidth="150.0">
-                            <HBox.margin>
-                                <Insets left="5.0" top="20.0" />
-                            </HBox.margin>
-                        </PasswordField>
-                    </children>
-                </HBox>
-            <HBox>
-               <children>
-                    <Button fx:id="help" mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Help" textFill="white" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets left="50.0" right="50.0" top="25.0" />
-                     </HBox.margin>
-                  </Button>
-                    <Button fx:id="login" mnemonicParsing="false" onAction="#login" styleClass="Button" stylesheets="/css/helpspot.css" text="Login" textFill="white" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets left="50.0" right="50.0" top="25.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
-            </children>
-        </VBox>
-        <ImageView fitHeight="41.0" fitWidth="181.0" layoutX="125.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="/logo/HelpSpot Logo.png" />
-         </image></ImageView>
-    </children>
+<Pane maxHeight="282.0" maxWidth="367.0" minHeight="231.0" minWidth="253.0" prefHeight="232.0" prefWidth="367.0"
+      style="-fx-background-color: FC766AFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="login.LoginController">
+    <VBox layoutY="50.0">
+        <HBox VBox.vgrow="ALWAYS">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:">
+                <HBox.margin>
+                    <Insets left="40.0" top="20.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="24.0"/>
+                </font>
+            </Text>
+            <TextField fx:id="username" prefHeight="26.0" prefWidth="150.0">
+                <HBox.margin>
+                    <Insets left="5.0" top="20.0"/>
+                </HBox.margin>
+                <padding>
+                    <Insets right="5.0"/>
+                </padding>
+            </TextField>
+        </HBox>
+        <HBox VBox.vgrow="ALWAYS">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+                <HBox.margin>
+                    <Insets left="40.0" top="20.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="24.0"/>
+                </font>
+            </Text>
+            <PasswordField fx:id="password" prefHeight="26.0" prefWidth="150.0">
+                <HBox.margin>
+                    <Insets left="5.0" top="20.0"/>
+                </HBox.margin>
+            </PasswordField>
+        </HBox>
+        <HBox>
+            <Button fx:id="help" mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css"
+                    text="Help" textFill="white" HBox.hgrow="ALWAYS">
+                <HBox.margin>
+                    <Insets left="50.0" right="50.0" top="25.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="login" mnemonicParsing="false" onAction="#login" styleClass="Button"
+                    stylesheets="/css/helpspot.css" text="Login" textFill="white" HBox.hgrow="ALWAYS">
+                <HBox.margin>
+                    <Insets left="50.0" right="50.0" top="25.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+    </VBox>
+    <ImageView fitHeight="41.0" fitWidth="181.0" layoutX="125.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+        <Image url="/logo/HelpSpot Logo.png"/>
+        </image>
+    </ImageView>
 </Pane>

@@ -6,13 +6,13 @@ import java.sql.Timestamp;
 import java.util.Collection;
 
 public class Message {
-    private MessageDAO dao;
-    private int messageID;
-    private Ticket ticket;
-    private String message;
-    private Timestamp datePosted;
-    private Message messageReplyToID;
-    private Person person;
+    private final MessageDAO dao;
+    private final int messageID;
+    private final Ticket ticket;
+    private final String message;
+    private final Timestamp datePosted;
+    private final Message messageReplyToID;
+    private final Person person;
 
     //Maybe add cache of reply messages
     private Collection<Message> replyMessages;

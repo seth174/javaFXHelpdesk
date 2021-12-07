@@ -7,7 +7,6 @@ import error.Error;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.Priority;
 import main.Driver;
 import models.*;
 import models.Queue;
@@ -62,7 +61,7 @@ public class CreateTickets extends ButtonCalls implements Initializable {
     public void loadPriorities(Organization organization)
     {
         Organization personOrganization = person.getOrganization();
-        Collection<TicketPriority> priorities = null;
+        Collection<TicketPriority> priorities;
         //this will need work
         if(personOrganization == organization)
         {
@@ -95,7 +94,7 @@ public class CreateTickets extends ButtonCalls implements Initializable {
     public void loadStatuses(Organization organization)
     {
         Organization personOrganization = person.getOrganization();
-        Collection<TicketStatus> statuses = null;
+        Collection<TicketStatus> statuses;
         //this will need work
         if(personOrganization == organization)
         {
@@ -133,7 +132,7 @@ public class CreateTickets extends ButtonCalls implements Initializable {
         {
             Organization organization2 = dbm.findByName(organization.getText());
             Organization personOrganization = person.getOrganization();
-            Organization used = null;
+            Organization used;
             if(personOrganization == organization2 || personOrganization.getParentOrganization() == organization2)
             {
                 used = organization2;

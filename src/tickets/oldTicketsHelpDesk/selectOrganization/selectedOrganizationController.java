@@ -28,7 +28,6 @@ public class selectedOrganizationController extends ButtonCalls implements Initi
     private Person person = dbm.findPersonByID(Driver.getEmployeeID());
     @FXML
     private ComboBox<String> comboBox;
-    private Stage stage = Driver.getStage();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadOrganizations();

@@ -9,9 +9,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import main.Driver;
 import models.*;
 
@@ -21,9 +19,6 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class OldTickets extends ButtonCalls implements Initializable {
-    private static Stage stage = Driver.getStage();
-    @FXML
-    private VBox vBox;
     @FXML
     private TitledPane myOldTickets;
     @FXML
@@ -37,7 +32,7 @@ public class OldTickets extends ButtonCalls implements Initializable {
 
     public void loadQueues()
     {
-        Collection<QueuePerPerson> qp  = person.getQueuePerPerson();
+        //Collection<QueuePerPerson> qp  = person.getQueuePerPerson();
         loadTickets(myOldTickets, null);
 
         Queue closedQueue = dbm.findQueueByName("Closed", person.getOrganization());
@@ -107,10 +102,6 @@ public class OldTickets extends ButtonCalls implements Initializable {
             Text status1 = new Text(t.getTicketStatus().getTicketStatus());
             System.out.println("Setting the status");
             Text id1 = new Text(String.valueOf(t.getTicketID()));
-
-            organization1.setOnMouseClicked(e -> {System.out.println("hi");});
-
-
 
             GridPane.setConstraints(organization1, 0, counter);
             GridPane.setConstraints(title1, 1, counter);
