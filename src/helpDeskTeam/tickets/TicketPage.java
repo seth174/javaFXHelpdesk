@@ -32,17 +32,15 @@ public class TicketPage extends ButtonCalls implements Initializable {
     @FXML
     private TextField datePickerTime;
     @FXML
-    private GridPane infoGridPane;
-    @FXML
     private GridPane newMessages;
     @FXML
     private TextArea textArea;
     @FXML
-    private ButtonBar buttonBar;
-    @FXML
     private MenuButton menuButtonStatus;
     @FXML
     private MenuButton menuButtonPriority;
+    @FXML
+    private MenuButton menuButtonQueue;
     private static int ticketID;
     private DatabaseManager dbm = new DatabaseManager();
     private Ticket ticket = dbm.findTicketByID(ticketID);
@@ -54,6 +52,8 @@ public class TicketPage extends ButtonCalls implements Initializable {
 
         loadTitle();
         loadDescription();
+
+        loadQueue(person.getOrganization());
 
         Organization otherOrg = dbm.findOtherTicketOrganization(ticket.getTicketID(), person.getOrganization());
         loadPriorities(otherOrg);
@@ -392,6 +392,39 @@ public class TicketPage extends ButtonCalls implements Initializable {
             double time = dbm.findTimePerPerson(date, ticket, person).getTime();
             datePickerTime.setText(String.valueOf(time));
         }
+        dbm.commit();
+    }
+
+    public void loadQueue(Organization organization)
+    {
+        TicketsPerQueue tq = dbm.find(ticket, organization);
+        String queueName = tq.getQueue().getName();
+
+        menuButtonQueue.setText(queueName);
+
+        if(queueName.equalsIgnoreCase("Assigned") || queueName.equalsIgnoreCase("Closed"))
+        {
+            dbm.commit();
+            return;
+        }
+
+        Collection<Queue> queues = organization.getOrganizationQueues();
+
+        for(Queue q: queues)
+        {
+            if(q.getName().equalsIgnoreCase("Closed") || q.getName().equalsIgnoreCase("Assigned"))
+                continue;
+            MenuItem queue = new MenuItem(q.getName());
+            menuButtonQueue.getItems().add(queue);
+
+            queue.setOnAction(e -> {
+                TicketsPerQueue ticketsPerQueue = dbm.find(ticket, organization);
+                dbm.updateTicketPerQueue(ticketsPerQueue, q);
+                menuButtonQueue.setText(q.getName());
+                dbm.commit();
+            });
+        }
+
         dbm.commit();
     }
 

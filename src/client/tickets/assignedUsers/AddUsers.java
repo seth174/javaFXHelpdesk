@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import main.Driver;
 import models.*;
 
@@ -57,10 +58,15 @@ public class AddUsers {
         }
 
         person.invalidateTicketsPerPerson();
+        ticket.invalidateTicketPerPerson();
 
         updateQueues(person.getOrganization());
-        Error.error("Successfully Added user");
+//        Error.error("Successfully Added user");
         dbm.commit();
+
+        Stage window = (Stage)closeButton.getScene().getWindow();
+
+        window.fireEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 
     public void updateQueues(Organization organization)

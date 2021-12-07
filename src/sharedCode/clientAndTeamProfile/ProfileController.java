@@ -31,8 +31,6 @@ public class ProfileController extends ButtonCalls implements Initializable {
     private Text phoneNumber;
     @FXML
     private Text organization;
-    @FXML
-    private ButtonBar buttonBar;
 
     private static DatabaseManager dbm = Driver.getDbm();
     private static Stage stage = Driver.getStage();
@@ -41,6 +39,7 @@ public class ProfileController extends ButtonCalls implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         person = dbm.findPersonByID(Driver.getEmployeeID());
         loadData();
+        System.out.println("Inside intitaliza");
         dbm.commit();
 
     }
@@ -91,10 +90,6 @@ public class ProfileController extends ButtonCalls implements Initializable {
         }
 
         stage2.setOnCloseRequest(e -> {
-            refreshData();
-        });
-
-        stage.setOnShowing(e -> {
             refreshData();
         });
 

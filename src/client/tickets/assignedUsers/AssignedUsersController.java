@@ -39,8 +39,15 @@ public class AssignedUsersController extends ButtonCalls implements Initializabl
     private DatabaseManager dbm = Driver.getDbm();
     private Person person = dbm.findPersonByID(Driver.getEmployeeID());
     private Ticket ticket = dbm.findTicketByID(TicketPage.getTicket());
+    Stage stage = Driver.getStage();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadOrganizationUsers();
+    }
+
+    public void loadOrganizationUsers()
+    {
+        System.out.println("This executed");
         loadUsers(person.getOrganization(), organization1, true, organization1Text);
         Organization organization = dbm.findOtherTicketOrganization(ticket.getTicketID(), person.getOrganization());
         loadUsers(organization, organization2, true, organization2Text);
@@ -119,6 +126,13 @@ public class AssignedUsersController extends ButtonCalls implements Initializabl
             addUsers.setTicket(ticket);
             addUsers.setOrganization(organization);
             window.setTitle("Add Users");
+
+
+            window.setOnCloseRequest(e -> {
+                System.out.println("SetOnClose");
+                loadAssignedUsers();
+            });
+
             window.showAndWait();
         }
         catch (IOException e)
