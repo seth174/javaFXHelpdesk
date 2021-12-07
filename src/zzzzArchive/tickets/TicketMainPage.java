@@ -26,7 +26,7 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/zzzzArchive/tickets/oldTicketsPage.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/tickets/oldTicketsHelpDesk/oldTicketPage/oldTicketsPage.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

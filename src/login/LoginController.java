@@ -71,7 +71,7 @@ public class LoginController implements Initializable {
             if(person.getLevel() == 1)
                 root1 = FXMLLoader.load(getClass().getResource("/client/dashboard/dashboard.fxml"));
             else
-                root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/ticketMainPage.fxml"));
+                root1 = FXMLLoader.load(getClass().getResource("/tickets/ticketMainPage/ticketMainPage.fxml"));
             stage.setScene(new Scene(root1));
             stage.setTitle("Ticket Home Page");
             stage.setFullScreen(true);

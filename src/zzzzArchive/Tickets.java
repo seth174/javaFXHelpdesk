@@ -23,7 +23,7 @@ public class Tickets extends ClientButtons implements Initializable {
     public void loadProfile()  {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/sharedCode/clientAndTeamProfile/Profile.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/profile/profile/Profile.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();
@@ -38,7 +38,7 @@ public class Tickets extends ClientButtons implements Initializable {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/sharedCode/contacts/contacts.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/contacts/contacts.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

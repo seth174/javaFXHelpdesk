@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tickets.oldTicketsHelpDesk.oldTicketPage.OldTicketPage" stylesheets="/css/helpspot.css">
+    <top>
+        <fx:include fx:id="header" source="/headerAndFooter/header/header.fxml"/>
+    </top>
+    <bottom>
+        <fx:include fx:id="footer" source="/headerAndFooter/footer/footer.fxml"/>
+    </bottom>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" stylesheets="/css/helpspot.css" styleClass="BigButton" text="Organization Old Tickets" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#loadSelectOrganization">
+            </Button>
+            <Button mnemonicParsing="false" stylesheets="/css/helpspot.css" styleClass="BigButton" text="My Old Tickets" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#loadOldTicketsHelpDesk">
+            </Button>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

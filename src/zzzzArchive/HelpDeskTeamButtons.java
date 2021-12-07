@@ -3,7 +3,6 @@ package zzzzArchive;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.Driver;
 
@@ -46,7 +45,7 @@ public abstract class HelpDeskTeamButtons {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/ticketMainPage.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/tickets/ticketMainPage/ticketMainPage.fxml"));
             stage.setScene(new Scene(root1));
             stage.setTitle("Tickets");
             stage.setFullScreen(true);
@@ -62,7 +61,7 @@ public abstract class HelpDeskTeamButtons {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/oldTicketsPage.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/tickets/oldTicketsHelpDesk/oldTicketPage/oldTicketsPage.fxml"));
             stage.setScene(new Scene(root1));
             stage.setTitle("Old Tickets Select");
             stage.setFullScreen(true);

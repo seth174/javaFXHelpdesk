@@ -3,8 +3,6 @@ package buttonCalls;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.Driver;
 
@@ -28,64 +26,49 @@ public abstract class ButtonCalls {
         stage.getScene().setRoot(page);
     }
     public void loadProfile()  {
-        load("/sharedCode/clientAndTeamProfile/Profile.fxml", "Profile", "Profile");
+        load("/profile/profile/Profile.fxml", "Profile", "Profile");
     }
 
     public void loadContacts()
     {
-        load("/sharedCode/contacts/contacts.fxml", "Contacts", "Contacts");
+        load("/contacts/contacts.fxml", "Contacts", "Contacts");
     }
 
     public void loadTickets()
     {
-        load("/helpdeskTeam/tickets/ticketMainPage.fxml", "Tickets", "Tickets");
+        load("/tickets/ticketMainPage/ticketMainPage.fxml", "Tickets", "Tickets");
     }
 
     public void loadAssignedUsers()
     {
-        load("/client/tickets/assignedUsers/assignedUsers.fxml", "Assigned Users", "Tickets");
+        load("/tickets/assignedUsers/assignedUsers.fxml", "Assigned Users", "Tickets");
     }
 
     public void loadTicketPage()
     {
-        load("/helpDeskTeam/tickets/ticketPage.fxml", "Tickets", "Tickets");
+        load("/tickets/ticketPage/ticketPage.fxml", "Tickets", "Tickets");
     }
 
     public void loadOldTickets()
     {
-        load("/client/tickets/oldTickets.fxml", "Old Tickets", "Tickets");
-    }
-
-    public void loadOrganizationTickets()
-    {
-        try
+        if(Driver.getDbm().findPersonByID(Driver.getEmployeeID()).getLevel() != 1)
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/selectOrganization.fxml"));
-            stage.setScene(new Scene(root1));
-            stage.setTitle("Organization Old Tickets");
-            stage.setFullScreen(true);
-            stage.show();
+            load("/tickets/oldTicketsHelpDesk/oldTicketPage/oldTicketsPage.fxml", "Old Tickets", "Tickets");
         }
-        catch (IOException e)
+        else
         {
-            System.out.println(e);
+            load("/tickets/oldTickets/oldTickets.fxml", "Old Tickets", "Tickets");
         }
     }
 
-    public void loadMyOldTickets()
+    public void loadOldTicketsHelpDesk()
     {
-        try
-        {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/myOldTickets.fxml"));
-            stage.setScene(new Scene(root1));
-            stage.setTitle("My Old Tickets");
-            stage.setFullScreen(true);
-            stage.show();
-        }
-        catch (IOException e)
-        {
-            System.out.println(e);
-        }
+        load("/tickets/oldTickets/oldTickets.fxml", "Old Tickets", "Tickets");
+    }
+
+    public void loadSelectOrganization()
+    {
+        load("/tickets/oldTicketsHelpDesk/selectOrganization/selectOrganization.fxml", "Select Organization", "Tickets");
     }
 
     public void loadAdd()
@@ -104,7 +87,7 @@ public abstract class ButtonCalls {
 
     public void loadCreateUsers()
     {
-        load("/helpDeskTeamManager/addUsers/addUsers.fxml", "Create Users", "Contacts");
+        load("/helpDeskTeamManager/addUsers/addUsers.fxml", "Create Users", "Add");
     }
 
     public void loadViewQueue()
@@ -129,7 +112,7 @@ public abstract class ButtonCalls {
 
     public void createNewTicket()
     {
-        load("/helpDeskTeam/tickets/createTickets.fxml", "Create New Ticket", "Tickets");
+        load("/tickets/createTickets/createTickets.fxml", "Create New Ticket", "Tickets");
     }
 
     public void loadAddTicketStatus()

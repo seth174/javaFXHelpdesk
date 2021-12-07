@@ -1,0 +1,7 @@
+.combo-box-base
+{
+    -fx-background-color: #5B84B1FF, #5B84B1FF, #5B84B1FF, #5B84B1FF;
+    -fx-background-radius: 15;
+    -fx-font-size: 20;
+    -fx-cursor: hand;
+}

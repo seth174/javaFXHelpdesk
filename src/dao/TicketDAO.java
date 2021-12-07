@@ -348,6 +348,43 @@ public class TicketDAO {
         }
     }
 
+    public void closeTicket(Ticket ticket, Person person)
+    {
+        try {
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("update ticket");
+            sb.append("  set dateClosed = ?, EmployeeIDClosed = ?");
+            sb.append("  where ticketID = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            java.sql.Date date= new java.sql.Date(System.currentTimeMillis());
+            pstmt.setDate(1, date);
+            pstmt.setInt(2, person.getEmployeeID());
+            pstmt.setInt(3, ticket.getTicketID());
+            pstmt.executeUpdate();
+
+            person.invalidateTicketsPerPerson();
+            ticket.invalidateTicketPerPerson();
+            ticket.invalidateTicketsPerQueue();
+
+            Ticket newTicket = new Ticket(ticket.getDao(), ticket.getTicketID(), ticket.getTicketTitle(),
+                    ticket.getTicketDescription(), ticket.getTicketPriority(), ticket.getTicketStatus(), ticket.getDateCreated(),
+                    date, ticket.getPersonCreated(), person);
+
+            cache.remove(ticket.getTicketID());
+
+            cache.put(newTicket.getTicketID(), newTicket);
+
+
+            newTicket.invalidateTicketsPerQueue();
+
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error updating new time per person", e);
+        }
+    }
+
     public Collection<TicketsPerQueue> getTicketsPerQueue(int ticketID)
     {
         return dbm.getTicketsPerQueueTickets(ticketID);

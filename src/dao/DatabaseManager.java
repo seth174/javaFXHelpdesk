@@ -377,6 +377,11 @@ public class DatabaseManager {
         ticketsPerQueueDAO.updateTicketPerQueue(newQueue, ticketsPerQueue);
     }
 
+    public void closeTicket(Ticket ticket, Person person)
+    {
+        ticketDAO.closeTicket(ticket, person);
+    }
+
     public void updateTicketPriority(TicketPriority oldPriority, TicketPriority newPriority, Ticket ticket)
     {
         ticketDAO.updateTicketPriority(oldPriority, newPriority, ticket);

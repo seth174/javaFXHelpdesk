@@ -31,22 +31,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Old Tickets" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Old Tickets" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" onAction="#loadOldTickets">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Submit Ticket" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Submit Ticket" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER" onAction="#createNewTicket">
                     <font>
                         <Font size="20.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="HelpSpot Support" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                    <font>
-                        <Font size="20.0" />
-                    </font>
-                </Button>
-                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Current Tickets" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" onAction="#createNewTicket">
+                <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" stylesheets="/css/helpspot.css" styleClass="Button" text="Current Tickets" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" onAction="#loadTickets">
                     <font>
                         <Font size="20.0" />
                     </font>

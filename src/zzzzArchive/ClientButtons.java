@@ -14,7 +14,7 @@ public abstract class ClientButtons {
     public void loadProfile()  {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/sharedCode/clientAndTeamProfile/Profile.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/profile/profile/Profile.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();
@@ -29,7 +29,7 @@ public abstract class ClientButtons {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/sharedCode/contacts/contacts.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/contacts/contacts.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();
@@ -76,7 +76,7 @@ public abstract class ClientButtons {
         window.initModality(Modality.APPLICATION_MODAL);
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/assignedUsers/assignedUsers.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/tickets/assignedUsers/assignedUsers.fxml"));
             window.setScene(new Scene(root1));
             window.setTitle("Assigned Users");
             window.setFullScreen(true);
@@ -92,7 +92,7 @@ public abstract class ClientButtons {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/ticketPage.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/tickets/ticketPage/ticketPage.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();
@@ -107,7 +107,7 @@ public abstract class ClientButtons {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/oldTickets.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/tickets/oldTickets/oldTickets.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();
@@ -124,7 +124,7 @@ public abstract class ClientButtons {
         window.initModality(Modality.APPLICATION_MODAL);
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/assignedUsers/addUsers.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/tickets/addUsers/addUsers.fxml"));
             window.setScene(new Scene(root1));
             window.setTitle("Add Users");
             window.showAndWait();

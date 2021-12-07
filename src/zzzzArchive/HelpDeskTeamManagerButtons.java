@@ -76,7 +76,7 @@ public class HelpDeskTeamManagerButtons  {
         window.initModality(Modality.APPLICATION_MODAL);
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/selectOrganization.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/tickets/oldTicketsHelpDesk/selectOrganization/selectOrganization.fxml"));
             window.setScene(new Scene(root1));
             window.setTitle("Select Organization");
             window.showAndWait();
@@ -91,7 +91,7 @@ public class HelpDeskTeamManagerButtons  {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/zzzzArchive/tickets/myOldTickets.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/tickets/oldTicketsHelpDesk/organizationOldTickets/organizationOldTickets.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

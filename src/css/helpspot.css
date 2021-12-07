@@ -7,6 +7,10 @@
 	-fx-font-size: 16;
 }
 
+.SmallButton{
+    	-fx-font-size: 10;
+}
+
 .Button:hover {
     -fx-background-color: #050A30;
 }
@@ -161,5 +165,4 @@
 
 .TicketText{
     -fx-font-size: 24;
-
 }
