@@ -13,9 +13,11 @@ import java.io.IOException;
 public abstract class ButtonCalls {
     private int level = Driver.getDbm().findPersonByID(Driver.getEmployeeID()).getLevel();
     private static Stage stage = Driver.getStage();
+    private static String buttonPressed = "None";
 
-    public void load(String fxml, String stageTitle)
+    public void load(String fxml, String stageTitle, String buttonPressed)
     {
+        ButtonCalls.buttonPressed = buttonPressed;
         Parent page = null;
         try {
             page = FXMLLoader.load(getClass().getResource(fxml), null, new JavaFXBuilderFactory());
@@ -26,105 +28,32 @@ public abstract class ButtonCalls {
         stage.getScene().setRoot(page);
     }
     public void loadProfile()  {
-        load("/sharedCode/clientAndTeamProfile/Profile.fxml", "Profile");
+        load("/sharedCode/clientAndTeamProfile/Profile.fxml", "Profile", "Profile");
     }
 
     public void loadContacts()
     {
-        load("/sharedCode/contacts/contacts.fxml", "Contacts");
+        load("/sharedCode/contacts/contacts.fxml", "Contacts", "Contacts");
     }
 
     public void loadTickets()
     {
-        load("/helpdeskTeam/tickets/ticketMainPage.fxml", "Tickets");
-    }
-
-    public void loadCurrentTickets()
-    {
-        try
-        {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/tickets.fxml"));
-            stage.setScene(new Scene(root1));
-            stage.setFullScreen(true);
-            stage.show();
-        }
-        catch (IOException e)
-        {
-            System.out.println(e);
-        }
+        load("/helpdeskTeam/tickets/ticketMainPage.fxml", "Tickets", "Tickets");
     }
 
     public void loadAssignedUsers()
     {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        try
-        {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/assignedUsers/assignedUsers.fxml"));
-            window.setScene(new Scene(root1));
-            window.setTitle("Assigned Users");
-            window.setFullScreen(true);
-            window.showAndWait();
-        }
-        catch (IOException e)
-        {
-            System.out.println(e);
-        }
+        load("/client/tickets/assignedUsers/assignedUsers.fxml", "Assigned Users", "Tickets");
     }
 
     public void loadTicketPage()
     {
-        load("/helpDeskTeam/tickets/ticketPage.fxml", "Tickets");
+        load("/helpDeskTeam/tickets/ticketPage.fxml", "Tickets", "Tickets");
     }
 
     public void loadOldTickets()
     {
-        if(level == 1)
-        {
-            try
-            {
-                Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/oldTickets.fxml"));
-                stage.setScene(new Scene(root1));
-                stage.setFullScreen(true);
-                stage.show();
-            }
-            catch (IOException e)
-            {
-                System.out.println(e);
-            }
-        }
-        else
-        {
-            try
-            {
-                Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskteam/tickets/oldTicketsPage.fxml"));
-                stage.setScene(new Scene(root1));
-                stage.setFullScreen(true);
-                stage.show();
-            }
-            catch (IOException e)
-            {
-                System.out.println(e);
-            }
-        }
-
-    }
-
-    public void loadAddUsers()
-    {
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        try
-        {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/assignedUsers/addUsers.fxml"));
-            window.setScene(new Scene(root1));
-            window.setTitle("Add Users");
-            window.showAndWait();
-        }
-        catch (IOException e)
-        {
-            System.out.println(e);
-        }
+        load("/client/tickets/oldTickets.fxml", "Old Tickets", "Tickets");
     }
 
     public void loadOrganizationTickets()
@@ -161,61 +90,67 @@ public abstract class ButtonCalls {
 
     public void loadAdd()
     {
-        load("/helpDeskTeamManager/add/add.fxml", "Add");
+        load("/helpDeskTeamManager/add/add.fxml", "Add", "Add");
     }
 
     public void loadManageQueue()
     {
-        load("/helpDeskTeamManager/manageQueue/manageQueue.fxml", "Manage Queue");
+        load("/helpDeskTeamManager/manageQueue/manageQueue.fxml", "Manage Queue", "ManageTeamQueue");
     }
 
     public void loadAddOrganization(){
-        load("/helpDeskTeamManager/addOrganization/addOrganization.fxml", "Organization");
+        load("/helpDeskTeamManager/addOrganization/addOrganization.fxml", "Organization", "Add");
     }
 
     public void loadCreateUsers()
     {
-        load("/helpDeskTeamManager/addUsers/addUsers.fxml", "Create Users");
+        load("/helpDeskTeamManager/addUsers/addUsers.fxml", "Create Users", "Contacts");
     }
 
     public void loadViewQueue()
     {
-        load("/helpDeskTeamManager/viewQueue/viewQueue.fxml", "View Queue");
+        load("/helpDeskTeamManager/viewQueue/viewQueue.fxml", "View Queue", "ManageTeamQueue");
     }
 
     public void loadAddQueue()
     {
-        load("/helpDeskTeamManager/addQueue/addQueue.fxml", "Add Queue");
+        load("/helpDeskTeamManager/addQueue/addQueue.fxml", "Add Queue", "ManageTeamQueue");
     }
 
     public void loadDeleteQueue()
     {
-        load("/helpDeskTeamManager/deleteQueue/deleteQueue.fxml", "Delete Queue");
+        load("/helpDeskTeamManager/deleteQueue/deleteQueue.fxml", "Delete Queue", "ManageTeamQueue");
     }
 
     public void loadAddUsersToQueue()
     {
-        load("/helpDeskTeamManager/addUsersToQueue/addUsersToQueue.fxml", "Add Users To Queue");
+        load("/helpDeskTeamManager/addUsersToQueue/addUsersToQueue.fxml", "Add Users To Queue", "ManageTeamQueue");
     }
 
     public void createNewTicket()
     {
-        load("/helpDeskTeam/tickets/createTickets.fxml", "Create New Ticket");
+        load("/helpDeskTeam/tickets/createTickets.fxml", "Create New Ticket", "Tickets");
     }
 
     public void loadAddTicketStatus()
     {
-        load("/helpDeskTeamManager/addTicketStatus/addTicketStatus.fxml", "Add Ticket Status");
+        load("/helpDeskTeamManager/addTicketStatus/addTicketStatus.fxml", "Add Ticket Status", "Add");
     }
 
     public void loadAddTicketPriority()
     {
-        load("/helpDeskTeamManager/addTicketPriority/AddTicketPriority.fxml", "Add Ticket Priority");
+        load("/helpDeskTeamManager/addTicketPriority/AddTicketPriority.fxml", "Add Ticket Priority", "Add");
     }
 
     public void logout()
     {
-        load("/login/login.fxml", "login");
+        load("/login/login.fxml", "login", "none");
     }
 
+    public static void setButtonPressed(String buttonPressed)
+    {
+        ButtonCalls.buttonPressed = buttonPressed;
+    }
+
+    public static String getButtonPressed(){ return buttonPressed; }
 }

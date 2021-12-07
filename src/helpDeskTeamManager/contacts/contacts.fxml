@@ -17,43 +17,10 @@
 <?import javafx.scene.image.Image?>
 <BorderPane fx:controller="helpDeskTeamManager.contacts.contactsController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" >
     <top>
-        <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
-            <children>
-                <ImageView fitHeight="37.0" fitWidth="89.0" pickOnBounds="true">
-                    <image>
-                        <Image url="/logo/HelpSpot Logo.png" />
-                    </image>
-               <HBox.margin>
-                  <Insets left="25.0" top="5.0" />
-               </HBox.margin></ImageView>
-                <ButtonBar style="-fx-background-color: none;">
-                    <buttons>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Tickets" onAction="#loadTickets"/>
-                        <Button mnemonicParsing="false" styleClass="ButtonPressed" stylesheets="/css/helpspot.css" text="Contacts" onAction="#loadContacts"/>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Profile" onAction="#loadProfile"/>
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Add Organizations" />
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Manage Team Queue" />
-                        <Button mnemonicParsing="false" styleClass="Button" stylesheets="/css/helpspot.css" text="Statistics" />
-                    </buttons>
-                    <HBox.margin>
-                        <Insets left="100.0" />
-                    </HBox.margin>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </ButtonBar>
-            </children>
-            <opaqueInsets>
-                <Insets left="100.0" />
-            </opaqueInsets>
-        </HBox>
+        <fx:include fx:id="header" source="/headerAndFooter/header/header.fxml"/>
     </top>
     <bottom>
-        <HBox prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
-            <children>
-                <Text fill="#5b84b1" strokeType="OUTSIDE" strokeWidth="0.0" text="Submit Ticket To HelpSpot For Support" textAlignment="CENTER" wrappingWidth="593.85595703125" />
-            </children>
-        </HBox>
+        <fx:include fx:id="footer" source="/headerAndFooter/footer/footer.fxml"/>
     </bottom>
     <center>
         <GridPane BorderPane.alignment="CENTER">

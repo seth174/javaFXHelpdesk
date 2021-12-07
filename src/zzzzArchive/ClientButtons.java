@@ -44,7 +44,7 @@ public abstract class ClientButtons {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/tickets.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/zzzzArchive/tickets.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();
@@ -59,7 +59,7 @@ public abstract class ClientButtons {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/client/tickets/tickets.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/zzzzArchive/tickets.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

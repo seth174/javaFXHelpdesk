@@ -39,13 +39,15 @@ public class Queue {
 
     public Collection<Ticket> getTicketsPerQueues()
     {
+        ticketsPerQueues = null;
         if(ticketsPerQueues == null){
+            System.out.println("its null");
             ticketsPerQueues = dao.getTicketsPerQueue(queueID);
         }
         return ticketsPerQueues;
     }
 
-    public Organization getOrganizationID(){
+    public Organization getOrganization(){
         return organization;
     }
 
@@ -56,6 +58,7 @@ public class Queue {
 
     public void invalidateTicketsPerQueues()
     {
+        System.out.println("Invalidated");
         ticketsPerQueues = null;
     }
 

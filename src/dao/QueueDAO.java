@@ -102,7 +102,7 @@ public class QueueDAO {
             // make sure that the name is currently unused
             Queue q = findByName(name, organization);
             if (q != null) {
-                if(q.getOrganizationID() == organization)
+                if(q.getOrganization() == organization)
                     return null;
             }
 
@@ -206,7 +206,7 @@ public class QueueDAO {
             pstmt.executeUpdate();
 
             cache.clear();
-            queue.getOrganizationID().invalidateQueues();
+            queue.getOrganization().invalidateQueues();
 
             return find(queueID);
         } catch (SQLException e) {

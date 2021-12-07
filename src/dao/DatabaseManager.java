@@ -204,6 +204,11 @@ public class DatabaseManager {
         return ticketPerPersonDAO.getTicketPerPersonTicket(ticketID);
     }
 
+    public void updateTicketStatus(TicketStatus oldStatus, TicketStatus newStatus, Ticket ticket)
+    {
+        ticketDAO.updateTicketStatus(oldStatus, newStatus, ticket);
+    }
+
     public Collection<Ticket> getOnlyTicketsPerQueue(int queueID)
     {
         return ticketsPerQueueDAO.getOnlyTicketsPerQueue(queueID);
@@ -347,9 +352,48 @@ public class DatabaseManager {
         return timePerPersonDAO.findTimePerPerson(date, ticket, person);
     }
 
+    public TicketPerPerson find(int ticketPerPersonID)
+    {
+        return ticketPerPersonDAO.find(ticketPerPersonID);
+    }
+
+    public TicketPerPerson find(Ticket ticket, Person person)
+    {
+        return ticketPerPersonDAO.find(ticket, person);
+    }
+
+    public TicketsPerQueue find(Ticket ticket, Organization organization)
+    {
+        return ticketsPerQueueDAO.find(ticket, organization);
+    }
+
+    public TicketsPerQueue find(Queue queue, Ticket ticket)
+    {
+        return ticketsPerQueueDAO.find(queue, ticket);
+    }
+
+    public void updateTicketPerQueue(TicketsPerQueue ticketsPerQueue, Queue newQueue)
+    {
+        ticketsPerQueueDAO.updateTicketPerQueue(newQueue, ticketsPerQueue);
+    }
+
+    public void updateTicketPriority(TicketPriority oldPriority, TicketPriority newPriority, Ticket ticket)
+    {
+        ticketDAO.updateTicketPriority(oldPriority, newPriority, ticket);
+    }
+
+    public boolean findSubscribers(Ticket ticket, Organization organization)
+    {
+        return ticketPerPersonDAO.findSubscribers(ticket, organization);
+    }
+
     public Collection<Queue> getOrganizationQueues(int organizationID)
     {
         return queueDAO.getOrganizationQueues(organizationID);
+    }
+
+    public Collection<Ticket> getOldTicketPerPerson(int employeeID){
+        return ticketPerPersonDAO.getOldTicketPerPerson(employeeID);
     }
 
     public QueuePerPerson findQueuePerPerson(Person person, Queue queue){

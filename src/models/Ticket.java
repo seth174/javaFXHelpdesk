@@ -40,6 +40,10 @@ public class Ticket {
 
     public int getTicketID() {return ticketID;}
 
+    public TicketDAO getDao() {
+        return dao;
+    }
+
     public String getTicketTitle() {return ticketTitle;}
 
     public String getTicketDescription() {return ticketDescription;}

@@ -1,5 +1,6 @@
 package dao;
 
+import models.Organization;
 import models.Person;
 import models.Ticket;
 import models.TicketPerPerson;
@@ -42,9 +43,12 @@ public class TicketPerPersonDAO {
             Collection<Ticket> ticketPerPerson = new ArrayList<>();
 
             StringBuilder sb = new StringBuilder();
-            sb.append("select tp.ticketID");
+            sb.append("select distinct tp.ticketID");
             sb.append("  from ticketPerPerson tp");
-            sb.append("  where tp.employeeID = ?");
+            sb.append("  LEFT join ticket t ON t.ticketid = tp.ticketID");
+            sb.append("  LEFT JOIN ticketsperqueue tq ON tq.ticketid = t.TICKETID ");
+            sb.append("  LEFT JOIN QUEUE q ON q.QUEUEID = tq.queueid");
+            sb.append("  where tp.employeeID = ? and tp.Subscribed = 1 AND q.NAME != 'Closed'");
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
             pstmt.setInt(1, employeeID);
@@ -70,7 +74,7 @@ public class TicketPerPersonDAO {
 
         try {
             StringBuilder sb = new StringBuilder();
-            sb.append("select tp.ticketID, tp.employeeID, t.Subscribed");
+            sb.append("select tp.ticketID, tp.employeeID, tp.Subscribed");
             sb.append("  from ticketPerPerson tp");
             sb.append("  where tp.ticketPerPersonID = ?");
 
@@ -136,7 +140,7 @@ public class TicketPerPersonDAO {
             StringBuilder sb = new StringBuilder();
             sb.append("select tp.ticketPerPersonID");
             sb.append("  from ticketPerPerson tp");
-            sb.append("  where tp.ticketID = ?");
+            sb.append("  where tp.ticketID = ? and tp.subscribed = 1");
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
             pstmt.setInt(1, ticketID);
@@ -193,6 +197,7 @@ public class TicketPerPersonDAO {
 
             PreparedStatement pstmt = conn.prepareStatement(sb.toString());
             TicketPerPerson ticketPerPerson = find(ticket, person);
+            boolean subscribed = false;
             if (ticketPerPerson == null) {
                 return;
             }
@@ -203,16 +208,48 @@ public class TicketPerPersonDAO {
             else
             {
                 pstmt.setInt(1, 1);
+                subscribed = true;
             }
 
             pstmt.setInt(2, ticketPerPerson.getTicketPerPersonID());
             pstmt.executeUpdate();
+
+            TicketPerPerson newTicketPerPerson = new TicketPerPerson(this, ticketPerPerson.getTicketPerPersonID(), ticket, person, subscribed);
+
+            cache.put(newTicketPerPerson.getTicketPerPersonID(), newTicketPerPerson);
 
             person.invalidateTicketsPerPerson();
             ticket.invalidateTicketPerPerson();
         } catch (SQLException e) {
             dbm.cleanup();
             throw new RuntimeException("error changing ticketsPerPerson", e);
+        }
+    }
+
+    public boolean findSubscribers(Ticket ticket, Organization organization)
+    {
+        try {
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("select tp.ticketPerPersonID");
+            sb.append(" from ticketPerPerson tp");
+            sb.append(" LEFT JOIN PERSON p ON p.EMPLOYEEID = tp.EMPLOYEEID ");
+            sb.append(" where tp.ticketID = ? and tp.subscribed = 1 AND p.ORGANIZATIONID = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, ticket.getTicketID());
+            pstmt.setInt(2, organization.getOrganizationID());
+            ResultSet rs = pstmt.executeQuery();
+
+            // return null if student doesn't exist
+            if (!rs.next())
+                return false;
+            rs.close();
+
+            return true;
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding subscribers", e);
         }
     }
 
@@ -233,6 +270,36 @@ public class TicketPerPersonDAO {
         } catch (SQLException e) {
             dbm.cleanup();
             throw new RuntimeException("error finding max ticket id", e);
+        }
+    }
+
+    public Collection<Ticket> getOldTicketPerPerson(int employeeID)
+    {
+        try {
+            Collection<Ticket> ticketPerPerson = new ArrayList<>();
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("select distinct tp.ticketID");
+            sb.append("  from ticketPerPerson tp");
+            sb.append("  LEFT join ticket t ON t.ticketid = tp.ticketID");
+            sb.append("  LEFT JOIN ticketsperqueue tq ON tq.ticketid = t.TICKETID ");
+            sb.append("  LEFT JOIN QUEUE q ON q.QUEUEID = tq.queueid");
+            sb.append("  where tp.employeeID = ? and tp.Subscribed = 1 AND q.NAME = 'Closed'");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, employeeID);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int ticketPerPersonID = rs.getInt("ticketID");
+                ticketPerPerson.add(dbm.findTicketByID(ticketPerPersonID));
+            }
+            rs.close();
+
+            return ticketPerPerson;
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error getting ticket per person", e);
         }
     }
 

@@ -252,6 +252,35 @@ public class PersonDAO {
         }
     }
 
+    public Collection<Person> getPeoplePerTicket(Organization organization, Ticket ticket)
+    {
+        try {
+            Collection<Person> peoplePerTicket = new ArrayList<>();
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("select tp.employeeID");
+            sb.append(" from PERSON p");
+            sb.append(" LEFT JOIN TICKETPERPERSON tp ON tp.EMPLOYEEID = p.EMPLOYEEID ");
+            sb.append(" where tp.ticketID = ? and p.ORGANIZATIONID = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, ticket.getTicketID());
+            pstmt.setInt(2, organization.getOrganizationID());
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int employeeID = rs.getInt("employeeID");
+                peoplePerTicket.add(find(employeeID));
+            }
+            rs.close();
+
+            return peoplePerTicket;
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error getting people per ticket", e);
+        }
+    }
+
     public Collection<Ticket> getTicketPerPerson(int employeeID)
     {
         return dbm.getTicketPerPerson(employeeID);
@@ -292,7 +321,11 @@ public class PersonDAO {
         }
     }
 
+    public Collection<Ticket> getOldTicketPerPerson(int employeeID)
+    {
+        return dbm.getOldTicketPerPerson(employeeID);
+    }
+
 }
 
 
-//finish update method for user info then finish the editProfile dao

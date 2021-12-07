@@ -45,9 +45,11 @@ public class TicketDAO {
 
     public Ticket find(int ticketID)
     {
-        if (cache.containsKey(ticketID)) {
-            return cache.get(ticketID);
-        }
+//        if (cache.containsKey(ticketID)) {
+//            System.out.println("Inside Cache");
+//            return cache.get(ticketID);
+//        }
+        System.out.println("Looking in database");
 
         try {
             StringBuilder sb = new StringBuilder();
@@ -68,6 +70,7 @@ public class TicketDAO {
             String ticketDescription = rs.getString("ticketDescription");
             int ticketPriorityNumber = rs.getInt("ticketPriority");
             int ticketStatusID = rs.getInt("ticketStatus");
+            System.out.println("ID " + ticketStatusID);
             Date dateCreated = rs.getDate("dateCreated");
             Date dateClosed = rs.getDate("dateClosed");
             int employeeIDClosed = rs.getInt("EmployeeIDClosed");
@@ -273,8 +276,82 @@ public class TicketDAO {
         }
     }
 
+    public void updateTicketStatus(TicketStatus oldStatus, TicketStatus newStatus, Ticket ticket)
+    {
+        try {
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("update ticket");
+            sb.append("  set ticketStatus = ?");
+            sb.append("  where ticketStatus = ? and ticketID = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setDouble(1, newStatus.getTicketStatusID());
+            pstmt.setInt(2, oldStatus.getTicketStatusID());
+            pstmt.setInt(3, ticket.getTicketID());
+            pstmt.executeUpdate();
+
+            oldStatus.invalidate();
+            newStatus.invalidate();
+            ticket.invalidateTicketsPerQueue();
+
+            Ticket newTicket = new Ticket(ticket.getDao(), ticket.getTicketID(), ticket.getTicketTitle(),
+                    ticket.getTicketDescription(), ticket.getTicketPriority(), newStatus, ticket.getDateCreated(),
+                    ticket.getDateClosed(), ticket.getPersonCreated(), ticket.getPersonClosed());
+
+            cache.remove(ticket.getTicketID());
+
+            cache.put(newTicket.getTicketID(), newTicket);
+
+
+            newTicket.invalidateTicketsPerQueue();
+
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error updating new time per person", e);
+        }
+    }
+
+    public void updateTicketPriority(TicketPriority oldPriority, TicketPriority newPriority, Ticket ticket)
+    {
+        try {
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("update ticket");
+            sb.append("  set ticketPriority = ?");
+            sb.append("  where ticketPriority = ? and ticketID = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, newPriority.getId());
+            pstmt.setInt(2, oldPriority.getId());
+            pstmt.setInt(3, ticket.getTicketID());
+            pstmt.executeUpdate();
+
+            oldPriority.invalidate();
+            newPriority.invalidate();
+            ticket.invalidateTicketsPerQueue();
+
+            Ticket newTicket = new Ticket(ticket.getDao(), ticket.getTicketID(), ticket.getTicketTitle(),
+                    ticket.getTicketDescription(), newPriority, ticket.getTicketStatus(), ticket.getDateCreated(),
+                    ticket.getDateClosed(), ticket.getPersonCreated(), ticket.getPersonClosed());
+
+            cache.remove(ticket.getTicketID());
+
+            cache.put(newTicket.getTicketID(), newTicket);
+
+
+            newTicket.invalidateTicketsPerQueue();
+
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error updating new time per person", e);
+        }
+    }
+
     public Collection<TicketsPerQueue> getTicketsPerQueue(int ticketID)
     {
         return dbm.getTicketsPerQueueTickets(ticketID);
     }
+
+
 }

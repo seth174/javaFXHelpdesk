@@ -65,27 +65,6 @@ public class ContactsController extends ButtonCalls implements Initializable {
             }
         });
 
-        if(dbm.findPersonByID(Driver.getEmployeeID()).getLevel() == 3)
-        {
-            Button manageTeamQueue = new Button("Manage Team Queue");
-            manageTeamQueue.getStylesheets().add("/css/helpspot.css");
-            manageTeamQueue.getStyleClass().add("Button");
-
-            Button stats = new Button("Statistics");
-            stats.getStylesheets().add("/css/helpspot.css");
-            stats.getStyleClass().add("Button");
-
-            Button add = new Button("Add");
-            add.getStylesheets().add("/css/helpspot.css");
-            add.getStyleClass().add("Button");
-
-            buttonBar.getButtons().add(add);
-            buttonBar.getButtons().add(manageTeamQueue);
-            buttonBar.getButtons().add(stats);
-
-            manageTeamQueue.setOnAction(e -> loadManageQueue());
-            add.setOnAction(e -> loadAdd());
-        }
     }
 
     public void clear()

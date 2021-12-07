@@ -19,62 +19,22 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import main.Driver;
 import models.*;
+import models.Queue;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TicketMainPage extends ButtonCalls implements Initializable {
     private static Stage stage = Driver.getStage();
-    @FXML
-    private ButtonBar buttonBar;
     @FXML
     private VBox vBox;
     @FXML
     private TitledPane titledPane;
     private DatabaseManager dbm = Driver.getDbm();
     private Person person = dbm.findPersonByID(Driver.getEmployeeID());
-    private HashMap<Integer, Integer> ticketPosition;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(dbm.findPersonByID(Driver.getEmployeeID()).getLevel() == 3)
-        {
-            Button add = new Button("Add");
-            add.getStyleClass().add("Button");
-
-            Button manageTeamQueue = new Button("Manage Team Queue");
-            manageTeamQueue.getStyleClass().add("Button");
-
-            Button stats = new Button("Statistics");
-            stats.getStyleClass().add("Button");
-
-            buttonBar.getButtons().add(add);
-            buttonBar.getButtons().add(manageTeamQueue);
-            buttonBar.getButtons().add(stats);
-
-            manageTeamQueue.setOnAction(e -> loadManageQueue());
-            add.setOnAction(e -> loadAdd());
-        }
-
-        titledPane.setOnMouseClicked( e -> {
-                try
-                {
-                    Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeam/tickets/ticketPage.fxml"));
-                    stage.setScene(new Scene(root1));
-                    stage.setFullScreen(true);
-                    stage.show();
-                }
-                catch (IOException exception)
-                {
-                    System.out.println(exception);
-                }
-        });
-
-        ticketPosition = new HashMap<>();
-
         loadQueues();
     }
 
@@ -100,6 +60,9 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
 
     public void loadTickets(TitledPane titledPane, Queue q)
     {
+        HashMap<Integer, Integer> position = new HashMap<>();
+
+
         Text organization = new Text("Organization");
         Text title = new Text("Title");
         Text priority = new Text("Priority");
@@ -136,12 +99,14 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
         }
         else
         {
+            System.out.println("HEREREERE");
             tickets = q.getTicketsPerQueues();
         }
 
         int counter = 1;
         for(Ticket t: tickets)
         {
+
             //this one needs help
 
             Organization otherOrg = dbm.findOtherTicketOrganization(t.getTicketID(), person.getOrganization());
@@ -152,6 +117,7 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
             Text title1 = new Text(t.getTicketTitle());
             Text priority1 = new Text(String.valueOf(t.getTicketPriority().getPriority()));
             Text status1 = new Text(t.getTicketStatus().getTicketStatus());
+            System.out.println("Setting the status");
             Text id1 = new Text(String.valueOf(t.getTicketID()));
 
             organization1.setOnMouseClicked(e -> {System.out.println("hi");});
@@ -172,25 +138,18 @@ public class TicketMainPage extends ButtonCalls implements Initializable {
 
             titledPaneGridPane.getChildren().addAll(organization1, title1, priority1, status1, id1);
 
-            ticketPosition.put(counter, t.getTicketID());
+            position.put(counter, t.getTicketID());
 
             counter += 1;
         }
 
         titledPaneGridPane.setOnMouseClicked(e -> {
-            int guess = ((int)(e.getY() - 10) / 35);
-            if(ticketPosition.containsKey(guess))
+            int guess = ((int)(e.getY() - 20) / 35);
+            if(position.containsKey(guess))
             {
-                TicketPage.setTicketID(ticketPosition.get(guess));
+                TicketPage.setTicketID(position.get(guess));
                 loadTicketPage();
             }
-            Bounds boundsInScreen = titledPaneGridPane.localToScreen(titledPaneGridPane.getBoundsInLocal());
-            System.out.println("MIN " + boundsInScreen.getMinY());
-            System.out.println("MAX " + boundsInScreen.getMaxY());
-            System.out.println("Size" + (boundsInScreen.getMaxY() - boundsInScreen.getMinY()));
-            System.out.println("LOCATION " + e.getY());
-            System.out.println("Guess " + ((int)(e.getY() - 10) / 35));
-            System.out.println();
         });
     }
 

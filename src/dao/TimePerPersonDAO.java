@@ -174,6 +174,7 @@ public class TimePerPersonDAO {
             pstmt.setInt(2, timePerPersonid);
             pstmt.executeUpdate();
 
+            invalidateCache();
             person.invalidateTimePerPerson();
             ticket.invalidateTimePerPerson();
 
@@ -197,6 +198,9 @@ public class TimePerPersonDAO {
             pstmt.setInt(2, person.getEmployeeID());
             pstmt.setDate(3, date);
             ResultSet rs = pstmt.executeQuery();
+
+            if (!rs.next())
+                return null;
 
             int timePerPersonID = rs.getInt("timePerPersonid");
 
@@ -225,6 +229,11 @@ public class TimePerPersonDAO {
             dbm.cleanup();
             throw new RuntimeException("error finding max ticket id", e);
         }
+    }
+
+    public void invalidateCache()
+    {
+        cache.clear();
     }
 
 }

@@ -34,24 +34,6 @@ public class CreateTickets extends ButtonCalls implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(dbm.findPersonByID(Driver.getEmployeeID()).getLevel() == 3)
-        {
-            Button add = new Button("Add");
-            add.getStyleClass().add("Button");
-
-            Button manageTeamQueue = new Button("Manage Team Queue");
-            manageTeamQueue.getStyleClass().add("Button");
-
-            Button stats = new Button("Statistics");
-            stats.getStyleClass().add("Button");
-
-            buttonBar.getButtons().add(add);
-            buttonBar.getButtons().add(manageTeamQueue);
-            buttonBar.getButtons().add(stats);
-
-            manageTeamQueue.setOnAction(e -> loadManageQueue());
-            add.setOnAction(e -> loadAdd());
-        }
 
         Collection<Organization> organizations = person.getOrganization().getOrganizationsChildren();
         organizations.add(person.getOrganization());
@@ -149,14 +131,25 @@ public class CreateTickets extends ButtonCalls implements Initializable {
     {
         if(check())
         {
+            Organization organization2 = dbm.findByName(organization.getText());
+            Organization personOrganization = person.getOrganization();
+            Organization used = null;
+            if(personOrganization == organization2 || personOrganization.getParentOrganization() == organization2)
+            {
+                used = organization2;
+            }
+            else
+            {
+                used = personOrganization;
+            }
+
             String description1 = description.getText();
             String title1 = title.getText();
-            Organization organization1 = dbm.findByName(organization.getText());
             TicketPriority priority1;
-            priority1 = dbm.findPriorityByName(priority.getValue(), organization1);
-            TicketStatus ticketStatus = dbm.findStatusByName(status.getValue(), organization1);
+            priority1 = dbm.findPriorityByName(priority.getValue(), used);
+            TicketStatus ticketStatus = dbm.findStatusByName(status.getValue(), used);
 
-            Ticket ticket = dbm.insert(title1, description1, priority1, ticketStatus, organization1, person);
+            Ticket ticket = dbm.insert(title1, description1, priority1, ticketStatus, used, person);
 
             addQueues(ticket);
 

@@ -36,9 +36,10 @@ public class TicketsPerQueueDAO {
 
     public TicketsPerQueue find(int ticketsPerQueueID)
     {
-        if (cache.containsKey(ticketsPerQueueID)) {
-            return cache.get(ticketsPerQueueID);
-        }
+//        if (cache.containsKey(ticketsPerQueueID)) {
+//            System.out.println("inside tickets per queue cach");
+//            return cache.get(ticketsPerQueueID);
+//        }
 
         try {
             StringBuilder sb = new StringBuilder();
@@ -69,6 +70,65 @@ public class TicketsPerQueueDAO {
         } catch (SQLException e) {
             dbm.cleanup();
             throw new RuntimeException("error finding ticketsPerQueue", e);
+        }
+    }
+
+    public TicketsPerQueue find(Queue queue, Ticket ticket)
+    {
+
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select tq.TicketsPerQueueID");
+            sb.append("  from TicketsPerQueue tq");
+            sb.append("  where tq.QueueID = ? and tq.ticketID = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, queue.getQueueID());
+            pstmt.setInt(2, ticket.getTicketID());
+            ResultSet rs = pstmt.executeQuery();
+
+            // return null if student doesn't exist
+            if (!rs.next())
+                return null;
+
+            int ticketsPerQueueID = rs.getInt("TicketsPerQueueID");
+
+            rs.close();
+
+            return find(ticketsPerQueueID);
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding ticketsPerQueue with ticket and queue", e);
+        }
+    }
+
+    public TicketsPerQueue find(Ticket ticket, Organization organization)
+    {
+
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("select tq.TicketsPerQueueID");
+            sb.append("  from TicketsPerQueue tq");
+            sb.append("  LEFT JOIN QUEUE q ON q.QUEUEID = tq.queueId");
+            sb.append("  where tq.ticketID = ? AND q.ORGANIZATIONID = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, ticket.getTicketID());
+            pstmt.setInt(2, organization.getOrganizationID());
+            ResultSet rs = pstmt.executeQuery();
+
+            // return null if student doesn't exist
+            if (!rs.next())
+                return null;
+
+            int ticketsPerQueueID = rs.getInt("TicketsPerQueueID");
+
+            rs.close();
+
+            return find(ticketsPerQueueID);
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error finding ticketsPerQueue with ticket and org", e);
         }
     }
 
@@ -232,4 +292,38 @@ public class TicketsPerQueueDAO {
             throw new RuntimeException("error finding ticketsPerQueue", e);
         }
     }
+
+    public void updateTicketPerQueue(Queue newQueue, TicketsPerQueue ticketsPerQueue)
+    {
+        try {
+
+            System.out.println("------------------");
+            System.out.println(ticketsPerQueue.getQueue().getName());
+            System.out.println(newQueue.getName());
+            System.out.println(newQueue.getOrganization().getOrganizationID());
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Update TicketsPerQueue");
+            sb.append(" set QueueID = ?");
+            sb.append(" where TicketsPerQueueID = ?");
+
+            PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setInt(1, newQueue.getQueueID());
+            pstmt.setInt(2, ticketsPerQueue.getTicketsPerQueueID());
+
+            pstmt.executeUpdate();
+
+            ticketsPerQueue.getQueue().invalidateTicketsPerQueues();
+            TicketsPerQueue ticketsPerQueueNew = new TicketsPerQueue(this, ticketsPerQueue.getTicketsPerQueueID(),
+                    ticketsPerQueue.getTicket(), newQueue);
+            cache.put(ticketsPerQueue.getTicketsPerQueueID(), ticketsPerQueueNew);
+            ticketsPerQueueNew.getTicket().invalidateTicketsPerQueue();
+            ticketsPerQueue.getQueue().invalidateTicketsPerQueues();
+
+        } catch (SQLException e) {
+            dbm.cleanup();
+            throw new RuntimeException("error updating ticketsPerQueue", e);
+        }
+    }
+
 }

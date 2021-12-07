@@ -17,36 +17,11 @@
 <?import autoCompleteTextField.AutoCompleteTextField?>
 <BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpDeskTeamManager.deleteQueue.DeleteQueue" stylesheets="/css/helpspot.css">
     <top>
-        <HBox prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: FC766AFF;" BorderPane.alignment="CENTER">
-            <children>
-                <ImageView fitHeight="37.0" fitWidth="89.0" pickOnBounds="true">
-
-                    <HBox.margin>
-                        <Insets left="25.0" top="5.0" />
-                    </HBox.margin>
-                </ImageView>
-                <ButtonBar>
-                    <buttons>
-                        <Button mnemonicParsing="false" onAction="#loadTickets" styleClass="Button" text="Tickets" />
-                        <Button mnemonicParsing="false" onAction="#loadContacts" styleClass="Button" text="Contacts" />
-                        <Button mnemonicParsing="false" onAction="#loadProfile" styleClass="Button" text="Profile" />
-                        <Button mnemonicParsing="false" onAction="#loadAdd" styleClass="Button" text="Add Organizations" />
-                        <Button mnemonicParsing="false" onAction="#loadManageQueue" styleClass="ButtonPressed" text="Manage Team Queue" />
-                        <Button mnemonicParsing="false" styleClass="Button" text="Statistics" />
-                    </buttons>
-                    <HBox.margin>
-                        <Insets left="100.0" />
-                    </HBox.margin>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                </ButtonBar>
-            </children>
-            <opaqueInsets>
-                <Insets left="100.0" />
-            </opaqueInsets>
-        </HBox>
+        <fx:include fx:id="header" source="/headerAndFooter/header/header.fxml"/>
     </top>
+    <bottom>
+        <fx:include fx:id="footer" source="/headerAndFooter/footer/footer.fxml"/>
+    </bottom>
     <center>
         <GridPane alignment="CENTER" styleClass="Pink">
             <columnConstraints>

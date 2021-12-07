@@ -2,6 +2,7 @@ package helpDeskTeam.tickets;
 
 import buttonCalls.ButtonCalls;
 import dao.DatabaseManager;
+import dao.TicketsPerQueueDAO;
 import error.Error;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -50,24 +51,6 @@ public class TicketPage extends ButtonCalls implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(dbm.findPersonByID(Driver.getEmployeeID()).getLevel() == 3)
-        {
-            Button add = new Button("Add");
-            add.getStyleClass().add("Button");
-
-            Button manageTeamQueue = new Button("Manage Team Queue");
-            manageTeamQueue.getStyleClass().add("Button");
-
-            Button stats = new Button("Statistics");
-            stats.getStyleClass().add("Button");
-
-            buttonBar.getButtons().add(add);
-            buttonBar.getButtons().add(manageTeamQueue);
-            buttonBar.getButtons().add(stats);
-
-            manageTeamQueue.setOnAction(e -> loadManageQueue());
-            add.setOnAction(e -> loadAdd());
-        }
 
         loadTitle();
         loadDescription();
@@ -244,6 +227,34 @@ public class TicketPage extends ButtonCalls implements Initializable {
             {
                 MenuItem priority = new MenuItem(tp.getPriority());
                 menuButtonPriority.getItems().add(priority);
+
+                priority.setOnAction( e -> {
+                    Organization ticketPriorityOrg = null;
+                    if(personOrganization == organization)
+                    {
+                        ticketPriorityOrg = organization;
+                    }
+                    else if(personOrganization.getParentOrganization() == organization)
+                    {
+                        ticketPriorityOrg = organization;
+                    }
+                    else
+                    {
+                        ticketPriorityOrg = personOrganization;
+                    }
+                    TicketPriority oldPriority =  dbm.findPriorityByName(menuButtonPriority.getText(), ticketPriorityOrg);
+                    TicketPriority newPriority = tp;
+
+                    dbm.updateTicketPriority(oldPriority, newPriority, ticket);
+
+                    menuButtonPriority.setText(tp.getPriority());
+
+                    TicketsPerQueue queue = dbm.find(ticket, ticketPriorityOrg);
+                    queue.getQueue().invalidateTicketsPerQueues();
+
+                    dbm.commit();
+
+                });
             }
 
         }
@@ -272,10 +283,53 @@ public class TicketPage extends ButtonCalls implements Initializable {
             for(TicketStatus ts : statuses)
             {
                 MenuItem status = new MenuItem(ts.getTicketStatus());
+                status.setOnAction( e -> {
+                    Organization ticketStatusOrg = null;
+                    if(personOrganization == organization)
+                    {
+                        ticketStatusOrg = organization;
+                    }
+                    else if(personOrganization.getParentOrganization() == organization)
+                    {
+                        ticketStatusOrg = organization;
+                    }
+                    else
+                    {
+                        ticketStatusOrg = personOrganization;
+                    }
+                    TicketStatus oldStatus =  dbm.findStatusByName(menuButtonStatus.getText(), ticketStatusOrg);
+                    TicketStatus newStatus = ts;
+
+                    dbm.updateTicketStatus(oldStatus, newStatus, ticket);
+
+                    menuButtonStatus.setText(ts.getTicketStatus());
+
+                    TicketsPerQueue queue = dbm.find(ticket, ticketStatusOrg);
+                    queue.getQueue().invalidateTicketsPerQueues();
+
+                    if(ts.getTicketStatus().equalsIgnoreCase("Closed")){
+                        updateQueues(ticket, person.getOrganization());
+                    }
+
+                    dbm.commit();
+                });
                 menuButtonStatus.getItems().add(status);
             }
 
         }
+        dbm.commit();
+    }
+
+    public void updateQueues(Ticket ticket, Organization organization)
+    {
+        TicketsPerQueue ticketsPerQueue = dbm.find(ticket, organization);
+        Queue newQueue = dbm.findQueueByName("Closed", organization);
+        dbm.updateTicketPerQueue(ticketsPerQueue, newQueue);
+
+        Organization otherOrganization = dbm.findOtherTicketOrganization(ticket.getTicketID(), organization);
+        TicketsPerQueue ticketsPerQueue2 = dbm.find(ticket, otherOrganization);
+        Queue newQueue2 = dbm.findQueueByName("Closed", otherOrganization);
+        dbm.updateTicketPerQueue(ticketsPerQueue2, newQueue2);
         dbm.commit();
     }
 
@@ -286,7 +340,7 @@ public class TicketPage extends ButtonCalls implements Initializable {
             return;
         }
         Date date = Date.valueOf(datePicker.getValue());
-        double time = Integer.parseInt(datePickerTime.getText());
+        double time = Double.parseDouble(datePickerTime.getText());
 
         if(dbm.findTimePerPerson(date, ticket, person) == null)
         {
@@ -298,6 +352,7 @@ public class TicketPage extends ButtonCalls implements Initializable {
             dbm.updateTimePerPerson(timePerPersonID, time, person, ticket);
         }
         dbm.commit();
+        Error.error("successfully added time");
     }
 
     public boolean checkTime()
@@ -317,7 +372,7 @@ public class TicketPage extends ButtonCalls implements Initializable {
             Error.error("Please enter a time");
             return false;
         }
-        else if(!datePickerTime.getText().matches("[0-9]+"))
+        else if(datePickerTime.getText().matches("[\\w]"))
         {
             Error.error("Please enter a number");
             return false;
@@ -339,5 +394,7 @@ public class TicketPage extends ButtonCalls implements Initializable {
         }
         dbm.commit();
     }
+
+    public static int getTicket(){ return (ticketID);}
 
 }
