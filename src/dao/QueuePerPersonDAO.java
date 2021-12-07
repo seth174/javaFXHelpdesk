@@ -1,6 +1,5 @@
 package dao;
 
-import models.Organization;
 import models.Person;
 import models.Queue;
 import models.QueuePerPerson;

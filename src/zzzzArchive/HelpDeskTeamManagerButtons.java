@@ -29,7 +29,7 @@ public class HelpDeskTeamManagerButtons  {
     {
         try
         {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/contacts/contacts.fxml"));
+            Parent root1 = FXMLLoader.load(getClass().getResource("/zzzzArchive/contacts/contacts.fxml"));
             stage.setScene(new Scene(root1));
             stage.setFullScreen(true);
             stage.show();

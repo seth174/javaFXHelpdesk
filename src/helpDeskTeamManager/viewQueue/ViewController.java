@@ -28,8 +28,6 @@ public class ViewController extends ButtonCalls implements Initializable {
     @FXML
     private Text userText;
     @FXML
-    private Text queueText;
-    @FXML
     private VBox vBox;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -5,7 +5,6 @@ import buttonCalls.ButtonCalls;
 import dao.DatabaseManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -24,7 +23,6 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class ContactsController extends ButtonCalls implements Initializable {
-    private static Stage stage = Driver.getStage();
     private static DatabaseManager dbm = Driver.getDbm();
     private Collection<Organization> organizations = new ArrayList<>();
     @FXML
@@ -35,14 +33,12 @@ public class ContactsController extends ButtonCalls implements Initializable {
     private VBox middleVBox;
     @FXML
     private VBox rightVBox;
-    @FXML
-    private ButtonBar buttonBar;
     private Person person = dbm.findPersonByID(Driver.getEmployeeID());
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         organizations.add(person.getOrganization());
-        if(dbm.findPersonByID(Driver.getEmployeeID()).getOrganization().getParentOrganization() != null)
+        if(!dbm.findPersonByID(Driver.getEmployeeID()).getOrganization().getParentOrganization().getName().equalsIgnoreCase("fake"))
             organizations.add(dbm.findPersonByID(Driver.getEmployeeID()).getOrganization().getParentOrganization());
         Collection<Organization> children = person.getOrganization().getOrganizationsChildren();
         organizations.addAll(children);
@@ -57,13 +53,6 @@ public class ContactsController extends ButtonCalls implements Initializable {
                 display(o.getName());
             });
         }
-
-        menuButton.setOnKeyPressed(e -> {
-            if(e.getCode() == KeyCode.A)
-            {
-                System.out.println("Key Pressed");
-            }
-        });
 
     }
 

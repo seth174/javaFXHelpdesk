@@ -2,7 +2,6 @@ package dao;
 
 import models.Organization;
 import models.Ticket;
-import models.TicketPriority;
 import models.TicketStatus;
 
 import java.sql.*;

@@ -1,6 +1,5 @@
 package dao;
 
-import models.Organization;
 import models.Person;
 import models.Ticket;
 import models.TimePerPerson;

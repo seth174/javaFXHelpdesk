@@ -1,15 +1,10 @@
 package dao;
 
 import models.Message;
-import models.Organization;
 import models.Person;
 import models.Ticket;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -214,7 +209,6 @@ public class MessageDAO {
             while (rs.next()) {
                 int replyMessageID = rs.getInt("messageID");
                 Message m = find(replyMessageID);
-                System.out.println(m.getMessageID());
                 messages.add(m);
             }
             rs.close();

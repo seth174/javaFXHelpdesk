@@ -37,7 +37,6 @@ public class ProfileController extends ButtonCalls implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         person = dbm.findPersonByID(Driver.getEmployeeID());
         loadData();
-        System.out.println("Inside intitaliza");
         dbm.commit();
 
     }
@@ -101,23 +100,7 @@ public class ProfileController extends ButtonCalls implements Initializable {
     public void invalidate()
     {
         person = dbm.findPersonByID(Driver.getEmployeeID());
-        System.out.println(person.getFirstName());
         dbm.commit();
-    }
-
-    public void refresh()
-    {
-        try
-        {
-            Parent root1 = FXMLLoader.load(getClass().getResource("/helpDeskTeamManager/editProfile/editProfile.fxml"));
-            stage.setScene(new Scene(root1));
-            stage.setFullScreen(true);
-            stage.show();
-        }
-        catch (IOException e)
-        {
-            System.out.println(e);
-        }
     }
 
     public void refreshData()

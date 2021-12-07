@@ -15,7 +15,7 @@ public abstract class ButtonCalls {
 
     public void load(String fxml, String stageTitle, String buttonPressed)
     {
-        ButtonCalls.buttonPressed = buttonPressed;
+        setButtonPressed(buttonPressed);
         Parent page = null;
         try {
             page = FXMLLoader.load(getClass().getResource(fxml), null, new JavaFXBuilderFactory());

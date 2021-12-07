@@ -100,7 +100,6 @@ public class OldTickets extends ButtonCalls implements Initializable {
             Text title1 = new Text(t.getTicketTitle());
             Text priority1 = new Text(String.valueOf(t.getTicketPriority().getPriority()));
             Text status1 = new Text(t.getTicketStatus().getTicketStatus());
-            System.out.println("Setting the status");
             Text id1 = new Text(String.valueOf(t.getTicketID()));
 
             GridPane.setConstraints(organization1, 0, counter);

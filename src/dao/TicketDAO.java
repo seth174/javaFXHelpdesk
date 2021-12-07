@@ -49,7 +49,6 @@ public class TicketDAO {
 //            System.out.println("Inside Cache");
 //            return cache.get(ticketID);
 //        }
-        System.out.println("Looking in database");
 
         try {
             StringBuilder sb = new StringBuilder();
@@ -70,7 +69,6 @@ public class TicketDAO {
             String ticketDescription = rs.getString("ticketDescription");
             int ticketPriorityNumber = rs.getInt("ticketPriority");
             int ticketStatusID = rs.getInt("ticketStatus");
-            System.out.println("ID " + ticketStatusID);
             Date dateCreated = rs.getDate("dateCreated");
             Date dateClosed = rs.getDate("dateClosed");
             int employeeIDClosed = rs.getInt("EmployeeIDClosed");

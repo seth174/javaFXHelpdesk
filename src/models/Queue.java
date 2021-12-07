@@ -41,7 +41,6 @@ public class Queue {
     {
         ticketsPerQueues = null;
         if(ticketsPerQueues == null){
-            System.out.println("its null");
             ticketsPerQueues = dao.getTicketsPerQueue(queueID);
         }
         return ticketsPerQueues;
@@ -58,7 +57,6 @@ public class Queue {
 
     public void invalidateTicketsPerQueues()
     {
-        System.out.println("Invalidated");
         ticketsPerQueues = null;
     }
 

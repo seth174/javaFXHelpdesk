@@ -190,7 +190,6 @@ public class TicketPage extends ButtonCalls implements Initializable {
 
             if(replyMessages.size() > 0)
             {
-                System.out.println("yessir");
                 loadReplyMessages(messageVbox, (Message)m.getReplyMessages().toArray()[0]);
             }
         }

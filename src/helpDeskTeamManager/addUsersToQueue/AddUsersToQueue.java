@@ -48,9 +48,7 @@ public class AddUsersToQueue extends ButtonCalls implements Initializable {
         if(check())
         {
             Person p = dbm.findPersonByID(dbm.findByEmail(userComboBox.getValue()).getEmployeeID());
-            System.out.println(p.getEmail());
             Queue q = dbm.findQueueByName(queueComboBox.getValue(), p.getOrganization());
-            System.out.println(q.getQueueID());
             dbm.insert(p, q);
             p.invalidateQueuePerPerson();
             q.invalidateQueuePerPerson();

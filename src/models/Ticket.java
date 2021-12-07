@@ -70,8 +70,6 @@ public class Ticket {
 
     public Collection<TicketPerPerson> getTicketPerPerson()
     {
-        System.out.println("**********");
-        System.out.println(ticketPerPerson);
         if (ticketPerPerson == null) {
             ticketPerPerson = dao.getTicketPerPersonTickets(ticketID);
         }

@@ -43,7 +43,6 @@ public class AssignedUsersController extends ButtonCalls implements Initializabl
 
     public void loadOrganizationUsers()
     {
-        System.out.println("This executed");
         loadUsers(person.getOrganization(), organization1, true, organization1Text);
         Organization organization = dbm.findOtherTicketOrganization(ticket.getTicketID(), person.getOrganization());
         loadUsers(organization, organization2, true, organization2Text);
@@ -58,16 +57,12 @@ public class AssignedUsersController extends ButtonCalls implements Initializabl
     {
         orgText.setText(organization.getName() + " Users:");
         Collection<TicketPerPerson> organization1Users = ticket.getTicketPerPerson();
-        System.out.println("FWGR - " + organization.getName());
         for(TicketPerPerson tp: organization1Users)
         {
             if(tp.getPerson().getOrganization() != organization)
             {
-                System.out.println(organization.getName());
-                System.out.println(tp.getPerson().getEmail());
                 continue;
             }
-            System.out.println("new text: " + tp.getPerson().getEmail());
             HBox hBox = new HBox();
             Text text = new Text(tp.getPerson().getEmail());
             text.getStyleClass().addAll("WhiteText", "MediumText");
@@ -98,7 +93,6 @@ public class AssignedUsersController extends ButtonCalls implements Initializabl
         dbm.updateSubscription(person1, ticket);
         if(!dbm.findSubscribers(ticket, person1.getOrganization()))
         {
-            System.out.println("Yesssss");
             updateQueue(person1.getOrganization());
         }
         person1.invalidateTicketsPerPerson();
@@ -129,7 +123,6 @@ public class AssignedUsersController extends ButtonCalls implements Initializabl
 
 
             window.setOnCloseRequest(e -> {
-                System.out.println("SetOnClose");
                 loadAssignedUsers();
             });
 

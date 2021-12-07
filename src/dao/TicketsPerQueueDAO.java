@@ -297,11 +297,6 @@ public class TicketsPerQueueDAO {
     {
         try {
 
-            System.out.println("------------------");
-            System.out.println(ticketsPerQueue.getQueue().getName());
-            System.out.println(newQueue.getName());
-            System.out.println(newQueue.getOrganization().getOrganizationID());
-
             StringBuilder sb = new StringBuilder();
             sb.append("Update TicketsPerQueue");
             sb.append(" set QueueID = ?");

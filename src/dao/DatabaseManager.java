@@ -5,7 +5,6 @@ import java.util.Properties;
 
 import models.*;
 import org.apache.derby.jdbc.ClientDriver;
-import org.apache.derby.jdbc.EmbeddedDriver;
 
 public class DatabaseManager {
     private Driver driver;
@@ -414,61 +413,9 @@ public class DatabaseManager {
         return queueDAO.updateDeleted(queueID);
     }
 
-    public void insertFakeOrganization()
-    {
-        Organization helpSpot =  organizationDAO.insert("helpSpot", null);
-        Organization dePauwHelpDesk = organizationDAO.insert("DePauwHelpDesk", helpSpot);
-        organizationDAO.insert("CS Department", dePauwHelpDesk);
-        organizationDAO.insert("Math Department", dePauwHelpDesk);
-        organizationDAO.insert("English Department", dePauwHelpDesk);
-        Organization bigTech = organizationDAO.insert("BigTech", helpSpot);
-        organizationDAO.insert("Google", bigTech);
-        organizationDAO.insert("Microsoft", bigTech);
-        organizationDAO.insert("FaceBook", bigTech);
-        organizationDAO.insert("Uber", bigTech);
-        commit();
-    }
-
-    public void fakePeople()
-    {
-        insert("Seth", "Fagen", "Sethfagen_2022@depauw.edu", "1234", "2385777",
-         findByName("helpSpot"),  3);
-        insert("Steven", "Boegarts", "stevenBoegarts@depauw.edu", "1235", "254",
-                findByName("CS Department"),  1);
-        insert("Scott", "Thede", "sThede@depauw.edu", "1236", "2543",
-                findByName("CS Department"),  1);
-        insert("Khadija", "Stewart", "Khadija@depauw.edu", "1237", "654",
-                findByName("CS Department"),  1);
-        insert("HelpDesk", "DePauw", "helpdesk@depauw.edu", "1238", "734",
-                findByName("DePauwHelpDesk"),  2);
-        insert("1", "1", "1", "1", "1", findByName("DePauwHelpDesk"), 1);
-        insert("2", "2", "2", "2", "2", findByName("DePauwHelpDesk"), 2);
-        insert("3", "3", "3", "3", "3", findByName("CS Department"), 3);
-        commit();
-    }
-
-    public void insertPriorities()
-    {
-//        insertTickePriority("0");
-//        insertTickePriority("1");
-//        insertTickePriority("2");
-//        insertTickePriority("3");
-//        insertTickePriority("4");
-//        insertTickePriority("5");
-        commit();
-    }
-
-    public void insertStatus(){
-//        insertTicketStatus("Awaiting Feedback");
-//        insertTicketStatus("Response Provided");
-//        insertTicketStatus("Closed");
-//        insertTicketStatus("On hold");
-        commit();
-    }
-
     public void insertFakeData()
     {
-        Organization helpSpot =  organizationDAO.insert("fake", null);
+        organizationDAO.insert("fake", null);
         insert("fake", "fake", "fake", "fake", "fake",
                 findByName("fake"),  3);
     }
