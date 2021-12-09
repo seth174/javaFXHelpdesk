@@ -41,10 +41,8 @@ public class Message {
 
     public Collection<Message> getReplyMessages()
     {
-        if(replyMessages == null)
-        {
-            replyMessages = dao.getReplyMessages(messageID);
-        }
+
+        replyMessages = dao.getReplyMessages(messageID);
         return replyMessages;
     }
 

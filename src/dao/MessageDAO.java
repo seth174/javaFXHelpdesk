@@ -164,6 +164,7 @@ public class MessageDAO {
 
             // Tell the ticket that it will have to recalculate its message list
             ticket.invalidateMessage();
+            message.invalidateReplyMessages();
 
             return message;
         } catch (SQLException e) {
