@@ -21,7 +21,7 @@ public class DatabaseManager {
     private TimePerPersonDAO timePerPersonDAO;
     private TicketsPerQueueDAO ticketsPerQueueDAO;
 
-    private final String url = "jdbc:derby://localhost:1527/db/HelpSpotDB";
+    private final String url = "jdbc:derby://localhost/db/HelpSpotDB";
 
     public DatabaseManager() {
         driver = new ClientDriver();

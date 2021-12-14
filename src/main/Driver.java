@@ -1,12 +1,14 @@
 package main;
 
 import dao.DatabaseManager;
+import email.EmailHelper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
 
 public class Driver extends Application {
