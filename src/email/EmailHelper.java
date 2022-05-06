@@ -19,7 +19,7 @@ public class EmailHelper {
         Session session = Session.getInstance(prop, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(from, password); //password to the email account that will be sending emails you will also need to turn onn less secure app access for gmail accounts here: https://myaccount.google.com/security
+                return new PasswordAuthentication(from, "password"); //password to the email account that will be sending emails you will also need to turn onn less secure app access for gmail accounts here: https://myaccount.google.com/security
             }
         });
 
@@ -40,9 +40,6 @@ public class EmailHelper {
         message.setContent(multipart);
 
         Transport.send(message);
-
-
-
     }
 
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+
+<?import javafx.scene.layout.HBox?>
+<?import autoCompleteTextField.AutoCompleteTextField?>
+<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpDeskTeamManager.deleteQueue.DeleteQueue" stylesheets="/css/helpspot.css">
+    <top>
+        <fx:include fx:id="header" source="/headerAndFooter/header/header.fxml"/>
+    </top>
+    <bottom>
+        <fx:include fx:id="footer" source="/headerAndFooter/footer/footer.fxml"/>
+    </bottom>
+    <center>
+        <GridPane alignment="CENTER" styleClass="Pink">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS"/>
+                <RowConstraints vgrow="ALWAYS"/>
+                <RowConstraints vgrow="ALWAYS"/>
+                <RowConstraints vgrow="ALWAYS"/>
+                <RowConstraints vgrow="ALWAYS"/>
+            </rowConstraints>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Which Queue would you like to delete?"
+                  textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <styleClass>
+                    <String fx:value="BigText"/>
+                    <String fx:value="WhiteText"/>
+                </styleClass>
+                <GridPane.margin>
+                    <Insets top="25.0"/>
+                </GridPane.margin>
+            </Text>
+            <GridPane GridPane.rowIndex="3">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints valignment="CENTER" vgrow="ALWAYS"/>
+                </rowConstraints>
+                <GridPane.margin>
+                    <Insets bottom="25.0" top="25.0"/>
+                </GridPane.margin>
+                <Button mnemonicParsing="false" text="Cancel" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
+                        GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" styleClass="BigButton"
+                        onAction="#close"/>
+                <Button mnemonicParsing="false" text="Delete" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+                        GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"
+                        styleClass="BigButton" onAction="#delete"/>
+            </GridPane>
+            <AutoCompleteTextField prefWidth="150.0" GridPane.rowIndex="1" styleClass="MediumText" prefHeight="100"
+                                   fx:id="textField">
+                <GridPane.margin>
+                    <Insets bottom="15.0" top="15.0" left="15.0" right="15.0"/>
+                </GridPane.margin>
+            </AutoCompleteTextField>
+        </GridPane>
+   </center>
+</BorderPane>

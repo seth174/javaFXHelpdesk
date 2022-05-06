@@ -191,6 +191,8 @@ public class PersonDAO {
             int employeeID = rs.getInt("employeeID");
             rs.close();
 
+            System.out.println(employeeID);
+
             return find(employeeID);
         } catch (SQLException e) {
             dbm.cleanup();

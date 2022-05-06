@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="helpDeskTeamManager.addQueue.QueueController" stylesheets="/css/helpspot.css">
+    <top>
+        <fx:include fx:id="header" source="/headerAndFooter/header/header.fxml"/>
+    </top>
+    <bottom>
+        <fx:include fx:id="footer" source="/headerAndFooter/footer/footer.fxml"/>
+    </bottom>
+   <center>
+        <GridPane alignment="CENTER" styleClass="Pink">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="ALWAYS" />
+            <RowConstraints vgrow="ALWAYS" />
+            <RowConstraints vgrow="ALWAYS" />
+            <RowConstraints vgrow="ALWAYS" />
+            </rowConstraints>
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name of new Queue" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <styleClass>
+                        <String fx:value="BigText" />
+                        <String fx:value="WhiteText" />
+                    </styleClass>
+                    <GridPane.margin>
+                        <Insets top="25.0" />
+                    </GridPane.margin>
+                </Text>
+            <TextField fx:id="name" prefHeight="100.0" prefWidth="200.0" styleClass="MediumText" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+               <GridPane.margin>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </GridPane.margin>
+            </TextField>
+            <GridPane GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" styleClass="BigButton" text="Close" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#close"/>
+                  <Button mnemonicParsing="false" styleClass="BigButton" text="Add" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" onAction="#insertQueue"/>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="25.0" top="25.0" />
+               </GridPane.margin>
+            </GridPane>
+            </children>
+        </GridPane>
+   </center>
+</BorderPane>

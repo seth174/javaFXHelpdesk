@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tickets.oldTicketsHelpDesk.organizationOldTickets.OrganizationOldTickets" stylesheets="/css/helpspot.css">
+    <top>
+        <fx:include fx:id="header" source="/headerAndFooter/header/header.fxml"/>
+    </top>
+    <bottom>
+        <fx:include fx:id="footer" source="/headerAndFooter/footer/footer.fxml"/>
+    </bottom>
+    <center>
+        <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
+            <content>
+                <VBox>
+                    <children>
+                        <HBox>
+                            <children>
+                                <TitledPane animated="false" stylesheets="/css/helpspot.css" text="My Old Tickets" HBox.hgrow="ALWAYS" fx:id="titledPane">
+                                    <HBox.margin>
+                                        <Insets left="15.0" right="15.0" top="30.0" />
+                                    </HBox.margin>
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                    <content>
+                                        <ScrollPane fitToHeight="true" fitToWidth="true">
+                                            <content>
+                                                <VBox>
+                                                    <children>
+                                                    </children>
+                                                </VBox>
+                                            </content>
+                                        </ScrollPane>
+                                    </content>
+                                </TitledPane>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+</BorderPane>

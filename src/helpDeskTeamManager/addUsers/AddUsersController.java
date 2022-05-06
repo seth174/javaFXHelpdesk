@@ -174,7 +174,14 @@ public class AddUsersController extends ButtonCalls implements Initializable {
     {
         var = false;
         comboBox.getItems().clear();
-        comboBox.getItems().addAll("Client", "HelpDeskWorker", "SuperUser");
+        Person person = dbm.findPersonByID(Driver.getEmployeeID());
+        if(person.getOrganization().getParentOrganization() == null || person.getOrganization().getParentOrganization().getParentOrganization() == null){
+            comboBox.getItems().addAll("Client", "HelpDeskWorker", "SuperUser");
+        }
+        else{
+            comboBox.getItems().addAll("Client", "HelpDeskWorker");
+        }
+
     }
 
     public void setEnterRequest()

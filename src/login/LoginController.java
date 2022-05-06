@@ -56,6 +56,9 @@ public class LoginController implements Initializable {
 
         Person person = dbm.getPerson(email, loginPassword);
 
+        System.out.println(email);
+        System.out.println(loginPassword);
+
         dbm.commit();
 
         if(person == null)
