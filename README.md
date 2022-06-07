@@ -15,4 +15,6 @@ Every time a user creates an organization, three queues get created: Assigned, C
 
 Every time a user creates another user, the project assigns the user to the Name of Organization queue
 
-Once a queue is placed in 
+Users can be assigned to as many queues as they want and new queues can be created.
+
+Then an organization can create tickets with another organization and place them in specific queues and edit who is assigned to that ticket
